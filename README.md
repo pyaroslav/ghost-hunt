@@ -71,6 +71,12 @@ and a person runs it.
    instrumentation is off, because a `subprocess` span carries its command line. I found that the first time I
    looked at a trace. [`tests/test_core.py`](tests/test_core.py) checks the scrubbing.
 
+![Temporal timeline of one hunt: two hunts, Gemma, the approval timer (up to 12 hours), the approve signal, three exorcisms, two hunts to check](docs/temporal.png)
+
+![The same hunt in Sentry: one trace across the worker restart, with the Gemma call's model and token counts and no input recorded](docs/sentry-trace.png)
+
+![Sentry span detail for the Gemma call: gemma4:26b, 965 in + 421 out tokens, "No input for this span"](docs/sentry-span.png)
+
 ## Which Gemma?
 
 The checks catch a line that names the wrong ghost or invents a number. They can't catch a sentence that uses
