@@ -89,7 +89,7 @@ anything changed, nothing is run and the report says so.
 
 ![The same hunt in Sentry: one trace across the worker restart, with the Gemma call's model and token counts and no input recorded](docs/sentry-trace.png)
 
-![Sentry span detail for the Gemma call: gemma4:26b, 965 in + 421 out tokens, "No input for this span"](docs/sentry-span.png)
+![Sentry span detail for the Gemma call: gemma4:26b, 967 in + 425 out tokens, "No input for this span"](docs/sentry-span.png)
 
 ## Which Gemma?
 
