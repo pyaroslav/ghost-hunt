@@ -40,8 +40,9 @@ Exorcism, if you approve it:
 
 The hunter only exorcises the two kinds where the right move can be read off the database: a session that
 others are waiting on, and an in-doubt transaction whose partner is visible. For an in-doubt transaction it reads
-both databases. If the other side committed, it forces a commit; if no side committed, a rollback. **If it can only
-see one side, it refuses to guess** and tells you what to look up. Everything else gets the SQL and a sentence,
+both databases and only follows an outcome that is already written down somewhere: if the other side committed,
+it forces a commit; if the other side was rolled back, a rollback. **Otherwise it refuses to guess** (one side
+visible, or every visible side still prepared) and tells you what to look up. Everything else gets the SQL and a sentence,
 and a person runs it.
 
 ## How it works

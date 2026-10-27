@@ -171,27 +171,35 @@ def hunt(target: dict) -> list[Ghost]:
 
 
 def pair_indoubt(ghosts: list[Ghost]) -> None:
-    """An in-doubt transaction has a partner on the other database. Read both sides to decide the exorcism:
-    if any side committed, force the rest to commit; if no side committed, force a rollback.
-    Then purge the leftover entries everywhere."""
+    """An in-doubt transaction has a partner on the other database. Read both sides to decide the exorcism.
+    Only an outcome that is already written somewhere is followed: if a side committed, force the prepared sides
+    to commit; if a side was already rolled back, force a rollback. Anything else is a guess and is refused:
+    the commit point site never sits in 'prepared', so if every visible side is prepared, the side that decided
+    isn't in the hunt. Sides that are already settled only need their leftover entry purged."""
     groups: dict[str, list[Ghost]] = {}
     for g in ghosts:
         if g.kind == "indoubt":
             groups.setdefault(g.facts["global_tran_id"], []).append(g)
     for gtid, side in groups.items():
         states = {g.db: g.facts["state"] for g in side}
-        committed = any(s in ("committed", "forced commit") for s in states.values())
+        if any(s in ("committed", "forced commit") for s in states.values()):
+            verb, why = "commit", "the other side committed"
+        elif any(s == "forced rollback" for s in states.values()):
+            verb, why = "rollback", "the other side was rolled back"
+        else:
+            verb, why = None, ""
         for g in side:
             g.facts["other_sides"] = {db: s for db, s in states.items() if db != g.db} or {"unknown": "no record"}
             tid = g.facts["local_tran_id"]
-            if g.facts["state"] == "prepared":
-                verb = "commit" if committed else "rollback"
-                g.exorcise = [(g.pdb, f"{verb} force '{tid}'"), (g.pdb, f"begin dbms_transaction.purge_lost_db_entry('{tid}'); commit; end;")]
-                g.facts["decision"] = (f"{verb} force: the other side {'committed' if committed else 'has no commit'}")
-            else:
-                g.exorcise = [(g.pdb, f"begin dbms_transaction.purge_lost_db_entry('{tid}'); commit; end;")]
+            purge = (g.pdb, f"begin dbms_transaction.purge_lost_db_entry('{tid}'); commit; end;")
+            if g.facts["state"] != "prepared":
+                g.exorcise = [purge]
                 g.facts["decision"] = f"purge: this side is already {g.facts['state']}"
-            if len(side) == 1 and g.facts["state"] == "prepared":
+            elif verb:
+                g.exorcise = [(g.pdb, f"{verb} force '{tid}'"), purge]
+                g.facts["decision"] = f"{verb} force: {why}"
+            else:
                 g.exorcise = []
-                g.facts["decision"] = "none: the other database isn't in the hunt, so there's no way to tell which way it went"
+                g.facts["decision"] = ("none: the database that decided isn't in the hunt, so there's no way to tell "
+                                       "which way it went")
                 g.bury = f"Look up {gtid} on the other database, then commit force or rollback force '{tid}' to match it."

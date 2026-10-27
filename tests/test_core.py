@@ -16,8 +16,14 @@ def test_prepared_side_is_forced_the_way_the_other_side_went():
     assert b.exorcise == [("P", "begin dbms_transaction.purge_lost_db_entry('9.9.9'); commit; end;")]
 
 
-def test_no_commit_anywhere_means_rollback():
+def test_no_outcome_anywhere_is_never_guessed():
     a, b = indoubt("se2", "3.4.5", "prepared"), indoubt("ai", "9.9.9", "prepared")
+    pair_indoubt([a, b])
+    assert a.exorcise == [] and b.exorcise == [] and "isn't in the hunt" in a.facts["decision"]
+
+
+def test_rolled_back_side_means_rollback():
+    a, b = indoubt("se2", "3.4.5", "prepared"), indoubt("ai", "9.9.9", "forced rollback")
     pair_indoubt([a, b])
     assert a.exorcise[0][1] == "rollback force '3.4.5'"
 
