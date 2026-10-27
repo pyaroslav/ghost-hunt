@@ -5,6 +5,7 @@ If the worker dies while waiting, nothing is lost: the workflow is still waiting
 approval signal can arrive before or after.
 """
 
+import asyncio
 import json
 import os
 import subprocess
@@ -187,7 +188,7 @@ class GhostHunt:
         self.stage = "waiting for approval"
         try:
             await workflow.wait_condition(lambda: self.approval is not None, timeout=timedelta(hours=a.wait_hours))
-        except TimeoutError:
+        except asyncio.TimeoutError:  # the built-in TimeoutError only from 3.11
             pass
         picks = sorted(set(self.approval.ghosts)) if self.approval else []
         self.stage = "exorcising"
