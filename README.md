@@ -31,45 +31,58 @@ Exorcism, if you approve it:
 | Ghost | Found with | Exorcised by the hunter? |
 |---|---|---|
 | 🕯️ Session idle with an open transaction, others waiting on it | `v$session` ⋈ `v$transaction` | Yes: `kill session ... immediate` |
+| 🕯️ Session idle with an open transaction, nobody waiting yet | same | No: ask its owner |
 | 🕯️ Session killed but still rolling back | `v$session.status = 'KILLED'` | No: it leaves when the rollback ends |
 | ⛓️ In-doubt distributed transaction | `dba_2pc_pending` on **both** databases | Yes: forced the way the other side went, then purged |
 | 📜 Database file on disk that the database no longer lists | `find` vs `v$datafile`/`v$controlfile`/... | No: you move it aside yourself |
 | ⚰️ Dropped table still holding space | `dba_recyclebin` | No: SQL to purge or flash back |
 | 🪦 Invalid object | `dba_objects.status` | No: SQL to recompile |
-| 🗝️ Locked or expired user that still owns objects or enabled jobs | `dba_users`, `dba_scheduler_jobs` | No: hand over or drop |
+| 🗝️ Locked or expired user whose scheduler jobs still run as it | `dba_users`, `dba_scheduler_jobs` | No: disable, hand over or drop |
 
 The hunter only exorcises the two kinds where the right move can be read off the database: a session that
 others are waiting on, and an in-doubt transaction whose partner is visible. For an in-doubt transaction it reads
 both databases and only follows an outcome that is already written down somewhere: if the other side committed,
 it forces a commit; if the other side was rolled back, a rollback. **Otherwise it refuses to guess** (one side
-visible, or every visible side still prepared) and tells you what to look up. Everything else gets the SQL and a sentence,
-and a person runs it.
+visible, every visible side still prepared, or a mixed outcome) and tells you what to look up. The committed side's
+entry is the only written record of the outcome, so it's purged only after its prepared partner has been forced in
+the same run, never on its own. Everything else gets the SQL and a sentence, and a person runs it.
+
+An approval can arrive hours after the hunt, so **every exorcism checks its ghost again first**: the same session
+(sid, serial# and transaction id), still idle, still blocking someone; the same transaction, still prepared. If
+anything changed, nothing is run and the report says so.
 
 ## How it works
 
 1. **Hunt** ([`ghosthunt/hunt.py`](ghosthunt/hunt.py)). One query per kind of ghost, run in each PDB by
    `c##ghost`, which has `CREATE SESSION` and `SELECT ANY DICTIONARY` and nothing else. Client machine names, OS
-   users and SQL text are never selected. Files are listed with `find` through `docker exec` (or locally).
+   users and SQL text are never selected. Files are listed with `find` in the CDB's own data directory, through
+   `docker exec` (or locally with `"files": "local"`); if that fails, the report says files weren't checked and
+   the rest of the hunt goes on.
 2. **Rank and pair** (`examine` in [`ghosthunt/flow.py`](ghosthunt/flow.py)). In-doubt transactions are matched
    across databases by global transaction id, and the decision is made in code. Ghosts are numbered by harm:
    whatever is blocking someone right now comes first.
 3. **Narrate** ([`ghosthunt/narrate.py`](ghosthunt/narrate.py)). Gemma 4 (26B, on Ollama) gets the ghosts'
    names, facts and dates. It writes two summary lines and one epitaph per ghost. Each line is checked: it must
-   name its ghost and may only use numbers and upper-case names from that ghost's facts. A failed line gets one
-   retry, then a plain line from the facts replaces it. The list of ghosts, their order, the decisions and the SQL
-   never come from the model.
+   name its ghost, and every number and identifier (anything with an underscore or a dot, like `GH_AUDIT_2019`)
+   must appear in that ghost's entry. A failed line gets one
+   retry, then a plain line from the facts replaces it. If the model can't be reached at all, every line comes from
+   the template and the report still goes out. The list of ghosts, their order, the decisions and the SQL never
+   come from the model.
 4. **Wait** (Temporal). The report is written and a desktop notification goes out. Then the workflow waits for
    an `approve` signal, 12 hours by default. If nobody answers, nothing is touched. The worker can die and come
    back while it waits, and the signal can arrive while it's down.
-5. **Exorcise and check** ([`ghosthunt/exorcise.py`](ghosthunt/exorcise.py)). Only the approved ghosts, as
-   `c##exorcist`, which can `ALTER SYSTEM` (to kill a session), `FORCE ANY TRANSACTION`, and delete from the three
-   pending-transaction tables `purge_lost_db_entry` cleans. Then the databases are hunted again, and the final
-   report says which ghosts are gone and which are still there.
+5. **Exorcise and check** ([`ghosthunt/exorcise.py`](ghosthunt/exorcise.py)). Only the approved ghosts, each
+   checked again first, as `c##exorcist`: `CREATE SESSION`, `SELECT ANY DICTIONARY` (for the checks),
+   `ALTER SYSTEM` (to kill a session), `FORCE ANY TRANSACTION`, `EXECUTE` on `DBMS_TRANSACTION`, and `DELETE` on
+   the three pending-transaction tables `purge_lost_db_entry` cleans. `ALTER SYSTEM` is a broad privilege; that's
+   why the exorcist is a separate account from the hunter. Then the databases are hunted again, and the final
+   report says which ghosts are gone, which are still there, and which it couldn't check.
 6. **Trace** ([`ghosthunt/trace.py`](ghosthunt/trace.py)). With `SENTRY_DSN` set, each activity is a Sentry
    `gen_ai.invoke_agent` transaction in one trace per hunt, with `execute_tool` and `chat` spans. **Only metadata
    leaves the machine:** model name, token counts, timings, how many ghosts of each kind. No SQL, no object or
-   user names, no prompts, no answers. Error messages are cut down to their ORA- code. Sentry's automatic
-   instrumentation is off, because a `subprocess` span carries its command line. I found that the first time I
+   user names, no prompts, no answers. Error messages are cut down to their ORA- code. Stack frames lose
+   their file paths. Sentry's standard-library instrumentation is off, because a `subprocess` span carries its
+   command line. I found that the first time I
    looked at a trace. [`tests/test_core.py`](tests/test_core.py) checks the scrubbing.
 
 ![Temporal timeline of one hunt: two hunts, Gemma, the approval timer (up to 12 hours), the approve signal, three exorcisms, two hunts to check](docs/temporal.png)
@@ -106,12 +119,12 @@ ollama pull gemma4:26b
 # accounts: c##ghost (reads) and c##exorcist (kills sessions, forces transactions)
 export GHOST_HUNTER_PASSWORD=... GHOST_EXORCIST_PASSWORD=...
 lab/users.sh <container> <ORACLE_SID>
-cp targets.json my-targets.json           # host:port, CDB service, PDBs, container (for the file check)
+cp targets.json my-targets.json           # host:port, CDB service, PDBs; "container" or "files": "local" for the file check
 
-ghost-hunt now                             # report only; touches nothing; no Temporal needed
+ghost-hunt now --targets my-targets.json   # report only; touches nothing; no Temporal needed
 ghost-hunt server                          # local Temporal: one binary, a SQLite file, UI on :8234
 ghost-hunt worker                          # leave it running
-ghost-hunt hunt                            # report, then waits for approval
+ghost-hunt hunt --targets my-targets.json  # report, then waits for approval
 ghost-hunt approve <hunt-id> 1 2 3         # or: all
 ghost-hunt status <hunt-id>
 ```
@@ -128,7 +141,11 @@ so a hunt has something to find:
   hook, `COMMIT COMMENT 'ORA-2PC-CRASH-TEST-7'`;
 - distributed recovery is disabled on both, or RECO would quietly resolve it within seconds;
 - the link goes from 12.2 to 26ai because the other direction fails with ORA-28267;
-- the lingering session and its victim are two Python clients left running.
+- the lingering session and its victim are two Python clients left running. A freshly planted session has only
+  been idle for seconds, so hunt the lab with `GHOST_IDLE_MINUTES=1` (or 0).
+
+`plant.py`, `lab/peek.py` and the two clients connect as a `LAB` user in each PDB, with its password in
+`GHOST_LAB_PASSWORD`; the container names and ports of my two labs are at the top of `plant.py`.
 
 One ghost wasn't planted: `control02.ctl` on the 12.2 lab. On Oct 13 at 16:07, while the container was creating
 the database, its setup script set `control_files` to `control01.ctl` alone. `control02.ctl` was last written a
@@ -138,12 +155,15 @@ minute later and has sat there since. Nobody noticed, including me, until Ghost 
 
 `pytest` runs in CI without a database:
 
-- the in-doubt decisions (commit, rollback, refuse to guess);
+- the in-doubt decisions (commit, rollback, refuse to guess, never purge the written outcome alone);
+- only a session someone waits on can be killed, and the kill re-checks the same session and transaction;
 - the ranking;
 - the line checks;
 - the Sentry scrubbing;
-- the workflow on Temporal's time-skipping test server: only approved ghosts are touched, a database that can't
-  be reached becomes a line in the report, and twelve hours with no answer touch nothing.
+- the workflow on Temporal's time-skipping test server: only approved ghosts are touched; a ghost that changed
+  since the hunt is left alone; a purge waits for its partner's force; a check that can't run isn't reported as
+  success; the report goes out without the model; a database that can't be reached becomes a line in the
+  report; and twelve hours with no answer touch nothing.
 
 ## Why local and open
 

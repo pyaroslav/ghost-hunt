@@ -2,8 +2,8 @@
 
 What leaves the machine: span names and timings, the model name, token counts, how many ghosts of each kind,
 which lab database (by its name in targets.json), and errors. What never does: SQL, object or user names,
-the ghosts' facts, the prompt or Gemma's answer. Prompts and answers stay out because send_default_pii is off
-and nothing here records them; scrub() also drops any string that slips into span data, as a last guard.
+the ghosts' facts, the prompt or Gemma's answer. Prompts and answers stay out because nothing here records them
+(and Sentry's own PII collection is off by default); scrub() also drops any string that slips into span data, as a last guard.
 
 Each activity runs as its own Sentry transaction, continued from one trace id derived from the workflow id,
 so a whole hunt (including the wait for approval and a worker restart) reads as one trace.
@@ -45,6 +45,8 @@ def scrub_error(event, hint=None):
         ex["value"] = " ".join(re.findall(r"\b(?:ORA|TNS|DPY|DPI)-\d{4,5}\b", ex.get("value") or "")) or "(message removed)"
         for fr in (ex.get("stacktrace") or {}).get("frames", []):
             fr.pop("vars", None)
+            fr.pop("abs_path", None)  # a home directory names the user
+            fr["filename"] = (fr.get("module") or "").rsplit(".", 1)[-1] or "?"
             fr.pop("context_line", None)
             fr.pop("pre_context", None)
             fr.pop("post_context", None)
@@ -60,7 +62,7 @@ def init():
         return
     import sentry_sdk
     from sentry_sdk.integrations.stdlib import StdlibIntegration
-    sentry_sdk.init(dsn=dsn, disabled_integrations=[StdlibIntegration()], traces_sample_rate=1.0, send_default_pii=False, server_name="ghost-hunt",
+    sentry_sdk.init(dsn=dsn, disabled_integrations=[StdlibIntegration()], traces_sample_rate=1.0, server_name="ghost-hunt",
                     include_local_variables=False, before_send_transaction=scrub, before_send=scrub_error, max_breadcrumbs=0,
                     environment="lab")
     _on = True

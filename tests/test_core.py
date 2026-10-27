@@ -1,11 +1,12 @@
-from ghosthunt.hunt import Ghost, pair_indoubt
+from ghosthunt import hunt
+from ghosthunt.hunt import Ghost, compile_sql, pair_indoubt
 from ghosthunt.narrate import check_epitaph, check_summary, compact, harm
 from ghosthunt.trace import scrub, scrub_error
 
 
-def indoubt(db, tid, state, gtid="SRC.abc.1.2.3"):
+def indoubt(db, tid, state, gtid="SRC.abc.1.2.3", mixed="no"):
     return Ghost(f"{db}/P/indoubt/{tid}", "indoubt", db, "P", "x",
-                 facts={"local_tran_id": tid, "global_tran_id": gtid, "state": state})
+                 facts={"local_tran_id": tid, "global_tran_id": gtid, "state": state, "mixed": mixed})
 
 
 def test_prepared_side_is_forced_the_way_the_other_side_went():
@@ -14,6 +15,23 @@ def test_prepared_side_is_forced_the_way_the_other_side_went():
     assert a.exorcise[0][1] == "commit force '3.4.5'"
     assert "purge_lost_db_entry('3.4.5')" in a.exorcise[1][1]
     assert b.exorcise == [("P", "begin dbms_transaction.purge_lost_db_entry('9.9.9'); commit; end;")]
+    assert b.requires == [a.id]               # the written outcome goes only after its partner is forced
+    assert a.verify[0][2] == {"tid": "3.4.5", "state": "prepared"}
+
+
+def test_a_lone_committed_entry_is_never_purged():
+    b = indoubt("ai", "9.9.9", "committed")
+    pair_indoubt([b])
+    assert b.exorcise == [] and "purge_lost_db_entry('9.9.9')" in b.bury
+
+
+def test_mixed_or_contradictory_outcomes_are_left_to_a_person():
+    a, b = indoubt("se2", "3.4.5", "prepared", mixed="yes"), indoubt("ai", "9.9.9", "committed")
+    pair_indoubt([a, b])
+    assert a.exorcise == [] and "purge_mixed" in a.bury
+    a, b, c = indoubt("se2", "3.4.5", "prepared"), indoubt("ai", "9.9.9", "forced commit"), indoubt("x", "1.1.1", "forced rollback")
+    pair_indoubt([a, b, c])
+    assert a.exorcise == b.exorcise == c.exorcise == []
 
 
 def test_no_outcome_anywhere_is_never_guessed():
@@ -32,6 +50,42 @@ def test_one_sided_prepared_transaction_is_never_guessed():
     a = indoubt("se2", "3.4.5", "prepared")
     pair_indoubt([a])
     assert a.exorcise == [] and "other database" in a.bury
+
+
+class FakeConn:
+    def __init__(self, rows):
+        self._rows = rows
+
+    def cursor(self):
+        conn = self
+
+        class C:
+            description = [(k,) for k in conn._rows[0]] if conn._rows else []
+
+            def execute(self, *a):
+                pass
+
+            def __iter__(self):
+                return iter([tuple(r.values()) for r in conn._rows])
+        return C()
+
+
+def session_row(blocked):
+    return {"SID": 217, "SERIAL#": 5412, "USERNAME": "LAB", "MODULE": "billing", "STATUS": "INACTIVE",
+            "LAST_CALL_ET": 900, "TXN": "3.4.5", "STARTED": "2026-10-27 22:37", "USED_UREC": 1, "BLOCKED": blocked}
+
+
+def test_only_a_session_someone_waits_on_can_be_killed_and_only_if_it_still_is():
+    idle = hunt.sessions("db", "P", FakeConn([session_row(0)]))[0]
+    assert idle.exorcise == [] and "isn't blocking anyone" in idle.bury
+    blocker = hunt.sessions("db", "P", FakeConn([session_row(1)]))[0]
+    assert blocker.exorcise == [("P", "alter system kill session '217,5412' immediate")]
+    assert blocker.verify[0][2] == {"sid": 217, "serial": 5412, "txn": "3.4.5"}  # same session, same transaction
+
+
+def test_package_bodies_compile_with_their_own_syntax():
+    assert compile_sql("PACKAGE BODY", "LAB.P") == "alter package LAB.P compile body;"
+    assert compile_sql("VIEW", "LAB.V") == "alter view LAB.V compile;"
 
 
 def test_harm_puts_blockers_and_locked_rows_first():
@@ -68,5 +122,23 @@ def test_sentry_gets_metadata_only():
     assert out["contexts"]["trace"]["data"] == {"gen_ai.request.model": "gemma4:26b"}
     assert out["spans"] == [{"op": "gen_ai.chat", "data": {"gen_ai.usage.input_tokens": 900}}]
     assert "server_name" not in out and "request" not in out
-    err = scrub_error({"exception": {"values": [{"value": 'ORA-00942: table or view "LAB"."GH_SECRET" does not exist'}]}})
-    assert err["exception"]["values"][0]["value"] == "ORA-00942"
+    err = scrub_error({"exception": {"values": [{"value": 'ORA-00942: table or view "LAB"."GH_SECRET" does not exist',
+                                                 "stacktrace": {"frames": [{"abs_path": "/home/someone/ghost-hunt/ghosthunt/hunt.py",
+                                                                            "filename": "/home/someone/ghost-hunt/ghosthunt/hunt.py",
+                                                                            "module": "ghosthunt.hunt", "function": "rows"}]}}]}})
+    ex = err["exception"]["values"][0]
+    assert ex["value"] == "ORA-00942"
+    assert "someone" not in str(ex) and ex["stacktrace"]["frames"][0]["function"] == "rows"
+
+
+def test_sentry_standard_library_instrumentation_is_off(monkeypatch):
+    import sentry_sdk
+    from ghosthunt import trace
+    monkeypatch.setenv("SENTRY_DSN", "https://key@o0.ingest.sentry.io/0")
+    monkeypatch.setattr(trace, "_on", False)
+    trace.init()
+    try:
+        assert "stdlib" not in sentry_sdk.get_client().integrations
+    finally:
+        sentry_sdk.get_client().close()
+        monkeypatch.setattr(trace, "_on", False)

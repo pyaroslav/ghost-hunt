@@ -99,7 +99,7 @@ def check_summary(lines: list, digest: dict) -> list[str]:
 
 def ask(prompt: str) -> dict:
     t0 = time.time()
-    r = requests.post(f"{OLLAMA}/api/chat", timeout=600, json={
+    r = requests.post(f"{OLLAMA}/api/chat", timeout=180, json={
         "model": MODEL, "stream": False, "think": False, "format": "json",
         "options": {"temperature": 0.4, "num_ctx": 8192}, "messages": [{"role": "user", "content": prompt}]})
     r.raise_for_status()
@@ -121,18 +121,22 @@ def narrate(ghosts: list[dict], tries: int = 2) -> dict:
                             "Nothing to lay to rest."], "epitaphs": {}, "by": {"summary": "template"}, "calls": []}
     first = digest["G1"]["name"]
     prompt = PROMPT.format(ghosts=json.dumps(digest, indent=1), first=first)
-    calls, epitaphs, summary, by, issues = [], {}, None, {}, []
+    calls, epitaphs, summary, by, issues, unavailable = [], {}, None, {}, [], ""
     for attempt in range(tries):
         try:
             res = ask(prompt if not issues else prompt + "\nYour last answer had problems: " + "; ".join(issues[:8]) + ". Fix them.")
         except requests.RequestException as e:
             calls.append({"error": type(e).__name__})
+            unavailable = type(e).__name__
             break
         calls.append({k: res[k] for k in ("input_tokens", "output_tokens", "seconds")})
         try:
             out = json.loads(res["content"])
         except json.JSONDecodeError:
             issues = ["answer wasn't JSON"]
+            continue
+        if not isinstance(out, dict):
+            issues = ["answer wasn't a JSON object"]
             continue
         issues = []
         for ref, entry in digest.items():
@@ -151,7 +155,7 @@ def narrate(ghosts: list[dict], tries: int = 2) -> dict:
             lines = [" ".join(str(x).split()) for x in out.get("summary", [])]
             bad = check_summary(lines, digest)
             if len(lines) == 2 and first.lower() not in lines[1].lower():
-                bad.append(f"line 2 must start with {first}")
+                bad.append(f"line 2 must name {first}")
             if not bad:
                 summary, by["summary"] = lines, MODEL
             else:
@@ -167,4 +171,5 @@ def narrate(ghosts: list[dict], tries: int = 2) -> dict:
                                   f"Start with {digest['G1']['name']} on {digest['G1']['database']}."], "template"
     ids = {f"G{i + 1}": g["id"] for i, g in enumerate(ghosts)}
     return {"summary": summary, "epitaphs": {ids[r]: t for r, t in epitaphs.items()},
-            "by": {ids.get(r, r): m for r, m in by.items()}, "calls": calls, "rejected": issues}
+            "by": {ids.get(r, r): m for r, m in by.items()}, "calls": calls, "rejected": issues,
+            **({"unavailable": unavailable} if unavailable else {})}

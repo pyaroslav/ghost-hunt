@@ -17,7 +17,7 @@ from temporalio import activity, workflow
 from temporalio.common import RetryPolicy
 from temporalio.exceptions import ActivityError
 
-from .report import found as render_found, rested
+from .report import fallback_story, found as render_found, rested
 
 QUEUE = "ghost-hunt"
 REPORTS = os.environ.get("GHOST_REPORTS", "reports")
@@ -48,6 +48,7 @@ class ExorciseIn:
     workflow_id: str
     target: dict
     steps: list
+    checks: list = field(default_factory=list)
 
 
 @dataclass
@@ -71,16 +72,17 @@ def _wid() -> str:
 
 
 @activity.defn
-def hunt_db(a: DbIn) -> list[dict]:
+def hunt_db(a: DbIn) -> dict:
     from . import hunt, trace
     trace.init()
     with trace.activity(a.workflow_id, "hunt_db", activity.info().attempt):
         with trace.span("gen_ai.execute_tool", "execute_tool hunt_database", **{"gen_ai.tool.name": "hunt_database",
                                                                                "ghost.database": a.target["name"]}) as s:
-            ghosts = [asdict(g) for g in hunt.hunt(a.target)]
+            found, notes = hunt.hunt(a.target)
+            ghosts = [asdict(g) for g in found]
             s.set_data("ghost.count", len(ghosts))
             s.set_data("ghost.kinds", json.dumps(sorted({g["kind"] for g in ghosts})))
-            return ghosts
+            return {"ghosts": ghosts, "notes": notes}
 
 
 @activity.defn
@@ -116,13 +118,13 @@ def write_story(a: StoryIn) -> dict:
 
 
 @activity.defn
-def exorcise(a: ExorciseIn) -> list[str]:
+def exorcise(a: ExorciseIn) -> dict:
     from . import exorcise as ex, trace
     trace.init()
     with trace.activity(a.workflow_id, "exorcise", activity.info().attempt):
         with trace.span("gen_ai.execute_tool", "execute_tool exorcise", **{"gen_ai.tool.name": "exorcise",
                                                                          "ghost.database": a.target["name"]}):
-            return ex.exorcise(a.target, a.steps)
+            return ex.exorcise(a.target, a.steps, a.checks)
 
 
 @activity.defn
@@ -145,6 +147,7 @@ class GhostHunt:
     def __init__(self) -> None:
         self.ghosts: list[dict] = []
         self.stage = "hunting"
+        self.report = ""
         self.approval: Approval | None = None
 
     @workflow.signal
@@ -153,31 +156,39 @@ class GhostHunt:
 
     @workflow.query
     def status(self) -> dict:
-        return {"stage": self.stage, "ghosts": [{"n": g["n"], "db": g["db"], "what": g["what"],
-                                                 "exorcise": bool(g["exorcise"])} for g in self.ghosts]}
+        return {"stage": self.stage, "report": self.report,
+                "ghosts": [{"n": g["n"], "db": g["db"], "what": g["what"], "exorcise": bool(g["exorcise"])}
+                           for g in self.ghosts]}
 
     async def _hunt(self, targets: list[dict]) -> tuple[list[dict], list[dict]]:
+        """(ghosts, problems): a database that can't be hunted, or a part of one that couldn't be checked."""
         wid = workflow.info().workflow_id
-        found, unreadable = [], []
+        found, problems = [], []
         for t in targets:  # one at a time: two lab databases, and it keeps the timeline readable
             try:
-                found += await workflow.execute_activity(hunt_db, DbIn(wid, t), start_to_close_timeout=timedelta(minutes=3),
-                                                         retry_policy=RETRY)
+                r = await workflow.execute_activity(hunt_db, DbIn(wid, t), start_to_close_timeout=timedelta(minutes=3),
+                                                    retry_policy=RETRY)
+                found += r["ghosts"]
+                problems += [{"db": t["name"], "note": n} for n in r["notes"]]
             except ActivityError as e:
-                unreadable.append({"db": t["name"], "error": str(e.cause or e)[:200]})
-        return found, unreadable
+                problems.append({"db": t["name"], "error": str(e.cause or e)[:200]})
+        return found, problems
 
     @workflow.run
     async def run(self, a: HuntIn) -> str:
         wid = workflow.info().workflow_id
         day = workflow.now().strftime("%Y-%m-%d_%H%M")
         by_name = {t["name"]: t for t in a.targets}
-        found, unreadable = await self._hunt(a.targets)
+        found, problems = await self._hunt(a.targets)
         self.ghosts = await workflow.execute_activity(examine, found, start_to_close_timeout=timedelta(seconds=30))
         self.stage = "writing"
-        story = await workflow.execute_activity(write_story, StoryIn(wid, self.ghosts),
-                                                start_to_close_timeout=timedelta(minutes=10), retry_policy=RETRY)
-        md = render_found(self.ghosts, story, wid, unreadable)
+        try:
+            story = await workflow.execute_activity(write_story, StoryIn(wid, self.ghosts),
+                                                    start_to_close_timeout=timedelta(minutes=10), retry_policy=RETRY)
+        except ActivityError as e:  # the model is the one part the hunt can do without
+            story = fallback_story(self.ghosts, type(e.cause or e).__name__)
+        md = render_found(self.ghosts, story, wid, problems)
+        self.report = md
         n = len(self.ghosts)
         await workflow.execute_activity(deliver, DeliverIn(wid, f"{day}-found", md, f"{n} ghost{'s' if n != 1 else ''} found. "
                                                            "Nothing touched until you approve.", a.notify),
@@ -192,21 +203,32 @@ class GhostHunt:
             pass
         picks = sorted(set(self.approval.ghosts)) if self.approval else []
         self.stage = "exorcising"
-        outcomes: dict[str, list[str]] = {}
-        for g in self.ghosts:
-            if g["n"] in picks and g["exorcise"]:
-                try:
-                    outcomes[g["id"]] = await workflow.execute_activity(
-                        exorcise, ExorciseIn(wid, by_name[g["db"]], g["exorcise"]),
-                        start_to_close_timeout=timedelta(minutes=2), retry_policy=RetryPolicy(maximum_attempts=2))
-                except ActivityError as e:
-                    outcomes[g["id"]] = [f"failed: {str(e.cause or e)[:160]}"]
-        after, _ = await self._hunt([by_name[db] for db in dict.fromkeys(g["db"] for g in self.ghosts)]) if picks else ([], [])
-        still = {g["id"] for g in after} if picks else {g["id"] for g in self.ghosts}
-        md2 = rested(self.ghosts, picks, outcomes, still, wid)
-        rest = sum(1 for g in self.ghosts if g["n"] in picks and g["id"] not in still)
+        outcomes: dict[str, dict] = {}
+        for g in self.ghosts:  # in harm order, so a prepared transaction is forced before its partner is purged
+            if g["n"] not in picks or not g["exorcise"]:
+                continue
+            first = [r for r in g.get("requires", []) if outcomes.get(r, {}).get("status") != "done"]
+            if first:
+                need = [str(o["n"]) for o in self.ghosts if o["id"] in first]
+                outcomes[g["id"]] = {"status": "waiting", "log": [f"not touched: approve #{', #'.join(need)} with it, "
+                                                                  "so its partner is forced first"]}
+                continue
+            try:
+                r = await workflow.execute_activity(
+                    exorcise, ExorciseIn(wid, by_name[g["db"]], g["exorcise"], g.get("verify", [])),
+                    start_to_close_timeout=timedelta(minutes=2), retry_policy=RetryPolicy(maximum_attempts=2))
+                outcomes[g["id"]] = {"status": "done" if r["done"] else "changed", "log": r["log"]}
+            except ActivityError as e:
+                outcomes[g["id"]] = {"status": "failed", "log": [f"failed: {str(e.cause or e)[:160]}"]}
+        touched = {g["db"] for g in self.ghosts if outcomes.get(g["id"], {}).get("status") == "done"}
+        after, again = await self._hunt([by_name[db] for db in touched]) if touched else ([], [])
+        unchecked = {p["db"] for p in again if "error" in p}
+        md2 = rested(self.ghosts, picks, outcomes, {g["id"]: g["kind"] for g in after}, unchecked, wid)
+        rest = sum(1 for g in self.ghosts if outcomes.get(g["id"], {}).get("status") == "done"
+                   and g["db"] not in unchecked and g["id"] not in {x["id"] for x in after if x["kind"] != "killed"})
         await workflow.execute_activity(deliver, DeliverIn(wid, f"{day}-rested", md2, f"{rest} ghost{'s' if rest != 1 else ''} laid to rest.",
                                                            a.notify), start_to_close_timeout=timedelta(seconds=30))
+        self.report = md2
         self.stage = "done"
         return md2
 

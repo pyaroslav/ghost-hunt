@@ -56,25 +56,52 @@ async def worker(a):
 
 
 async def hunt(a):
+    from temporalio.client import WorkflowExecutionStatus
     from .flow import QUEUE, GhostHunt, HuntIn, load_targets
     c = await client()
     wid = f"hunt-{datetime.now(timezone.utc):%Y%m%d-%H%M%S}"
     h = await c.start_workflow(GhostHunt.run, HuntIn(load_targets(a.targets), a.wait_hours, not a.quiet), id=wid, task_queue=QUEUE)
     print(f"hunting: {wid}", file=sys.stderr)
-    while (s := await h.query(GhostHunt.status))["stage"] in ("hunting", "writing"):
+    while True:
+        if (await h.describe()).status != WorkflowExecutionStatus.RUNNING:
+            print(await h.result())  # raises with the reason if the workflow failed
+            return
+        s = await h.query(GhostHunt.status)
+        if s["report"]:
+            print(s["report"])  # this hunt's own report, whatever directory the worker writes to
+            return
         await asyncio.sleep(1)
-    time.sleep(0.5)
-    print((ROOT / "reports" / "latest.md").read_text() if (ROOT / "reports" / "latest.md").exists() else json.dumps(s, indent=1))
 
 
 async def approve(a):
-    """A signal is stored by the Temporal server, so this works even while the worker is down."""
+    """A signal is stored by the Temporal server, so numbered approvals work even while the worker is down."""
+    from temporalio.service import RPCError
     from .flow import Approval, GhostHunt
     h = (await client()).get_workflow_handle(a.workflow_id)
+    try:
+        s = await h.query(GhostHunt.status)
+    except RPCError:
+        s = None  # no worker right now: the signal still waits in Temporal
+    if s and s["stage"] != "waiting for approval":
+        sys.exit(f"this hunt is {s['stage']}, not waiting for an approval")
     if a.ghosts == ["all"]:
-        picks = [g["n"] for g in (await h.query(GhostHunt.status))["ghosts"] if g["exorcise"]]
+        if s is None:
+            sys.exit("'all' needs a running worker to list the ghosts; give their numbers instead")
+        picks = [g["n"] for g in s["ghosts"] if g["exorcise"]]
     else:
-        picks = [int(x) for x in a.ghosts]
+        try:
+            picks = sorted({int(x) for x in a.ghosts})
+        except ValueError:
+            sys.exit("give ghost numbers from the report, or: all")
+        if s:
+            numbers = {g["n"]: g for g in s["ghosts"]}
+            if bad := [n for n in picks if n not in numbers]:
+                sys.exit(f"no ghost {', '.join(map(str, bad))} in this hunt")
+            if bare := [n for n in picks if not numbers[n]["exorcise"]]:
+                print(f"note: {', '.join(map(str, bare))} can't be exorcised by the hunter; the report says what to do",
+                      file=sys.stderr)
+    if not picks:
+        sys.exit("nothing to approve")
     await h.signal(GhostHunt.approve, Approval(picks))
     print(f"approved {picks}; the exorcism runs as soon as a worker is up", file=sys.stderr)
     if not a.no_wait:
@@ -99,12 +126,14 @@ async def status(a):
 def now(a):
     from . import hunt as h, narrate, report
     from .flow import load_targets
-    ghosts, unreadable = [], []
+    ghosts, problems = [], []
     for t in load_targets(a.targets):
         try:
-            ghosts += h.hunt(t)
+            found, notes = h.hunt(t)
+            ghosts += found
+            problems += [{"db": t["name"], "note": n} for n in notes]
         except Exception as e:  # noqa: BLE001 - one dead database shouldn't stop the hunt
-            unreadable.append({"db": t["name"], "error": str(e).splitlines()[0]})
+            problems.append({"db": t["name"], "error": str(e).splitlines()[0]})
     h.pair_indoubt(ghosts)
     gs = sorted((asdict(g) for g in ghosts), key=narrate.harm)
     for i, g in enumerate(gs):
@@ -112,7 +141,7 @@ def now(a):
     if a.json:
         print(json.dumps(gs, indent=1, default=str))
         return
-    print(report.found(gs, narrate.narrate(gs), "", unreadable))
+    print(report.found(gs, narrate.narrate(gs), "", problems))
 
 
 def main():
@@ -137,7 +166,11 @@ def main():
         return server(a)
     if a.cmd == "now":
         return now(a)
-    asyncio.run({"worker": worker, "hunt": hunt, "approve": approve, "status": status}[a.cmd](a))
+    from temporalio.service import RPCError
+    try:
+        asyncio.run({"worker": worker, "hunt": hunt, "approve": approve, "status": status}[a.cmd](a))
+    except RPCError as e:  # e.g. no Temporal server, an unknown hunt id, a hunt that already finished
+        sys.exit(f"temporal: {e.message}")
 
 
 if __name__ == "__main__":

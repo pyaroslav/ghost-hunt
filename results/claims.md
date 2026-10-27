@@ -3,8 +3,8 @@
 Input: `results/ghosts.json`, one real hunt of the two lab databases (7 ghosts). `lab/eval.py` asked each model
 20 times; every answer's lines are in `results/eval.json` under `first.lines`.
 
-The automatic checks (each epitaph names its ghost, no number or upper-case name that isn't in the ghost's
-facts, two summary lines that name both databases and start line 2 with the ghost ranked first) passed on
+The automatic checks (each epitaph names its ghost, no number or identifier with an underscore or dot that isn't in the ghost's
+facts, two summary lines that name both databases and name the ghost ranked first in line 2) passed on
 **every line of every run for both models: 160/160 each, no retries, no template lines.** So the checks didn't
 tell the models apart. What did is something the checks can't see: a sentence that uses only the right names and
 numbers and still says something untrue. I read all 280 epitaphs and 40 summaries against the facts.
