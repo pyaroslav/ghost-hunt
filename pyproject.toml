@@ -1,0 +1,15 @@
+[project]
+name = "ghost-hunt"
+version = "0.1.0"
+description = "Finds the ghosts in your Oracle databases (sessions nobody is coming back for, in-doubt transactions, forgotten files) and lays them to rest only when you approve, with Gemma and Temporal."
+requires-python = ">=3.10"
+license = {text = "MIT"}
+dependencies = ["oracledb>=2", "temporalio>=1.8", "requests", "sentry-sdk>=2.20"]
+
+[project.scripts]
+ghost-hunt = "ghosthunt.__main__:main"
+
+[tool.setuptools]
+packages = ["ghosthunt"]
+[tool.pytest.ini_options]
+asyncio_mode = "auto"

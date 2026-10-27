@@ -111,7 +111,7 @@ def recycled(db, pdb, conn) -> list[Ghost]:
                   f"Table {r['owner']}.{r['original_name']} was dropped on {r['droptime'][:10]} and still holds {r['mb']:.1f} MB",
                   since=r["droptime"].replace(":", " ", 1)[:16],
                   facts={"owner": r["owner"], "table": r["original_name"], "mb": round(r["mb"], 1)},
-                  bury=f'purge table {r["owner"]}."{r["object_name"]}";  -- or flashback table ... to before drop')
+                  bury=f'Purge it if nobody wants it back, or flash it back. SQL: purge table {r["owner"]}."{r["object_name"]}";')
             for r in rows(conn, RECYCLED)]
 
 
@@ -120,7 +120,8 @@ def invalid(db, pdb, conn) -> list[Ghost]:
                   f"{r['object_type'].title()} {r['owner']}.{r['object_name']} is invalid: something it depends on changed or is gone",
                   since=r["changed"] or "",
                   facts={"owner": r["owner"], "object": r["object_name"], "type": r["object_type"]},
-                  bury=f"alter {r['object_type'].lower()} {r['owner']}.{r['object_name']} compile;  -- if it fails, drop it")
+                  bury=f"Recompile it; if that fails, it reads something that's gone, and can be dropped. "
+                       f"SQL: alter {r['object_type'].lower()} {r['owner']}.{r['object_name']} compile;")
             for r in rows(conn, INVALID)]
 
 
