@@ -129,8 +129,9 @@ so a hunt has something to find:
 - the link goes from 12.2 to 26ai because the other direction fails with ORA-28267;
 - the lingering session and its victim are two Python clients left running.
 
-One ghost wasn't planted: `control02.ctl` on the 12.2 lab. The database stopped using it on Oct 13, when I set
-up the lab with a single control file, and it has sat there since. Ghost Hunt found it on its first run.
+One ghost wasn't planted: `control02.ctl` on the 12.2 lab. On Oct 13 at 16:07, while the container was creating
+the database, its setup script set `control_files` to `control01.ctl` alone. `control02.ctl` was last written a
+minute later and has sat there since. Nobody noticed, including me, until Ghost Hunt's first run.
 
 ## Tests
 
