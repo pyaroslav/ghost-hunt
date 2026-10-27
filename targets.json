@@ -1,0 +1,4 @@
+[
+ {"name": "lab-se2", "container": "w2-se2", "host": "127.0.0.1:15298", "cdb": "ORCLCDB", "pdbs": ["ORCLPDB1"]},
+ {"name": "lab-26ai", "container": "w2-awr-probe", "host": "127.0.0.1:15299", "cdb": "FREE", "pdbs": ["FREEPDB1"]}
+]

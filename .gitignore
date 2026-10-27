@@ -1,0 +1,8 @@
+.venv/
+__pycache__/
+*.egg-info/
+.temporal/
+.temporal-bin/
+lab/.sessions
+reports/
+.pytest_cache/
