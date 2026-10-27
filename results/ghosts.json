@@ -1,0 +1,146 @@
+[
+ {
+  "id": "lab-26ai/FREEPDB1/session/217,5412",
+  "kind": "lingering",
+  "db": "lab-26ai",
+  "pdb": "FREEPDB1",
+  "what": "Session 217 (LAB) has been idle 0 min with an open transaction that 1 other session is waiting on",
+  "since": "2026-10-27 22:37",
+  "facts": {
+   "sid": 217,
+   "serial": 5412,
+   "user": "LAB",
+   "module": "billing-holder",
+   "idle_min": 0,
+   "undo_records": 1,
+   "blocking": 1
+  },
+  "exorcise": [
+   [
+    "FREEPDB1",
+    "alter system kill session '217,5412' immediate"
+   ]
+  ],
+  "bury": "",
+  "n": 1
+ },
+ {
+  "id": "lab-se2/ORCLPDB1/indoubt/10.9.199680",
+  "kind": "indoubt",
+  "db": "lab-se2",
+  "pdb": "ORCLPDB1",
+  "what": "Distributed transaction 10.9.199680 is prepared and nobody is coming back for it",
+  "since": "2026-10-27 22:37",
+  "facts": {
+   "local_tran_id": "10.9.199680",
+   "global_tran_id": "ORCLPDB1.d5255f2a.10.9.199680",
+   "state": "prepared",
+   "other_sides": {
+    "lab-26ai": "committed"
+   },
+   "decision": "commit force: the other side committed"
+  },
+  "exorcise": [
+   [
+    "ORCLPDB1",
+    "commit force '10.9.199680'"
+   ],
+   [
+    "ORCLPDB1",
+    "begin dbms_transaction.purge_lost_db_entry('10.9.199680'); commit; end;"
+   ]
+  ],
+  "bury": "",
+  "n": 2
+ },
+ {
+  "id": "lab-26ai/FREEPDB1/indoubt/4.4.159581",
+  "kind": "indoubt",
+  "db": "lab-26ai",
+  "pdb": "FREEPDB1",
+  "what": "Distributed transaction 4.4.159581 is committed and nobody is coming back for it",
+  "since": "2026-10-27 22:37",
+  "facts": {
+   "local_tran_id": "4.4.159581",
+   "global_tran_id": "ORCLPDB1.d5255f2a.10.9.199680",
+   "state": "committed",
+   "other_sides": {
+    "lab-se2": "prepared"
+   },
+   "decision": "purge: this side is already committed"
+  },
+  "exorcise": [
+   [
+    "FREEPDB1",
+    "begin dbms_transaction.purge_lost_db_entry('4.4.159581'); commit; end;"
+   ]
+  ],
+  "bury": "",
+  "n": 3
+ },
+ {
+  "id": "lab-se2/ORCLPDB1/orphan/GH_CONTRACTOR",
+  "kind": "orphan",
+  "db": "lab-se2",
+  "pdb": "ORCLPDB1",
+  "what": "User GH_CONTRACTOR is locked but still owns 2 objects and 1 enabled scheduler job",
+  "since": "2026-10-27",
+  "facts": {
+   "user": "GH_CONTRACTOR",
+   "status": "LOCKED",
+   "objects": 2,
+   "jobs": 1
+  },
+  "exorcise": [],
+  "bury": "Hand the objects to a new owner or drop the user; disable its jobs first.",
+  "n": 4
+ },
+ {
+  "id": "lab-se2/CDB$ROOT/file//opt/oracle/oradata/ORCLCDB/control02.ctl",
+  "kind": "file",
+  "db": "lab-se2",
+  "pdb": "CDB$ROOT",
+  "what": "control02.ctl (18 MB) is on disk but the database stopped using it",
+  "since": "2026-10-13 16:08",
+  "facts": {
+   "file": "/opt/oracle/oradata/ORCLCDB/control02.ctl",
+   "mb": 18,
+   "last_written": "2026-10-13 16:08"
+  },
+  "exorcise": [],
+  "bury": "Move it aside, keep it a week, then delete it. Never delete a file the database still lists.",
+  "n": 5
+ },
+ {
+  "id": "lab-se2/ORCLPDB1/recyclebin/BIN$XtofteQWfKzgYwIAEaz9/g==$0",
+  "kind": "recyclebin",
+  "db": "lab-se2",
+  "pdb": "ORCLPDB1",
+  "what": "Table LAB.GH_AUDIT_2019 was dropped on 2026-10-27 and still holds 7.0 MB",
+  "since": "2026-10-27 21:28",
+  "facts": {
+   "owner": "LAB",
+   "table": "GH_AUDIT_2019",
+   "mb": 7
+  },
+  "exorcise": [],
+  "bury": "Purge it if nobody wants it back, or flash it back. SQL: purge table LAB.\"BIN$XtofteQWfKzgYwIAEaz9/g==$0\";",
+  "n": 6
+ },
+ {
+  "id": "lab-se2/ORCLPDB1/invalid/LAB.GH_RATES_TODAY",
+  "kind": "invalid",
+  "db": "lab-se2",
+  "pdb": "ORCLPDB1",
+  "what": "View LAB.GH_RATES_TODAY is invalid: something it depends on changed or is gone",
+  "since": "2026-10-27 21:28",
+  "facts": {
+   "owner": "LAB",
+   "object": "GH_RATES_TODAY",
+   "type": "VIEW"
+  },
+  "exorcise": [],
+  "bury": "Recompile it; if that fails, it reads something that's gone, and can be dropped. SQL: alter view LAB.GH_RATES_TODAY compile;",
+  "n": 7
+ }
+]

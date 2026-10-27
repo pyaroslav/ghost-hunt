@@ -1,0 +1,2130 @@
+{
+ "ghosts": 7,
+ "runs": 20,
+ "models": {
+  "gemma4:e4b": [
+   {
+    "first": {
+     "json": true,
+     "lines": {
+      "G1": "Here lies session 217, which started at 2026-10-27 22:37. It still holds an open transaction that another session awaits.",
+      "G2": "Here lies 10.9.199680, which was a distributed transaction since 2026-10-27 22:37. It remains prepared, though the other side committed.",
+      "G3": "Here lies 4.4.159581, a distributed transaction from 2026-10-27 22:37. It was committed, but this side still holds its record.",
+      "G4": "Here lies GH_CONTRACTOR, a user since 2026-10-27. It still owns 2 objects and 1 enabled scheduler job.",
+      "G5": "Here lies control02.ctl, which was on disk since 2026-10-13 16:08. The database itself has moved on from it.",
+      "G6": "Here lies GH_AUDIT_2019, a table dropped on 2026-10-27. It still holds 7.0 MB of memory.",
+      "G7": "Here lies GH_RATES_TODAY, a view since 2026-10-27 21:28. It is invalid because something it relied on has vanished.",
+      "summary": [
+       "The lab-26ai database holds session 217 and transaction 4.4.159581. The lab-se2 database holds several others, including 10.9.199680 and GH_CONTRACTOR.",
+       "Session 217 in lab-26ai is holding up another session right now."
+      ]
+     },
+     "fails": {},
+     "seconds": 1.05,
+     "tokens": 1406
+    },
+    "final": {
+     "summary": [
+      "The lab-26ai database holds session 217 and transaction 4.4.159581. The lab-se2 database keeps 10.9.199680, GH_CONTRACTOR, control02.ctl, GH_AUDIT_2019, and GH_RATES_TODAY.",
+      "Session 217 in lab-26ai is holding a lock, and another session waits upon it right now."
+     ],
+     "epitaphs": {
+      "lab-26ai/FREEPDB1/session/217,5412": "Here lies session 217, which began its work on 2026-10-27 22:37. It still holds an open transaction that others wait for.",
+      "lab-se2/ORCLPDB1/indoubt/10.9.199680": "Here lies 10.9.199680, which was part of a distributed transaction on 2026-10-27 22:37. It remains prepared, though the other side has committed.",
+      "lab-26ai/FREEPDB1/indoubt/4.4.159581": "Here lies 4.4.159581, which was a distributed transaction on 2026-10-27 22:37. It is committed, yet still rests in the records.",
+      "lab-se2/ORCLPDB1/orphan/GH_CONTRACTOR": "Here lies GH_CONTRACTOR, who was a user since 2026-10-27. It still owns two objects and one enabled scheduler job.",
+      "lab-se2/CDB$ROOT/file//opt/oracle/oradata/ORCLCDB/control02.ctl": "Here lies control02.ctl, which was a file since 2026-10-13 16:08. It sits on disk, though the database has moved on from it.",
+      "lab-se2/ORCLPDB1/recyclebin/BIN$XtofteQWfKzgYwIAEaz9/g==$0": "Here lies GH_AUDIT_2019, which was a table dropped on 2026-10-27 21:28. It still holds seven point zero megabytes of memory.",
+      "lab-se2/ORCLPDB1/invalid/LAB.GH_RATES_TODAY": "Here lies GH_RATES_TODAY, which was a view since 2026-10-27 21:28. It remains invalid because something it depends on has vanished."
+     },
+     "by": {
+      "lab-26ai/FREEPDB1/session/217,5412": "gemma4:e4b",
+      "lab-se2/ORCLPDB1/indoubt/10.9.199680": "gemma4:e4b",
+      "lab-26ai/FREEPDB1/indoubt/4.4.159581": "gemma4:e4b",
+      "lab-se2/ORCLPDB1/orphan/GH_CONTRACTOR": "gemma4:e4b",
+      "lab-se2/CDB$ROOT/file//opt/oracle/oradata/ORCLCDB/control02.ctl": "gemma4:e4b",
+      "lab-se2/ORCLPDB1/recyclebin/BIN$XtofteQWfKzgYwIAEaz9/g==$0": "gemma4:e4b",
+      "lab-se2/ORCLPDB1/invalid/LAB.GH_RATES_TODAY": "gemma4:e4b",
+      "summary": "gemma4:e4b"
+     },
+     "calls": [
+      {
+       "input_tokens": 959,
+       "output_tokens": 495,
+       "seconds": 1.12
+      }
+     ]
+    }
+   },
+   {
+    "first": {
+     "json": true,
+     "lines": {
+      "G1": "Here lies session 217, which began an idle transaction on 2026-10-27 22:37. It still waits for another session.",
+      "G2": "Here lies 10.9.199680, a distributed transaction prepared on 2026-10-27 22:37. It waits for a decision that will not come.",
+      "G3": "Here lies 4.4.159581, a distributed transaction committed on 2026-10-27 22:37. It remains here, purged by the system.",
+      "G4": "Here lies GH_CONTRACTOR, a user who locked objects on 2026-10-27. It still owns two objects and one scheduler job.",
+      "G5": "Here lies control02.ctl, a file that rested on disk since 2026-10-13 16:08. The database has moved on without it.",
+      "G6": "Here lies GH_AUDIT_2019, a table dropped on 2026-10-27. It still holds 7.0 MB of forgotten records.",
+      "G7": "Here lies GH_RATES_TODAY, a view that became invalid on 2026-10-27 21:28. It points to things that are no longer there.",
+      "summary": [
+       "The lab-26ai database holds session 217 and transaction 4.4.159581. lab-se2 holds 10.9.199680, GH_CONTRACTOR, control02.ctl, GH_AUDIT_2019, and GH_RATES_TODAY.",
+       "Session 217 in lab-26ai is holding up another session with its open transaction."
+      ]
+     },
+     "fails": {},
+     "seconds": 1.03,
+     "tokens": 1427
+    },
+    "final": {
+     "summary": [
+      "The lab-26ai database holds session 217 and transaction 4.4.159581. lab-se2 holds 10.9.199680, GH_CONTRACTOR, control02.ctl, GH_AUDIT_2019, and GH_RATES_TODAY.",
+      "Session 217 in lab-26ai is holding up another session, waiting for a decision that will not come."
+     ],
+     "epitaphs": {
+      "lab-26ai/FREEPDB1/session/217,5412": "Here lies session 217, who began an idle transaction on 2026-10-27 22:37. It still holds a lock that waits on another session.",
+      "lab-se2/ORCLPDB1/indoubt/10.9.199680": "Here lies 10.9.199680, who was prepared for a distributed transaction on 2026-10-27 22:37. It waits for a return that will not arrive.",
+      "lab-26ai/FREEPDB1/indoubt/4.4.159581": "Here lies 4.4.159581, who was committed on 2026-10-27 22:37. It remains in the record, though its work is done.",
+      "lab-se2/ORCLPDB1/orphan/GH_CONTRACTOR": "Here lies GH_CONTRACTOR, who was a user since 2026-10-27. It still owns two objects and one enabled scheduler job.",
+      "lab-se2/CDB$ROOT/file//opt/oracle/oradata/ORCLCDB/control02.ctl": "Here lies control02.ctl, which was on disk since 2026-10-13 16:08. It sits there, unused by the database.",
+      "lab-se2/ORCLPDB1/recyclebin/BIN$XtofteQWfKzgYwIAEaz9/g==$0": "Here lies GH_AUDIT_2019, which was dropped on 2026-10-27. It still holds 7.0 MB of space.",
+      "lab-se2/ORCLPDB1/invalid/LAB.GH_RATES_TODAY": "Here lies GH_RATES_TODAY, which became invalid on 2026-10-27 21:28. It points to things that are no longer there."
+     },
+     "by": {
+      "lab-26ai/FREEPDB1/session/217,5412": "gemma4:e4b",
+      "lab-se2/ORCLPDB1/indoubt/10.9.199680": "gemma4:e4b",
+      "lab-26ai/FREEPDB1/indoubt/4.4.159581": "gemma4:e4b",
+      "lab-se2/ORCLPDB1/orphan/GH_CONTRACTOR": "gemma4:e4b",
+      "lab-se2/CDB$ROOT/file//opt/oracle/oradata/ORCLCDB/control02.ctl": "gemma4:e4b",
+      "lab-se2/ORCLPDB1/recyclebin/BIN$XtofteQWfKzgYwIAEaz9/g==$0": "gemma4:e4b",
+      "lab-se2/ORCLPDB1/invalid/LAB.GH_RATES_TODAY": "gemma4:e4b",
+      "summary": "gemma4:e4b"
+     },
+     "calls": [
+      {
+       "input_tokens": 959,
+       "output_tokens": 478,
+       "seconds": 1.05
+      }
+     ]
+    }
+   },
+   {
+    "first": {
+     "json": true,
+     "lines": {
+      "G1": "Here lies session 217, which began its work on 2026-10-27 22:37. It still holds an open transaction that waits for others.",
+      "G2": "Here lies 10.9.199680, which was part of a distributed transaction on 2026-10-27 22:37. It waits for a return that never comes.",
+      "G3": "Here lies 4.4.159581, a transaction that finished its work on 2026-10-27 22:37. It remains, though its side is already settled.",
+      "G4": "Here lies GH_CONTRACTOR, who was a user since 2026-10-27. It still keeps two objects and one scheduler job locked.",
+      "G5": "Here lies control02.ctl, which was noted on 2026-10-13 16:08. It sits on the disk, though the database has moved on from it.",
+      "G6": "Here lies GH_AUDIT_2019, a table dropped on 2026-10-27. It still holds 7.0 MB of what it once contained.",
+      "G7": "Here lies GH_RATES_TODAY, a view noted on 2026-10-27 21:28. It points to something that has since vanished from the records.",
+      "summary": [
+       "The lab-26ai database holds session 217 and transaction 4.4.159581. lab-se2 holds 10.9.199680, GH_CONTRACTOR, control02.ctl, GH_AUDIT_2019, and GH_RATES_TODAY.",
+       "Session 217 in lab-26ai is holding up another session, waiting for its transaction to conclude."
+      ]
+     },
+     "fails": {},
+     "seconds": 1.14,
+     "tokens": 1444
+    },
+    "final": {
+     "summary": [
+      "The lab-26ai database holds session 217 and transaction 4.4.159581. lab-se2 holds 10.9.199680, GH_CONTRACTOR, control02.ctl, GH_AUDIT_2019, and GH_RATES_TODAY.",
+      "Session 217 in lab-26ai is holding up another session with its open transaction."
+     ],
+     "epitaphs": {
+      "lab-26ai/FREEPDB1/session/217,5412": "Here lies session 217, who began its work on 2026-10-27 22:37. It still holds an open transaction that others await.",
+      "lab-se2/ORCLPDB1/indoubt/10.9.199680": "Here lies 10.9.199680, who was prepared on 2026-10-27 22:37. It waits for a return that will not come.",
+      "lab-26ai/FREEPDB1/indoubt/4.4.159581": "Here lies 4.4.159581, who was committed on 2026-10-27 22:37. It remains, though its work is done.",
+      "lab-se2/ORCLPDB1/orphan/GH_CONTRACTOR": "Here lies GH_CONTRACTOR, who was locked on 2026-10-27. It still owns two objects and one scheduler job.",
+      "lab-se2/CDB$ROOT/file//opt/oracle/oradata/ORCLCDB/control02.ctl": "Here lies control02.ctl, which was seen on 2026-10-13 16:08. It rests on disk though the database has moved on.",
+      "lab-se2/ORCLPDB1/recyclebin/BIN$XtofteQWfKzgYwIAEaz9/g==$0": "Here lies GH_AUDIT_2019, which was dropped on 2026-10-27. It still holds 7.0 MB of memory.",
+      "lab-se2/ORCLPDB1/invalid/LAB.GH_RATES_TODAY": "Here lies GH_RATES_TODAY, which was noted on 2026-10-27 21:28. It remains invalid because something it needs has vanished."
+     },
+     "by": {
+      "lab-26ai/FREEPDB1/session/217,5412": "gemma4:e4b",
+      "lab-se2/ORCLPDB1/indoubt/10.9.199680": "gemma4:e4b",
+      "lab-26ai/FREEPDB1/indoubt/4.4.159581": "gemma4:e4b",
+      "lab-se2/ORCLPDB1/orphan/GH_CONTRACTOR": "gemma4:e4b",
+      "lab-se2/CDB$ROOT/file//opt/oracle/oradata/ORCLCDB/control02.ctl": "gemma4:e4b",
+      "lab-se2/ORCLPDB1/recyclebin/BIN$XtofteQWfKzgYwIAEaz9/g==$0": "gemma4:e4b",
+      "lab-se2/ORCLPDB1/invalid/LAB.GH_RATES_TODAY": "gemma4:e4b",
+      "summary": "gemma4:e4b"
+     },
+     "calls": [
+      {
+       "input_tokens": 959,
+       "output_tokens": 463,
+       "seconds": 1.04
+      }
+     ]
+    }
+   },
+   {
+    "first": {
+     "json": true,
+     "lines": {
+      "G1": "Here lies session 217, who was idle since 2026-10-27 22:37. It still holds an open transaction.",
+      "G2": "Here lies 10.9.199680, who was prepared for a distributed transaction since 2026-10-27 22:37. It awaits a return that will not come.",
+      "G3": "Here lies 4.4.159581, who was committed on 2026-10-27 22:37. It remains here, purged by the system.",
+      "G4": "Here lies GH_CONTRACTOR, who was a user since 2026-10-27. It still owns two objects and one scheduler job.",
+      "G5": "Here lies control02.ctl, which was on disk since 2026-10-13 16:08. The database stopped using it, though it remains.",
+      "G6": "Here lies GH_AUDIT_2019, which was dropped on 2026-10-27 and still holds 7.0 MB.",
+      "G7": "Here lies GH_RATES_TODAY, which was invalid since 2026-10-27 21:28. It depends on something that is now gone.",
+      "summary": [
+       "The lab-26ai database holds session 217 and transaction 4.4.159581. lab-se2 holds 10.9.199680, GH_CONTRACTOR, control02.ctl, GH_AUDIT_2019, and GH_RATES_TODAY.",
+       "Session 217 in lab-26ai is holding up another session with an open transaction."
+      ]
+     },
+     "fails": {},
+     "seconds": 1.0,
+     "tokens": 1418
+    },
+    "final": {
+     "summary": [
+      "The records in lab-26ai hold session 217 and transaction 4.4.159581. lab-se2 holds 10.9.199680, GH_CONTRACTOR, control02.ctl, GH_AUDIT_2019, and GH_RATES_TODAY.",
+      "Session 217 in lab-26ai is holding up another session with its open transaction."
+     ],
+     "epitaphs": {
+      "lab-26ai/FREEPDB1/session/217,5412": "Here lies session 217, which began an idle transaction at 2026-10-27 22:37. It still waits for another session.",
+      "lab-se2/ORCLPDB1/indoubt/10.9.199680": "Here lies 10.9.199680, a distributed transaction prepared at 2026-10-27 22:37. It waits for a return that will not come.",
+      "lab-26ai/FREEPDB1/indoubt/4.4.159581": "Here lies 4.4.159581, a distributed transaction committed at 2026-10-27 22:37. It remains, though its work is done.",
+      "lab-se2/ORCLPDB1/orphan/GH_CONTRACTOR": "Here lies GH_CONTRACTOR, a user locked since 2026-10-27. It still holds two objects and one scheduler job.",
+      "lab-se2/CDB$ROOT/file//opt/oracle/oradata/ORCLCDB/control02.ctl": "Here lies control02.ctl, a file of 18 MB since 2026-10-13 16:08. The database stopped using it, yet it remains.",
+      "lab-se2/ORCLPDB1/recyclebin/BIN$XtofteQWfKzgYwIAEaz9/g==$0": "Here lies GH_AUDIT_2019, a table dropped on 2026-10-27. It still holds 7.0 MB of what was once there.",
+      "lab-se2/ORCLPDB1/invalid/LAB.GH_RATES_TODAY": "Here lies GH_RATES_TODAY, a view since 2026-10-27 21:28. It is invalid, for something it relied upon is gone."
+     },
+     "by": {
+      "lab-26ai/FREEPDB1/session/217,5412": "gemma4:e4b",
+      "lab-se2/ORCLPDB1/indoubt/10.9.199680": "gemma4:e4b",
+      "lab-26ai/FREEPDB1/indoubt/4.4.159581": "gemma4:e4b",
+      "lab-se2/ORCLPDB1/orphan/GH_CONTRACTOR": "gemma4:e4b",
+      "lab-se2/CDB$ROOT/file//opt/oracle/oradata/ORCLCDB/control02.ctl": "gemma4:e4b",
+      "lab-se2/ORCLPDB1/recyclebin/BIN$XtofteQWfKzgYwIAEaz9/g==$0": "gemma4:e4b",
+      "lab-se2/ORCLPDB1/invalid/LAB.GH_RATES_TODAY": "gemma4:e4b",
+      "summary": "gemma4:e4b"
+     },
+     "calls": [
+      {
+       "input_tokens": 959,
+       "output_tokens": 471,
+       "seconds": 1.03
+      }
+     ]
+    }
+   },
+   {
+    "first": {
+     "json": true,
+     "lines": {
+      "G1": "Here lies session 217, who was idle since 2026-10-27 22:37. It still holds an open transaction that others wait upon.",
+      "G2": "Here lies 10.9.199680, who was prepared for a distributed transaction since 2026-10-27 22:37. It waits for a return that will not come.",
+      "G3": "Here lies 4.4.159581, who finished a distributed transaction on 2026-10-27 22:37. It remains, though its work is done.",
+      "G4": "Here lies GH_CONTRACTOR, who was a user since 2026-10-27. It still owns two objects and one enabled scheduler job.",
+      "G5": "Here lies control02.ctl, who was on disk since 2026-10-13 16:08. It sits there, unused by the database.",
+      "G6": "Here lies GH_AUDIT_2019, who was a table dropped on 2026-10-27. It still holds 7.0 MB of memory.",
+      "G7": "Here lies GH_RATES_TODAY, who was a view since 2026-10-27 21:28. It stands invalid, its dependencies having vanished.",
+      "summary": [
+       "The lab-26ai database holds session 217 and transaction 4.4.159581. The lab-se2 database holds several others, including 10.9.199680 and GH_CONTRACTOR.",
+       "Session 217 in lab-26ai is holding up another session with its open transaction."
+      ]
+     },
+     "fails": {},
+     "seconds": 0.97,
+     "tokens": 1412
+    },
+    "final": {
+     "summary": [
+      "The lab-26ai database holds session 217 and transaction 4.4.159581. The lab-se2 database holds several others, including 10.9.199680 and GH_CONTRACTOR.",
+      "Session 217 in lab-26ai is holding a lock that another session is waiting upon right now."
+     ],
+     "epitaphs": {
+      "lab-26ai/FREEPDB1/session/217,5412": "Here lies session 217, who began an idle transaction at 2026-10-27 22:37. It still holds a lock that waits for another session.",
+      "lab-se2/ORCLPDB1/indoubt/10.9.199680": "Here lies 10.9.199680, who was prepared for a distributed transaction at 2026-10-27 22:37. It waits for a return that will not come.",
+      "lab-26ai/FREEPDB1/indoubt/4.4.159581": "Here lies 4.4.159581, who committed a distributed transaction at 2026-10-27 22:37. It remains, though its work is done.",
+      "lab-se2/ORCLPDB1/orphan/GH_CONTRACTOR": "Here lies GH_CONTRACTOR, who owned objects and a scheduler job since 2026-10-27. It remains locked in the system.",
+      "lab-se2/CDB$ROOT/file//opt/oracle/oradata/ORCLCDB/control02.ctl": "Here lies control02.ctl, which was on disk at 2026-10-13 16:08. It sits unused by the database now.",
+      "lab-se2/ORCLPDB1/recyclebin/BIN$XtofteQWfKzgYwIAEaz9/g==$0": "Here lies GH_AUDIT_2019, which was dropped on 2026-10-27 and still holds 7.0 MB. It clings to the space.",
+      "lab-se2/ORCLPDB1/invalid/LAB.GH_RATES_TODAY": "Here lies GH_RATES_TODAY, which became invalid on 2026-10-27 21:28. It points to things that are no longer there."
+     },
+     "by": {
+      "lab-26ai/FREEPDB1/session/217,5412": "gemma4:e4b",
+      "lab-se2/ORCLPDB1/indoubt/10.9.199680": "gemma4:e4b",
+      "lab-26ai/FREEPDB1/indoubt/4.4.159581": "gemma4:e4b",
+      "lab-se2/ORCLPDB1/orphan/GH_CONTRACTOR": "gemma4:e4b",
+      "lab-se2/CDB$ROOT/file//opt/oracle/oradata/ORCLCDB/control02.ctl": "gemma4:e4b",
+      "lab-se2/ORCLPDB1/recyclebin/BIN$XtofteQWfKzgYwIAEaz9/g==$0": "gemma4:e4b",
+      "lab-se2/ORCLPDB1/invalid/LAB.GH_RATES_TODAY": "gemma4:e4b",
+      "summary": "gemma4:e4b"
+     },
+     "calls": [
+      {
+       "input_tokens": 959,
+       "output_tokens": 457,
+       "seconds": 1.01
+      }
+     ]
+    }
+   },
+   {
+    "first": {
+     "json": true,
+     "lines": {
+      "G1": "Here lies session 217, which began an idle transaction on 2026-10-27 22:37. It still waits for another session.",
+      "G2": "Here lies 10.9.199680, a distributed transaction prepared on 2026-10-27 22:37. It waits for a return that will not come.",
+      "G3": "Here lies 4.4.159581, a distributed transaction committed on 2026-10-27 22:37. It remains purged from this side.",
+      "G4": "Here lies GH_CONTRACTOR, a user locked since 2026-10-27. It still owns 2 objects and 1 enabled scheduler job.",
+      "G5": "Here lies control02.ctl, a file of 18 MB since 2026-10-13 16:08. It rests on disk though the database has moved on.",
+      "G6": "Here lies GH_AUDIT_2019, a table dropped on 2026-10-27. It still holds 7.0 MB of memory.",
+      "G7": "Here lies GH_RATES_TODAY, a view since 2026-10-27 21:28. It is invalid because something it depended on has vanished.",
+      "summary": [
+       "The records in lab-26ai hold session 217 and transaction 4.4.159581. lab-se2 holds 10.9.199680, GH_CONTRACTOR, control02.ctl, GH_AUDIT_2019, and GH_RATES_TODAY.",
+       "Session 217 in lab-26ai is holding up another session with an open transaction."
+      ]
+     },
+     "fails": {},
+     "seconds": 1.0,
+     "tokens": 1428
+    },
+    "final": {
+     "summary": [
+      "The lab-26ai database holds session 217 and transaction 4.4.159581. The lab-se2 database holds several others, including 10.9.199680 and GH_CONTRACTOR.",
+      "Session 217 in lab-26ai is holding a lock that another session is waiting upon right now."
+     ],
+     "epitaphs": {
+      "lab-26ai/FREEPDB1/session/217,5412": "Here lies session 217, who began an idle transaction on 2026-10-27 22:37. It still holds a lock that another session waits upon.",
+      "lab-se2/ORCLPDB1/indoubt/10.9.199680": "Here lies 10.9.199680, who was a prepared distributed transaction since 2026-10-27 22:37. It waits for a return that will not come.",
+      "lab-26ai/FREEPDB1/indoubt/4.4.159581": "Here lies 4.4.159581, who was a distributed transaction since 2026-10-27 22:37. It was committed, yet it remains.",
+      "lab-se2/ORCLPDB1/orphan/GH_CONTRACTOR": "Here lies GH_CONTRACTOR, who was a user since 2026-10-27. It still owns two objects and one enabled scheduler job.",
+      "lab-se2/CDB$ROOT/file//opt/oracle/oradata/ORCLCDB/control02.ctl": "Here lies control02.ctl, who was a database component since 2026-10-13 16:08. It rests on disk though the database no longer uses it.",
+      "lab-se2/ORCLPDB1/recyclebin/BIN$XtofteQWfKzgYwIAEaz9/g==$0": "Here lies GH_AUDIT_2019, who was a table since 2026-10-27 21:28. It was dropped, yet it still holds 7.0 MB.",
+      "lab-se2/ORCLPDB1/invalid/LAB.GH_RATES_TODAY": "Here lies GH_RATES_TODAY, who was a view since 2026-10-27 21:28. It is invalid because something it depends on has changed or gone."
+     },
+     "by": {
+      "lab-26ai/FREEPDB1/session/217,5412": "gemma4:e4b",
+      "lab-se2/ORCLPDB1/indoubt/10.9.199680": "gemma4:e4b",
+      "lab-26ai/FREEPDB1/indoubt/4.4.159581": "gemma4:e4b",
+      "lab-se2/ORCLPDB1/orphan/GH_CONTRACTOR": "gemma4:e4b",
+      "lab-se2/CDB$ROOT/file//opt/oracle/oradata/ORCLCDB/control02.ctl": "gemma4:e4b",
+      "lab-se2/ORCLPDB1/recyclebin/BIN$XtofteQWfKzgYwIAEaz9/g==$0": "gemma4:e4b",
+      "lab-se2/ORCLPDB1/invalid/LAB.GH_RATES_TODAY": "gemma4:e4b",
+      "summary": "gemma4:e4b"
+     },
+     "calls": [
+      {
+       "input_tokens": 959,
+       "output_tokens": 472,
+       "seconds": 1.01
+      }
+     ]
+    }
+   },
+   {
+    "first": {
+     "json": true,
+     "lines": {
+      "G1": "Here lies session 217, who started at 2026-10-27 22:37. It still holds an open transaction that others await.",
+      "G2": "Here lies 10.9.199680, who was a distributed transaction at 2026-10-27 22:37. It remains prepared, though the other side has committed.",
+      "G3": "Here lies 4.4.159581, who was a distributed transaction at 2026-10-27 22:37. It is committed, yet still resides here.",
+      "G4": "Here lies GH_CONTRACTOR, who was a user since 2026-10-27. It still owns two objects and one enabled scheduler job.",
+      "G5": "Here lies control02.ctl, who was a file since 2026-10-13 16:08. It rests on disk, though the database no longer uses it.",
+      "G6": "Here lies GH_AUDIT_2019, who was a table dropped on 2026-10-27. It still holds 7.0 MB of memory.",
+      "G7": "Here lies GH_RATES_TODAY, who was a view since 2026-10-27 21:28. It is invalid because something it relied upon has vanished.",
+      "summary": [
+       "The lab-26ai database holds session 217 and transaction 4.4.159581. The lab-se2 database holds several others, including 10.9.199680 and GH_CONTRACTOR.",
+       "Session 217 in lab-26ai is holding up another session, waiting for a decision that will not come."
+      ]
+     },
+     "fails": {},
+     "seconds": 1.01,
+     "tokens": 1420
+    },
+    "final": {
+     "summary": [
+      "The lab-26ai database holds session 217 and transaction 4.4.159581. The lab-se2 database holds several others, including 10.9.199680 and GH_CONTRACTOR.",
+      "Session 217 in lab-26ai is holding up another session with its open transaction."
+     ],
+     "epitaphs": {
+      "lab-26ai/FREEPDB1/session/217,5412": "Here lies session 217, who began its work on 2026-10-27 22:37. It still holds an open transaction that others wait upon.",
+      "lab-se2/ORCLPDB1/indoubt/10.9.199680": "Here lies 10.9.199680, who prepared a distributed transaction on 2026-10-27 22:37. It waits for a return that will not come.",
+      "lab-26ai/FREEPDB1/indoubt/4.4.159581": "Here lies 4.4.159581, who committed a distributed transaction on 2026-10-27 22:37. It remains, though its work is done.",
+      "lab-se2/ORCLPDB1/orphan/GH_CONTRACTOR": "Here lies GH_CONTRACTOR, who was a user since 2026-10-27. It still locks two objects and one scheduler job.",
+      "lab-se2/CDB$ROOT/file//opt/oracle/oradata/ORCLCDB/control02.ctl": "Here lies control02.ctl, who was on disk since 2026-10-13 16:08. It sits there, unused by the database.",
+      "lab-se2/ORCLPDB1/recyclebin/BIN$XtofteQWfKzgYwIAEaz9/g==$0": "Here lies GH_AUDIT_2019, who was a table dropped on 2026-10-27. It still holds 7.0 MB of memory.",
+      "lab-se2/ORCLPDB1/invalid/LAB.GH_RATES_TODAY": "Here lies GH_RATES_TODAY, who was a view since 2026-10-27 21:28. It remains invalid because something it relies on is gone."
+     },
+     "by": {
+      "lab-26ai/FREEPDB1/session/217,5412": "gemma4:e4b",
+      "lab-se2/ORCLPDB1/indoubt/10.9.199680": "gemma4:e4b",
+      "lab-26ai/FREEPDB1/indoubt/4.4.159581": "gemma4:e4b",
+      "lab-se2/ORCLPDB1/orphan/GH_CONTRACTOR": "gemma4:e4b",
+      "lab-se2/CDB$ROOT/file//opt/oracle/oradata/ORCLCDB/control02.ctl": "gemma4:e4b",
+      "lab-se2/ORCLPDB1/recyclebin/BIN$XtofteQWfKzgYwIAEaz9/g==$0": "gemma4:e4b",
+      "lab-se2/ORCLPDB1/invalid/LAB.GH_RATES_TODAY": "gemma4:e4b",
+      "summary": "gemma4:e4b"
+     },
+     "calls": [
+      {
+       "input_tokens": 959,
+       "output_tokens": 453,
+       "seconds": 0.97
+      }
+     ]
+    }
+   },
+   {
+    "first": {
+     "json": true,
+     "lines": {
+      "G1": "Here lies session 217, who was idle at 22:37 on 2026-10-27. It still holds an open transaction that others await.",
+      "G2": "Here lies 10.9.199680, who was prepared at 22:37 on 2026-10-27. It waits for a return that will not come.",
+      "G3": "Here lies 4.4.159581, who was committed at 22:37 on 2026-10-27. It remains here, though its work is done.",
+      "G4": "Here lies GH_CONTRACTOR, who was noted on 2026-10-27. It still owns two objects and one enabled scheduler job.",
+      "G5": "Here lies control02.ctl, which was seen on 2026-10-13 16:08. It sits on disk though the database no longer needs it.",
+      "G6": "Here lies GH_AUDIT_2019, who was dropped on 2026-10-27. It still holds 7.0 MB of space.",
+      "G7": "Here lies GH_RATES_TODAY, who was noted on 2026-10-27. It is invalid because something it relies upon has vanished.",
+      "summary": [
+       "The lab-26ai database holds session 217 and transaction 4.4.159581. lab-se2 holds 10.9.199680, GH_CONTRACTOR, control02.ctl, GH_AUDIT_2019, and GH_RATES_TODAY.",
+       "Session 217 in lab-26ai is holding a lock, and another session waits upon it now."
+      ]
+     },
+     "fails": {},
+     "seconds": 1.04,
+     "tokens": 1425
+    },
+    "final": {
+     "summary": [
+      "The lab-26ai database holds session 217 and transaction 4.4.159581. The lab-se2 database keeps 10.9.199680, GH_CONTRACTOR, control02.ctl, GH_AUDIT_2019, and GH_RATES_TODAY.",
+      "Session 217 in lab-26ai is holding a transaction that another session is waiting upon right now."
+     ],
+     "epitaphs": {
+      "lab-26ai/FREEPDB1/session/217,5412": "Here lies session 217, which began its work on 2026-10-27 22:37. It still holds an open transaction that waits for others.",
+      "lab-se2/ORCLPDB1/indoubt/10.9.199680": "Here lies 10.9.199680, which was prepared for a distributed transaction on 2026-10-27 22:37. It waits for a return that will not come.",
+      "lab-26ai/FREEPDB1/indoubt/4.4.159581": "Here lies 4.4.159581, which was committed on 2026-10-27 22:37. It remains here, though its work is done.",
+      "lab-se2/ORCLPDB1/orphan/GH_CONTRACTOR": "Here lies GH_CONTRACTOR, who was a user since 2026-10-27. It still owns two objects and one enabled scheduler job.",
+      "lab-se2/CDB$ROOT/file//opt/oracle/oradata/ORCLCDB/control02.ctl": "Here lies control02.ctl, which was noted on 2026-10-13 16:08. It rests on disk though the database no longer uses it.",
+      "lab-se2/ORCLPDB1/recyclebin/BIN$XtofteQWfKzgYwIAEaz9/g==$0": "Here lies GH_AUDIT_2019, which was dropped on 2026-10-27. It still holds 7.0 MB of data.",
+      "lab-se2/ORCLPDB1/invalid/LAB.GH_RATES_TODAY": "Here lies GH_RATES_TODAY, which was noted on 2026-10-27 21:28. It is invalid because something it relied upon has vanished."
+     },
+     "by": {
+      "lab-26ai/FREEPDB1/session/217,5412": "gemma4:e4b",
+      "lab-se2/ORCLPDB1/indoubt/10.9.199680": "gemma4:e4b",
+      "lab-26ai/FREEPDB1/indoubt/4.4.159581": "gemma4:e4b",
+      "lab-se2/ORCLPDB1/orphan/GH_CONTRACTOR": "gemma4:e4b",
+      "lab-se2/CDB$ROOT/file//opt/oracle/oradata/ORCLCDB/control02.ctl": "gemma4:e4b",
+      "lab-se2/ORCLPDB1/recyclebin/BIN$XtofteQWfKzgYwIAEaz9/g==$0": "gemma4:e4b",
+      "lab-se2/ORCLPDB1/invalid/LAB.GH_RATES_TODAY": "gemma4:e4b",
+      "summary": "gemma4:e4b"
+     },
+     "calls": [
+      {
+       "input_tokens": 959,
+       "output_tokens": 478,
+       "seconds": 1.05
+      }
+     ]
+    }
+   },
+   {
+    "first": {
+     "json": true,
+     "lines": {
+      "G1": "Here lies session 217, which began its work at 2026-10-27 22:37. It still waits for another session to finish its task.",
+      "G2": "Here lies 10.9.199680, which was prepared at 2026-10-27 22:37. It waits for a decision that will never come.",
+      "G3": "Here lies 4.4.159581, which was committed at 2026-10-27 22:37. It rests, though the system notes it is already done.",
+      "G4": "Here lies GH_CONTRACTOR, who was locked since 2026-10-27. It still holds two objects and one scheduler job.",
+      "G5": "Here lies control02.ctl, which was noted on 2026-10-13 16:08. It sits on disk though the database has moved on.",
+      "G6": "Here lies GH_AUDIT_2019, which was dropped on 2026-10-27. It still holds 7.0 MB of memory.",
+      "G7": "Here lies GH_RATES_TODAY, which was noted on 2026-10-27 21:28. It cannot be viewed because something it relies on is gone.",
+      "summary": [
+       "The lab-26ai database holds session 217 and transaction 4.4.159581. lab-se2 holds 10.9.199680, GH_CONTRACTOR, control02.ctl, GH_AUDIT_2019, and GH_RATES_TODAY.",
+       "Session 217 in lab-26ai is holding up another session right now."
+      ]
+     },
+     "fails": {},
+     "seconds": 1.06,
+     "tokens": 1426
+    },
+    "final": {
+     "summary": [
+      "The lab-26ai database holds session 217 and transaction 4.4.159581. lab-se2 holds 10.9.199680, GH_CONTRACTOR, control02.ctl, GH_AUDIT_2019, and GH_RATES_TODAY.",
+      "Session 217 in lab-26ai is holding up another session with its open transaction."
+     ],
+     "epitaphs": {
+      "lab-26ai/FREEPDB1/session/217,5412": "Here lies session 217, who began an idle transaction at 2026-10-27 22:37. It still holds a lock that another session waits upon.",
+      "lab-se2/ORCLPDB1/indoubt/10.9.199680": "Here lies 10.9.199680, who was part of a distributed transaction at 2026-10-27 22:37. It waits for a return that will not come.",
+      "lab-26ai/FREEPDB1/indoubt/4.4.159581": "Here lies 4.4.159581, who was part of a distributed transaction at 2026-10-27 22:37. It rests, having already been committed.",
+      "lab-se2/ORCLPDB1/orphan/GH_CONTRACTOR": "Here lies GH_CONTRACTOR, who was a user since 2026-10-27. It still keeps ownership of two objects and one scheduler job.",
+      "lab-se2/CDB$ROOT/file//opt/oracle/oradata/ORCLCDB/control02.ctl": "Here lies control02.ctl, which was on disk since 2026-10-13 16:08. It waits, though the database has long since moved on.",
+      "lab-se2/ORCLPDB1/recyclebin/BIN$XtofteQWfKzgYwIAEaz9/g==$0": "Here lies GH_AUDIT_2019, which was dropped on 2026-10-27. It still holds seven point zero megabytes.",
+      "lab-se2/ORCLPDB1/invalid/LAB.GH_RATES_TODAY": "Here lies GH_RATES_TODAY, which became invalid on 2026-10-27 21:28. It points to something that is no longer there."
+     },
+     "by": {
+      "lab-26ai/FREEPDB1/session/217,5412": "gemma4:e4b",
+      "lab-se2/ORCLPDB1/indoubt/10.9.199680": "gemma4:e4b",
+      "lab-26ai/FREEPDB1/indoubt/4.4.159581": "gemma4:e4b",
+      "lab-se2/ORCLPDB1/orphan/GH_CONTRACTOR": "gemma4:e4b",
+      "lab-se2/CDB$ROOT/file//opt/oracle/oradata/ORCLCDB/control02.ctl": "gemma4:e4b",
+      "lab-se2/ORCLPDB1/recyclebin/BIN$XtofteQWfKzgYwIAEaz9/g==$0": "gemma4:e4b",
+      "lab-se2/ORCLPDB1/invalid/LAB.GH_RATES_TODAY": "gemma4:e4b",
+      "summary": "gemma4:e4b"
+     },
+     "calls": [
+      {
+       "input_tokens": 959,
+       "output_tokens": 475,
+       "seconds": 1.14
+      }
+     ]
+    }
+   },
+   {
+    "first": {
+     "json": true,
+     "lines": {
+      "G1": "Here lies session 217, who began an idle transaction on 2026-10-27 22:37. It still holds a lock that others await.",
+      "G2": "Here lies 10.9.199680, who was part of a distributed transaction on 2026-10-27 22:37. It waits for a return that will not come.",
+      "G3": "Here lies 4.4.159581, who finished a distributed transaction on 2026-10-27 22:37. It rests, having already been purged.",
+      "G4": "Here lies GH_CONTRACTOR, who was a user on 2026-10-27. It still owns two objects and one enabled scheduler job.",
+      "G5": "Here lies control02.ctl, which was on disk since 2026-10-13 16:08. It remains, though the database has moved on.",
+      "G6": "Here lies GH_AUDIT_2019, which was dropped on 2026-10-27. It still keeps seven point zero MB.",
+      "G7": "Here lies GH_RATES_TODAY, which became invalid on 2026-10-27 21:28. It points to something that is no longer there.",
+      "summary": [
+       "lab-26ai holds session 217 and transaction 4.4.159581. lab-se2 holds 10.9.199680, GH_CONTRACTOR, control02.ctl, GH_AUDIT_2019, and GH_RATES_TODAY.",
+       "Session 217 in lab-26ai is holding up another session, waiting for a decision that will not come."
+      ]
+     },
+     "fails": {},
+     "seconds": 1.04,
+     "tokens": 1397
+    },
+    "final": {
+     "summary": [
+      "The lab-26ai database holds session 217 and transaction 4.4.159581. lab-se2 holds 10.9.199680, GH_CONTRACTOR, control02.ctl, GH_AUDIT_2019, and GH_RATES_TODAY.",
+      "Session 217 in lab-26ai is holding a transaction that another session is waiting upon right now."
+     ],
+     "epitaphs": {
+      "lab-26ai/FREEPDB1/session/217,5412": "Here lies session 217, which began its work on 2026-10-27 22:37. It still holds an open transaction that others wait upon.",
+      "lab-se2/ORCLPDB1/indoubt/10.9.199680": "Here lies 10.9.199680, which was part of a distributed transaction on 2026-10-27 22:37. It waits for a return that will not come.",
+      "lab-26ai/FREEPDB1/indoubt/4.4.159581": "Here lies 4.4.159581, which was a distributed transaction on 2026-10-27 22:37. It rests, having already been committed.",
+      "lab-se2/ORCLPDB1/orphan/GH_CONTRACTOR": "Here lies GH_CONTRACTOR, who was a user since 2026-10-27. It still owns two objects and one enabled scheduler job.",
+      "lab-se2/CDB$ROOT/file//opt/oracle/oradata/ORCLCDB/control02.ctl": "Here lies control02.ctl, which was on disk since 2026-10-13 16:08. The database has stopped using it, though it remains.",
+      "lab-se2/ORCLPDB1/recyclebin/BIN$XtofteQWfKzgYwIAEaz9/g==$0": "Here lies GH_AUDIT_2019, which was a table on 2026-10-27. It still holds 7.0 MB even after being dropped.",
+      "lab-se2/ORCLPDB1/invalid/LAB.GH_RATES_TODAY": "Here lies GH_RATES_TODAY, which was a view since 2026-10-27 21:28. It stands invalid because something it relied on has vanished."
+     },
+     "by": {
+      "lab-26ai/FREEPDB1/session/217,5412": "gemma4:e4b",
+      "lab-se2/ORCLPDB1/indoubt/10.9.199680": "gemma4:e4b",
+      "lab-26ai/FREEPDB1/indoubt/4.4.159581": "gemma4:e4b",
+      "lab-se2/ORCLPDB1/orphan/GH_CONTRACTOR": "gemma4:e4b",
+      "lab-se2/CDB$ROOT/file//opt/oracle/oradata/ORCLCDB/control02.ctl": "gemma4:e4b",
+      "lab-se2/ORCLPDB1/recyclebin/BIN$XtofteQWfKzgYwIAEaz9/g==$0": "gemma4:e4b",
+      "lab-se2/ORCLPDB1/invalid/LAB.GH_RATES_TODAY": "gemma4:e4b",
+      "summary": "gemma4:e4b"
+     },
+     "calls": [
+      {
+       "input_tokens": 959,
+       "output_tokens": 480,
+       "seconds": 1.07
+      }
+     ]
+    }
+   },
+   {
+    "first": {
+     "json": true,
+     "lines": {
+      "G1": "Here lies session 217, which began an idle transaction on 2026-10-27 22:37. It still holds a lock, waiting for another.",
+      "G2": "Here lies 10.9.199680, a distributed transaction that prepared on 2026-10-27 22:37. It waits for a return that will not come.",
+      "G3": "Here lies 4.4.159581, a distributed transaction that committed on 2026-10-27 22:37. It settles quietly, already done.",
+      "G4": "Here lies GH_CONTRACTOR, a user who locked things on 2026-10-27. It still owns two objects and one scheduler job.",
+      "G5": "Here lies control02.ctl, a file of 18 MB that settled on 2026-10-13 16:08. The database forgets it, yet it remains on disk.",
+      "G6": "Here lies GH_AUDIT_2019, a table dropped on 2026-10-27. It still holds 7.0 MB of what was once recorded.",
+      "G7": "Here lies GH_RATES_TODAY, a view that became invalid on 2026-10-27 21:28. It points to something that has since vanished.",
+      "summary": [
+       "The lab-26ai database holds session 217 and transaction 4.4.159581. lab-se2 holds 10.9.199680, GH_CONTRACTOR, control02.ctl, GH_AUDIT_2019, and GH_RATES_TODAY.",
+       "Session 217 in lab-26ai is holding up another session with its open transaction."
+      ]
+     },
+     "fails": {},
+     "seconds": 1.1,
+     "tokens": 1437
+    },
+    "final": {
+     "summary": [
+      "The lab-26ai database holds session 217 and transaction 4.4.159581. The lab-se2 database holds several others, including 10.9.199680 and GH_CONTRACTOR.",
+      "Session 217 in lab-26ai is holding a lock, and another session waits upon it now."
+     ],
+     "epitaphs": {
+      "lab-26ai/FREEPDB1/session/217,5412": "Here lies session 217, which began its work on 2026-10-27 22:37. It still holds an open transaction that waits for others.",
+      "lab-se2/ORCLPDB1/indoubt/10.9.199680": "Here lies 10.9.199680, which was a prepared distributed transaction on 2026-10-27 22:37. It waits for a return that will not come.",
+      "lab-26ai/FREEPDB1/indoubt/4.4.159581": "Here lies 4.4.159581, which was a distributed transaction on 2026-10-27 22:37. It rests after its side was already committed.",
+      "lab-se2/ORCLPDB1/orphan/GH_CONTRACTOR": "Here lies GH_CONTRACTOR, who was a user since 2026-10-27. It still owns two objects and one enabled scheduler job.",
+      "lab-se2/CDB$ROOT/file//opt/oracle/oradata/ORCLCDB/control02.ctl": "Here lies control02.ctl, which was a file since 2026-10-13 16:08. It sits on disk though the database no longer uses it.",
+      "lab-se2/ORCLPDB1/recyclebin/BIN$XtofteQWfKzgYwIAEaz9/g==$0": "Here lies GH_AUDIT_2019, which was a table dropped on 2026-10-27. It still holds 7.0 MB of memory.",
+      "lab-se2/ORCLPDB1/invalid/LAB.GH_RATES_TODAY": "Here lies GH_RATES_TODAY, which was a view since 2026-10-27 21:28. It remains invalid because something it relied upon is gone."
+     },
+     "by": {
+      "lab-26ai/FREEPDB1/session/217,5412": "gemma4:e4b",
+      "lab-se2/ORCLPDB1/indoubt/10.9.199680": "gemma4:e4b",
+      "lab-26ai/FREEPDB1/indoubt/4.4.159581": "gemma4:e4b",
+      "lab-se2/ORCLPDB1/orphan/GH_CONTRACTOR": "gemma4:e4b",
+      "lab-se2/CDB$ROOT/file//opt/oracle/oradata/ORCLCDB/control02.ctl": "gemma4:e4b",
+      "lab-se2/ORCLPDB1/recyclebin/BIN$XtofteQWfKzgYwIAEaz9/g==$0": "gemma4:e4b",
+      "lab-se2/ORCLPDB1/invalid/LAB.GH_RATES_TODAY": "gemma4:e4b",
+      "summary": "gemma4:e4b"
+     },
+     "calls": [
+      {
+       "input_tokens": 959,
+       "output_tokens": 461,
+       "seconds": 1.04
+      }
+     ]
+    }
+   },
+   {
+    "first": {
+     "json": true,
+     "lines": {
+      "G1": "Here lies session 217, which began its work on 2026-10-27 22:37. It still holds an open transaction that others await.",
+      "G2": "Here lies 10.9.199680, which was prepared on 2026-10-27 22:37. It waits for a return that never comes.",
+      "G3": "Here lies 4.4.159581, which was committed on 2026-10-27 22:37. It remains, though its work is finished.",
+      "G4": "Here lies GH_CONTRACTOR, who was active since 2026-10-27. It still owns two objects and one scheduler job.",
+      "G5": "Here lies control02.ctl, which was noted on 2026-10-13 16:08. It rests on disk, unused by the system.",
+      "G6": "Here lies GH_AUDIT_2019, which was dropped on 2026-10-27. It still holds seven point zero MB.",
+      "G7": "Here lies GH_RATES_TODAY, which was seen on 2026-10-27 21:28. It is invalid because something it relied upon is gone.",
+      "summary": [
+       "The lab-26ai database holds session 217 and transaction 4.4.159581. lab-se2 holds 10.9.199680, GH_CONTRACTOR, control02.ctl, GH_AUDIT_2019, and GH_RATES_TODAY.",
+       "Session 217 in lab-26ai still holds a transaction that another session is waiting upon."
+      ]
+     },
+     "fails": {},
+     "seconds": 1.04,
+     "tokens": 1419
+    },
+    "final": {
+     "summary": [
+      "The lab-26ai database holds session 217 and transaction 4.4.159581. lab-se2 holds 10.9.199680, GH_CONTRACTOR, control02.ctl, GH_AUDIT_2019, and GH_RATES_TODAY.",
+      "Session 217 in lab-26ai is holding a lock that another session is waiting upon right now."
+     ],
+     "epitaphs": {
+      "lab-26ai/FREEPDB1/session/217,5412": "Here lies session 217, who began an idle transaction on 2026-10-27 22:37. It still holds a lock waiting for another session.",
+      "lab-se2/ORCLPDB1/indoubt/10.9.199680": "Here lies 10.9.199680, who was part of a distributed transaction on 2026-10-27 22:37. It waits for a return that will not come.",
+      "lab-26ai/FREEPDB1/indoubt/4.4.159581": "Here lies 4.4.159581, who was a distributed transaction on 2026-10-27 22:37. It remains committed though its purpose is done.",
+      "lab-se2/ORCLPDB1/orphan/GH_CONTRACTOR": "Here lies GH_CONTRACTOR, who was a user on 2026-10-27. It still owns two objects and one scheduler job.",
+      "lab-se2/CDB$ROOT/file//opt/oracle/oradata/ORCLCDB/control02.ctl": "Here lies control02.ctl, who was a file on 2026-10-13 16:08. It rests on disk though the database no longer calls upon it.",
+      "lab-se2/ORCLPDB1/recyclebin/BIN$XtofteQWfKzgYwIAEaz9/g==$0": "Here lies GH_AUDIT_2019, who was a table dropped on 2026-10-27 21:28. It still holds seven point zero megabytes.",
+      "lab-se2/ORCLPDB1/invalid/LAB.GH_RATES_TODAY": "Here lies GH_RATES_TODAY, who was a view on 2026-10-27 21:28. It is invalid because something it relied upon has shifted or vanished."
+     },
+     "by": {
+      "lab-26ai/FREEPDB1/session/217,5412": "gemma4:e4b",
+      "lab-se2/ORCLPDB1/indoubt/10.9.199680": "gemma4:e4b",
+      "lab-26ai/FREEPDB1/indoubt/4.4.159581": "gemma4:e4b",
+      "lab-se2/ORCLPDB1/orphan/GH_CONTRACTOR": "gemma4:e4b",
+      "lab-se2/CDB$ROOT/file//opt/oracle/oradata/ORCLCDB/control02.ctl": "gemma4:e4b",
+      "lab-se2/ORCLPDB1/recyclebin/BIN$XtofteQWfKzgYwIAEaz9/g==$0": "gemma4:e4b",
+      "lab-se2/ORCLPDB1/invalid/LAB.GH_RATES_TODAY": "gemma4:e4b",
+      "summary": "gemma4:e4b"
+     },
+     "calls": [
+      {
+       "input_tokens": 959,
+       "output_tokens": 487,
+       "seconds": 1.08
+      }
+     ]
+    }
+   },
+   {
+    "first": {
+     "json": true,
+     "lines": {
+      "G1": "Here lies session 217, who was idle since 2026-10-27 22:37. It still holds an open transaction.",
+      "G2": "Here lies 10.9.199680, who was prepared since 2026-10-27 22:37. It waits for a return that will not come.",
+      "G3": "Here lies 4.4.159581, who was committed since 2026-10-27 22:37. It rests, purged from the waiting.",
+      "G4": "Here lies GH_CONTRACTOR, who was locked since 2026-10-27. It still owns two objects and one scheduler job.",
+      "G5": "Here lies control02.ctl, who was on disk since 2026-10-13 16:08. The database has moved on from it.",
+      "G6": "Here lies GH_AUDIT_2019, who was dropped on 2026-10-27. It still holds 7.0 MB of memory.",
+      "G7": "Here lies GH_RATES_TODAY, who was invalid since 2026-10-27 21:28. It points to something that is no longer there.",
+      "summary": [
+       "The lab-26ai database holds session 217 and transaction 4.4.159581. The lab-se2 database holds several others.",
+       "Session 217 in lab-26ai is holding up another session right now."
+      ]
+     },
+     "fails": {},
+     "seconds": 0.92,
+     "tokens": 1375
+    },
+    "final": {
+     "summary": [
+      "The records in lab-26ai hold session 217 and transaction 4.4.159581. lab-se2 holds 10.9.199680, GH_CONTRACTOR, control02.ctl, GH_AUDIT_2019, and GH_RATES_TODAY.",
+      "Session 217 in lab-26ai is holding back another session, waiting for a final word."
+     ],
+     "epitaphs": {
+      "lab-26ai/FREEPDB1/session/217,5412": "Here lies session 217, who was idle since 2026-10-27 22:37. It still holds an open transaction.",
+      "lab-se2/ORCLPDB1/indoubt/10.9.199680": "Here lies 10.9.199680, who was prepared at 2026-10-27 22:37. It waits for a return that will not come.",
+      "lab-26ai/FREEPDB1/indoubt/4.4.159581": "Here lies 4.4.159581, who was committed at 2026-10-27 22:37. It remains, though its work is done.",
+      "lab-se2/ORCLPDB1/orphan/GH_CONTRACTOR": "Here lies GH_CONTRACTOR, who was locked since 2026-10-27. It still owns two objects and one scheduler job.",
+      "lab-se2/CDB$ROOT/file//opt/oracle/oradata/ORCLCDB/control02.ctl": "Here lies control02.ctl, which was noted on 2026-10-13 16:08. It sits on disk, unused by the database.",
+      "lab-se2/ORCLPDB1/recyclebin/BIN$XtofteQWfKzgYwIAEaz9/g==$0": "Here lies GH_AUDIT_2019, which was dropped on 2026-10-27. It still holds 7.0 MB of memory.",
+      "lab-se2/ORCLPDB1/invalid/LAB.GH_RATES_TODAY": "Here lies GH_RATES_TODAY, which was noted on 2026-10-27 21:28. It is invalid because something it needed has vanished."
+     },
+     "by": {
+      "lab-26ai/FREEPDB1/session/217,5412": "gemma4:e4b",
+      "lab-se2/ORCLPDB1/indoubt/10.9.199680": "gemma4:e4b",
+      "lab-26ai/FREEPDB1/indoubt/4.4.159581": "gemma4:e4b",
+      "lab-se2/ORCLPDB1/orphan/GH_CONTRACTOR": "gemma4:e4b",
+      "lab-se2/CDB$ROOT/file//opt/oracle/oradata/ORCLCDB/control02.ctl": "gemma4:e4b",
+      "lab-se2/ORCLPDB1/recyclebin/BIN$XtofteQWfKzgYwIAEaz9/g==$0": "gemma4:e4b",
+      "lab-se2/ORCLPDB1/invalid/LAB.GH_RATES_TODAY": "gemma4:e4b",
+      "summary": "gemma4:e4b"
+     },
+     "calls": [
+      {
+       "input_tokens": 959,
+       "output_tokens": 461,
+       "seconds": 1.02
+      }
+     ]
+    }
+   },
+   {
+    "first": {
+     "json": true,
+     "lines": {
+      "G1": "Here lies session 217, who began an idle transaction on 2026-10-27 22:37. It still holds a lock that waits on another session.",
+      "G2": "Here lies 10.9.199680, who prepared a distributed transaction on 2026-10-27 22:37. It waits for a return that will not come.",
+      "G3": "Here lies 4.4.159581, who committed a distributed transaction on 2026-10-27 22:37. It remains, though its work is done.",
+      "G4": "Here lies GH_CONTRACTOR, who was a user since 2026-10-27. It still owns two objects and one scheduler job.",
+      "G5": "Here lies control02.ctl, who was a file since 2026-10-13 16:08. It rests on disk though the database has moved on.",
+      "G6": "Here lies GH_AUDIT_2019, who was a table dropped on 2026-10-27. It still holds 7.0 MB of memory.",
+      "G7": "Here lies GH_RATES_TODAY, who was a view since 2026-10-27 21:28. It looks upon things that have vanished.",
+      "summary": [
+       "The lab-26ai database holds session 217 and transaction 4.4.159581. lab-se2 holds 10.9.199680, GH_CONTRACTOR, control02.ctl, GH_AUDIT_2019, and GH_RATES_TODAY.",
+       "Session 217 in lab-26ai is holding up another session with its open transaction."
+      ]
+     },
+     "fails": {},
+     "seconds": 1.08,
+     "tokens": 1431
+    },
+    "final": {
+     "summary": [
+      "The lab-26ai database holds session 217 and transaction 4.4.159581. The lab-se2 database holds many others, including 10.9.199680 and GH_CONTRACTOR.",
+      "Session 217 in lab-26ai is holding up another session, waiting for a decision that will not come."
+     ],
+     "epitaphs": {
+      "lab-26ai/FREEPDB1/session/217,5412": "Here lies session 217, which began its work on 2026-10-27 22:37. It still holds an open transaction that others await.",
+      "lab-se2/ORCLPDB1/indoubt/10.9.199680": "Here lies 10.9.199680, which was prepared on 2026-10-27 22:37. It waits for a return that will not come, though the other side committed.",
+      "lab-26ai/FREEPDB1/indoubt/4.4.159581": "Here lies 4.4.159581, which was committed on 2026-10-27 22:37. It rests now, having been purged by this side.",
+      "lab-se2/ORCLPDB1/orphan/GH_CONTRACTOR": "Here lies GH_CONTRACTOR, who was active since 2026-10-27. It still owns two objects and one enabled scheduler job.",
+      "lab-se2/CDB$ROOT/file//opt/oracle/oradata/ORCLCDB/control02.ctl": "Here lies control02.ctl, which was seen on 2026-10-13 16:08. It sits on the disk, though the database no longer uses it.",
+      "lab-se2/ORCLPDB1/recyclebin/BIN$XtofteQWfKzgYwIAEaz9/g==$0": "Here lies GH_AUDIT_2019, which was dropped on 2026-10-27. It still keeps 7.0 MB of its former self.",
+      "lab-se2/ORCLPDB1/invalid/LAB.GH_RATES_TODAY": "Here lies GH_RATES_TODAY, which was noted on 2026-10-27 21:28. It is invalid because something it relied upon has changed or vanished."
+     },
+     "by": {
+      "lab-26ai/FREEPDB1/session/217,5412": "gemma4:e4b",
+      "lab-se2/ORCLPDB1/indoubt/10.9.199680": "gemma4:e4b",
+      "lab-26ai/FREEPDB1/indoubt/4.4.159581": "gemma4:e4b",
+      "lab-se2/ORCLPDB1/orphan/GH_CONTRACTOR": "gemma4:e4b",
+      "lab-se2/CDB$ROOT/file//opt/oracle/oradata/ORCLCDB/control02.ctl": "gemma4:e4b",
+      "lab-se2/ORCLPDB1/recyclebin/BIN$XtofteQWfKzgYwIAEaz9/g==$0": "gemma4:e4b",
+      "lab-se2/ORCLPDB1/invalid/LAB.GH_RATES_TODAY": "gemma4:e4b",
+      "summary": "gemma4:e4b"
+     },
+     "calls": [
+      {
+       "input_tokens": 959,
+       "output_tokens": 466,
+       "seconds": 1.09
+      }
+     ]
+    }
+   },
+   {
+    "first": {
+     "json": true,
+     "lines": {
+      "G1": "Here lies session 217, which began its work on 2026-10-27 22:37. It still holds an open transaction that others await.",
+      "G2": "Here lies 10.9.199680, which was part of a distributed transaction on 2026-10-27 22:37. It waits for a return that will not come.",
+      "G3": "Here lies 4.4.159581, which was a distributed transaction on 2026-10-27 22:37. It rests, though the work is done on its other side.",
+      "G4": "Here lies GH_CONTRACTOR, who was a user on 2026-10-27. It still owns two objects and one enabled scheduler job.",
+      "G5": "Here lies control02.ctl, which was a file on 2026-10-13 16:08. It sits on disk though the database no longer calls it.",
+      "G6": "Here lies GH_AUDIT_2019, which was a table on 2026-10-27 21:28. It still holds 7.0 MB after being dropped.",
+      "G7": "Here lies GH_RATES_TODAY, which was a view on 2026-10-27 21:28. It stands invalid because something it relied on is gone.",
+      "summary": [
+       "The lab-26ai database holds session 217 and transaction 4.4.159581. The lab-se2 database keeps 10.9.199680, GH_CONTRACTOR, control02.ctl, GH_AUDIT_2019, and GH_RATES_TODAY.",
+       "Session 217 in lab-26ai is holding a transaction that another session is waiting upon."
+      ]
+     },
+     "fails": {},
+     "seconds": 1.09,
+     "tokens": 1449
+    },
+    "final": {
+     "summary": [
+      "The lab-26ai database holds session 217 and transaction 4.4.159581. lab-se2 keeps 10.9.199680, GH_CONTRACTOR, control02.ctl, GH_AUDIT_2019, and GH_RATES_TODAY.",
+      "Session 217 in lab-26ai is holding up another session right now."
+     ],
+     "epitaphs": {
+      "lab-26ai/FREEPDB1/session/217,5412": "Here lies session 217, which began an idle wait on 2026-10-27 22:37. It still holds a transaction others await.",
+      "lab-se2/ORCLPDB1/indoubt/10.9.199680": "Here lies 10.9.199680, which prepared a distributed transaction on 2026-10-27 22:37. It waits for a return that will not come.",
+      "lab-26ai/FREEPDB1/indoubt/4.4.159581": "Here lies 4.4.159581, which committed a transaction on 2026-10-27 22:37. It remains here, though its work is done.",
+      "lab-se2/ORCLPDB1/orphan/GH_CONTRACTOR": "Here lies GH_CONTRACTOR, who was a user on 2026-10-27. It still owns two objects and one scheduler job.",
+      "lab-se2/CDB$ROOT/file//opt/oracle/oradata/ORCLCDB/control02.ctl": "Here lies control02.ctl, which was present since 2026-10-13 16:08. It sits on the disk though the database has moved on.",
+      "lab-se2/ORCLPDB1/recyclebin/BIN$XtofteQWfKzgYwIAEaz9/g==$0": "Here lies GH_AUDIT_2019, which was dropped on 2026-10-27. It still keeps its 7.0 MB of records.",
+      "lab-se2/ORCLPDB1/invalid/LAB.GH_RATES_TODAY": "Here lies GH_RATES_TODAY, which became invalid on 2026-10-27 21:28. It points to things that are no longer there."
+     },
+     "by": {
+      "lab-26ai/FREEPDB1/session/217,5412": "gemma4:e4b",
+      "lab-se2/ORCLPDB1/indoubt/10.9.199680": "gemma4:e4b",
+      "lab-26ai/FREEPDB1/indoubt/4.4.159581": "gemma4:e4b",
+      "lab-se2/ORCLPDB1/orphan/GH_CONTRACTOR": "gemma4:e4b",
+      "lab-se2/CDB$ROOT/file//opt/oracle/oradata/ORCLCDB/control02.ctl": "gemma4:e4b",
+      "lab-se2/ORCLPDB1/recyclebin/BIN$XtofteQWfKzgYwIAEaz9/g==$0": "gemma4:e4b",
+      "lab-se2/ORCLPDB1/invalid/LAB.GH_RATES_TODAY": "gemma4:e4b",
+      "summary": "gemma4:e4b"
+     },
+     "calls": [
+      {
+       "input_tokens": 959,
+       "output_tokens": 467,
+       "seconds": 1.06
+      }
+     ]
+    }
+   },
+   {
+    "first": {
+     "json": true,
+     "lines": {
+      "G1": "Here lies session 217, which was working in lab-26ai. It still holds an open transaction that another session waits upon.",
+      "G2": "Here lies 10.9.199680, which was part of a distributed transaction in lab-se2. It remains prepared, though the other side has already committed.",
+      "G3": "Here lies 4.4.159581, which was a distributed transaction in lab-26ai. It has been committed, yet it still remains here.",
+      "G4": "Here lies GH_CONTRACTOR, who was a user in lab-se2. It still owns two objects and one enabled scheduler job.",
+      "G5": "Here lies control02.ctl, which was on disk in lab-se2. It still occupies space though the database no longer uses it.",
+      "G6": "Here lies GH_AUDIT_2019, a table in lab-se2. It was dropped on 2026-10-27 but still holds 7.0 MB.",
+      "G7": "Here lies GH_RATES_TODAY, a view in lab-se2. It is invalid because something it relies upon has changed or vanished.",
+      "summary": [
+       "The lab-26ai database holds session 217 and transaction 4.4.159581. lab-se2 holds 10.9.199680, GH_CONTRACTOR, control02.ctl, GH_AUDIT_2019, and GH_RATES_TODAY.",
+       "Session 217 in lab-26ai is holding up another session, waiting for its work to be settled."
+      ]
+     },
+     "fails": {},
+     "seconds": 0.98,
+     "tokens": 1378
+    },
+    "final": {
+     "summary": [
+      "The lab-26ai holds session 217 and transaction 4.4.159581. lab-se2 holds 10.9.199680, GH_CONTRACTOR, control02.ctl, GH_AUDIT_2019, and GH_RATES_TODAY.",
+      "Session 217 in lab-26ai is holding a transaction that another session is waiting upon."
+     ],
+     "epitaphs": {
+      "lab-26ai/FREEPDB1/session/217,5412": "Here lies session 217, who began work at 2026-10-27 22:37. It still holds an open transaction that others wait upon.",
+      "lab-se2/ORCLPDB1/indoubt/10.9.199680": "Here lies 10.9.199680, who was a distributed transaction started at 2026-10-27 22:37. It waits for a return that will not come.",
+      "lab-26ai/FREEPDB1/indoubt/4.4.159581": "Here lies 4.4.159581, who was a distributed transaction started at 2026-10-27 22:37. It remains committed though nobody attends to it.",
+      "lab-se2/ORCLPDB1/orphan/GH_CONTRACTOR": "Here lies GH_CONTRACTOR, who began its presence on 2026-10-27. It still owns two objects and one scheduler job.",
+      "lab-se2/CDB$ROOT/file//opt/oracle/oradata/ORCLCDB/control02.ctl": "Here lies control02.ctl, who was noted on 2026-10-13 16:08. It rests on disk though the database no longer uses it.",
+      "lab-se2/ORCLPDB1/recyclebin/BIN$XtofteQWfKzgYwIAEaz9/g==$0": "Here lies GH_AUDIT_2019, who was dropped on 2026-10-27. It still holds 7.0 MB of memory.",
+      "lab-se2/ORCLPDB1/invalid/LAB.GH_RATES_TODAY": "Here lies GH_RATES_TODAY, who was noted on 2026-10-27 21:28. It is invalid because something it relies on has vanished."
+     },
+     "by": {
+      "lab-26ai/FREEPDB1/session/217,5412": "gemma4:e4b",
+      "lab-se2/ORCLPDB1/indoubt/10.9.199680": "gemma4:e4b",
+      "lab-26ai/FREEPDB1/indoubt/4.4.159581": "gemma4:e4b",
+      "lab-se2/ORCLPDB1/orphan/GH_CONTRACTOR": "gemma4:e4b",
+      "lab-se2/CDB$ROOT/file//opt/oracle/oradata/ORCLCDB/control02.ctl": "gemma4:e4b",
+      "lab-se2/ORCLPDB1/recyclebin/BIN$XtofteQWfKzgYwIAEaz9/g==$0": "gemma4:e4b",
+      "lab-se2/ORCLPDB1/invalid/LAB.GH_RATES_TODAY": "gemma4:e4b",
+      "summary": "gemma4:e4b"
+     },
+     "calls": [
+      {
+       "input_tokens": 959,
+       "output_tokens": 472,
+       "seconds": 1.03
+      }
+     ]
+    }
+   },
+   {
+    "first": {
+     "json": true,
+     "lines": {
+      "G1": "Here lies session 217, which began its work on 2026-10-27 22:37. It still holds an open transaction that others await.",
+      "G2": "Here lies 10.9.199680, which began its work on 2026-10-27 22:37. It remains prepared for a commit that never returns.",
+      "G3": "Here lies 4.4.159581, which began its work on 2026-10-27 22:37. It is committed, yet still remains in the ledger.",
+      "G4": "Here lies GH_CONTRACTOR, which began its work on 2026-10-27. It still owns two objects and one enabled scheduler job.",
+      "G5": "Here lies control02.ctl, which began its work on 2026-10-13 16:08. It sits on the disk, though the database has moved on.",
+      "G6": "Here lies GH_AUDIT_2019, which began its work on 2026-10-27 21:28. It was dropped, yet still holds seven point zero MB.",
+      "G7": "Here lies GH_RATES_TODAY, which began its work on 2026-10-27 21:28. It is a view, but something it depends on has slipped away.",
+      "summary": [
+       "The records in lab-26ai hold session 217 and transaction 4.4.159581. lab-se2 holds 10.9.199680, GH_CONTRACTOR, control02.ctl, GH_AUDIT_2019, and GH_RATES_TODAY.",
+       "Session 217 in lab-26ai is holding up another session with its open transaction."
+      ]
+     },
+     "fails": {},
+     "seconds": 1.09,
+     "tokens": 1445
+    },
+    "final": {
+     "summary": [
+      "The lab-26ai database holds session 217 and transaction 4.4.159581. lab-se2 holds 10.9.199680, GH_CONTRACTOR, control02.ctl, GH_AUDIT_2019, and GH_RATES_TODAY.",
+      "Session 217 in lab-26ai is holding a transaction that another session is waiting upon."
+     ],
+     "epitaphs": {
+      "lab-26ai/FREEPDB1/session/217,5412": "Here lies session 217, who began an idle transaction at 2026-10-27 22:37. It still waits for another session.",
+      "lab-se2/ORCLPDB1/indoubt/10.9.199680": "Here lies 10.9.199680, who was part of a distributed transaction at 2026-10-27 22:37. It waits for a return that will not come.",
+      "lab-26ai/FREEPDB1/indoubt/4.4.159581": "Here lies 4.4.159581, who was a distributed transaction at 2026-10-27 22:37. It has been purged by the system.",
+      "lab-se2/ORCLPDB1/orphan/GH_CONTRACTOR": "Here lies GH_CONTRACTOR, who was a user since 2026-10-27. It still owns two objects and one scheduler job.",
+      "lab-se2/CDB$ROOT/file//opt/oracle/oradata/ORCLCDB/control02.ctl": "Here lies control02.ctl, which was on disk since 2026-10-13 16:08. The database stopped using it.",
+      "lab-se2/ORCLPDB1/recyclebin/BIN$XtofteQWfKzgYwIAEaz9/g==$0": "Here lies GH_AUDIT_2019, which was a table dropped on 2026-10-27. It still holds 7.0 MB.",
+      "lab-se2/ORCLPDB1/invalid/LAB.GH_RATES_TODAY": "Here lies GH_RATES_TODAY, which was a view since 2026-10-27 21:28. It is invalid because something it depended on is gone."
+     },
+     "by": {
+      "lab-26ai/FREEPDB1/session/217,5412": "gemma4:e4b",
+      "lab-se2/ORCLPDB1/indoubt/10.9.199680": "gemma4:e4b",
+      "lab-26ai/FREEPDB1/indoubt/4.4.159581": "gemma4:e4b",
+      "lab-se2/ORCLPDB1/orphan/GH_CONTRACTOR": "gemma4:e4b",
+      "lab-se2/CDB$ROOT/file//opt/oracle/oradata/ORCLCDB/control02.ctl": "gemma4:e4b",
+      "lab-se2/ORCLPDB1/recyclebin/BIN$XtofteQWfKzgYwIAEaz9/g==$0": "gemma4:e4b",
+      "lab-se2/ORCLPDB1/invalid/LAB.GH_RATES_TODAY": "gemma4:e4b",
+      "summary": "gemma4:e4b"
+     },
+     "calls": [
+      {
+       "input_tokens": 959,
+       "output_tokens": 466,
+       "seconds": 1.0
+      }
+     ]
+    }
+   },
+   {
+    "first": {
+     "json": true,
+     "lines": {
+      "G1": "Here lies session 217, which began its work on 2026-10-27 22:37. It still holds an open transaction.",
+      "G2": "Here lies 10.9.199680, which was prepared on 2026-10-27 22:37. It waits for a return that will not come.",
+      "G3": "Here lies 4.4.159581, which was committed on 2026-10-27 22:37. It remains a record of a finished thing.",
+      "G4": "Here lies GH_CONTRACTOR, who was a user since 2026-10-27. It still owns two objects and one scheduler job.",
+      "G5": "Here lies control02.ctl, which was noted on 2026-10-13 16:08. It sits on disk, unused by the database.",
+      "G6": "Here lies GH_AUDIT_2019, which was dropped on 2026-10-27. It still holds 7.0 MB of data.",
+      "G7": "Here lies GH_RATES_TODAY, which was noted on 2026-10-27 21:28. It is a view that cannot find what it needs.",
+      "summary": [
+       "The lab-26ai database holds session 217 and transaction 4.4.159581. lab-se2 holds 10.9.199680, GH_CONTRACTOR, control02.ctl, GH_AUDIT_2019, and GH_RATES_TODAY.",
+       "Session 217 in lab-26ai is holding a transaction that another session is waiting upon."
+      ]
+     },
+     "fails": {},
+     "seconds": 1.02,
+     "tokens": 1421
+    },
+    "final": {
+     "summary": [
+      "The lab-26ai database holds session 217 and transaction 4.4.159581. lab-se2 holds 10.9.199680, GH_CONTRACTOR, control02.ctl, GH_AUDIT_2019, and GH_RATES_TODAY.",
+      "Session 217 in lab-26ai is holding up another session with its open transaction."
+     ],
+     "epitaphs": {
+      "lab-26ai/FREEPDB1/session/217,5412": "Here lies session 217, who began work on 2026-10-27 22:37. It still waits for another session to finish its task.",
+      "lab-se2/ORCLPDB1/indoubt/10.9.199680": "Here lies 10.9.199680, who prepared a distributed transaction on 2026-10-27 22:37. It waits for a return that will not come.",
+      "lab-26ai/FREEPDB1/indoubt/4.4.159581": "Here lies 4.4.159581, who committed a transaction on 2026-10-27 22:37. It remains, though its purpose is complete.",
+      "lab-se2/ORCLPDB1/orphan/GH_CONTRACTOR": "Here lies GH_CONTRACTOR, who was a user since 2026-10-27. It still holds two objects and one enabled scheduler job.",
+      "lab-se2/CDB$ROOT/file//opt/oracle/oradata/ORCLCDB/control02.ctl": "Here lies control02.ctl, which was noted on 2026-10-13 16:08. It sits on disk though the database has moved on from it.",
+      "lab-se2/ORCLPDB1/recyclebin/BIN$XtofteQWfKzgYwIAEaz9/g==$0": "Here lies GH_AUDIT_2019, which was dropped on 2026-10-27. It still keeps its 7.0 MB of records.",
+      "lab-se2/ORCLPDB1/invalid/LAB.GH_RATES_TODAY": "Here lies GH_RATES_TODAY, which was noted on 2026-10-27 21:28. It is a view that cannot see what it once depended upon."
+     },
+     "by": {
+      "lab-26ai/FREEPDB1/session/217,5412": "gemma4:e4b",
+      "lab-se2/ORCLPDB1/indoubt/10.9.199680": "gemma4:e4b",
+      "lab-26ai/FREEPDB1/indoubt/4.4.159581": "gemma4:e4b",
+      "lab-se2/ORCLPDB1/orphan/GH_CONTRACTOR": "gemma4:e4b",
+      "lab-se2/CDB$ROOT/file//opt/oracle/oradata/ORCLCDB/control02.ctl": "gemma4:e4b",
+      "lab-se2/ORCLPDB1/recyclebin/BIN$XtofteQWfKzgYwIAEaz9/g==$0": "gemma4:e4b",
+      "lab-se2/ORCLPDB1/invalid/LAB.GH_RATES_TODAY": "gemma4:e4b",
+      "summary": "gemma4:e4b"
+     },
+     "calls": [
+      {
+       "input_tokens": 959,
+       "output_tokens": 474,
+       "seconds": 1.11
+      }
+     ]
+    }
+   },
+   {
+    "first": {
+     "json": true,
+     "lines": {
+      "G1": "Here lies session 217, which began its work on 2026-10-27 22:37. It still holds an open transaction that others await.",
+      "G2": "Here lies 10.9.199680, which was prepared on 2026-10-27 22:37. It waits for a return that will not come.",
+      "G3": "Here lies 4.4.159581, which was committed on 2026-10-27 22:37. It rests, having already seen its final state.",
+      "G4": "Here lies GH_CONTRACTOR, who was active since 2026-10-27. It still guards two objects and one scheduler job.",
+      "G5": "Here lies control02.ctl, which was noted on 2026-10-13 16:08. It sits on the disk, unused by the database.",
+      "G6": "Here lies GH_AUDIT_2019, which was dropped on 2026-10-27. It still keeps its 7.0 MB of memory.",
+      "G7": "Here lies GH_RATES_TODAY, which was noted on 2026-10-27 21:28. It remains invalid because something it needs has vanished.",
+      "summary": [
+       "The lab-26ai database holds session 217 and transaction 4.4.159581. lab-se2 holds 10.9.199680, GH_CONTRACTOR, control02.ctl, GH_AUDIT_2019, and GH_RATES_TODAY.",
+       "Session 217 in lab-26ai is holding up another session, waiting for a decision."
+      ]
+     },
+     "fails": {},
+     "seconds": 1.02,
+     "tokens": 1425
+    },
+    "final": {
+     "summary": [
+      "The lab-26ai database holds session 217 and transaction 4.4.159581. The lab-se2 database keeps 10.9.199680, GH_CONTRACTOR, control02.ctl, GH_AUDIT_2019, and GH_RATES_TODAY.",
+      "Session 217 in lab-26ai is holding up one other session with its open transaction."
+     ],
+     "epitaphs": {
+      "lab-26ai/FREEPDB1/session/217,5412": "Here lies session 217, which began its work at 22:37 on 2026-10-27. It still waits for another session to finish.",
+      "lab-se2/ORCLPDB1/indoubt/10.9.199680": "Here lies 10.9.199680, which was part of a distributed transaction at 22:37 on 2026-10-27. It remains prepared, though the other side has moved on.",
+      "lab-26ai/FREEPDB1/indoubt/4.4.159581": "Here lies 4.4.159581, which was a distributed transaction at 22:37 on 2026-10-27. It settled its business, but the record remains.",
+      "lab-se2/ORCLPDB1/orphan/GH_CONTRACTOR": "Here lies GH_CONTRACTOR, who was a user since 2026-10-27. It still holds two objects and one scheduler job.",
+      "lab-se2/CDB$ROOT/file//opt/oracle/oradata/ORCLCDB/control02.ctl": "Here lies control02.ctl, which was a file on disk since 16:08 on 2026-10-13. The database has forgotten it, though it still rests.",
+      "lab-se2/ORCLPDB1/recyclebin/BIN$XtofteQWfKzgYwIAEaz9/g==$0": "Here lies GH_AUDIT_2019, which was a table dropped on 2026-10-27. It still keeps 7.0 MB of its old records.",
+      "lab-se2/ORCLPDB1/invalid/LAB.GH_RATES_TODAY": "Here lies GH_RATES_TODAY, which was a view since 21:28 on 2026-10-27. It points to things that are no longer there."
+     },
+     "by": {
+      "lab-26ai/FREEPDB1/session/217,5412": "gemma4:e4b",
+      "lab-se2/ORCLPDB1/indoubt/10.9.199680": "gemma4:e4b",
+      "lab-26ai/FREEPDB1/indoubt/4.4.159581": "gemma4:e4b",
+      "lab-se2/ORCLPDB1/orphan/GH_CONTRACTOR": "gemma4:e4b",
+      "lab-se2/CDB$ROOT/file//opt/oracle/oradata/ORCLCDB/control02.ctl": "gemma4:e4b",
+      "lab-se2/ORCLPDB1/recyclebin/BIN$XtofteQWfKzgYwIAEaz9/g==$0": "gemma4:e4b",
+      "lab-se2/ORCLPDB1/invalid/LAB.GH_RATES_TODAY": "gemma4:e4b",
+      "summary": "gemma4:e4b"
+     },
+     "calls": [
+      {
+       "input_tokens": 959,
+       "output_tokens": 488,
+       "seconds": 1.1
+      }
+     ]
+    }
+   },
+   {
+    "first": {
+     "json": true,
+     "lines": {
+      "G1": "Here lies session 217, which began an idle transaction at 2026-10-27 22:37. It still holds a lock that others await.",
+      "G2": "Here lies 10.9.199680, a distributed transaction prepared on 2026-10-27 22:37. It waits for a return that will not come.",
+      "G3": "Here lies 4.4.159581, a distributed transaction committed on 2026-10-27 22:37. It remains here though its work is done.",
+      "G4": "Here lies GH_CONTRACTOR, a user locked since 2026-10-27. It still owns two objects and one scheduler job.",
+      "G5": "Here lies control02.ctl, which was on disk since 2026-10-13 16:08. The database no longer calls upon it.",
+      "G6": "Here lies GH_AUDIT_2019, a table dropped on 2026-10-27. It still holds 7.0 MB of its old records.",
+      "G7": "Here lies GH_RATES_TODAY, a view since 2026-10-27 21:28. It points to something that has since vanished.",
+      "summary": [
+       "The records in lab-26ai hold session 217 and transaction 4.4.159581. lab-se2 holds 10.9.199680, GH_CONTRACTOR, control02.ctl, GH_AUDIT_2019, and GH_RATES_TODAY.",
+       "Session 217 in lab-26ai is holding a transaction that another session is waiting upon right now."
+      ]
+     },
+     "fails": {},
+     "seconds": 0.99,
+     "tokens": 1426
+    },
+    "final": {
+     "summary": [
+      "The lab-26ai database holds session 217 and transaction 4.4.159581. lab-se2 holds 10.9.199680, GH_CONTRACTOR, control02.ctl, GH_AUDIT_2019, and GH_RATES_TODAY.",
+      "Session 217 in lab-26ai is holding up another session, waiting for a final word."
+     ],
+     "epitaphs": {
+      "lab-26ai/FREEPDB1/session/217,5412": "Here lies session 217, who was idle since 2026-10-27 22:37. It still holds an open transaction that another session waits upon.",
+      "lab-se2/ORCLPDB1/indoubt/10.9.199680": "Here lies 10.9.199680, who was prepared for a distributed transaction since 2026-10-27 22:37. It waits for a return that will not come.",
+      "lab-26ai/FREEPDB1/indoubt/4.4.159581": "Here lies 4.4.159581, who was part of a distributed transaction since 2026-10-27 22:37. It rests, having already been purged.",
+      "lab-se2/ORCLPDB1/orphan/GH_CONTRACTOR": "Here lies GH_CONTRACTOR, who was a user since 2026-10-27. It still owns two objects and one enabled scheduler job.",
+      "lab-se2/CDB$ROOT/file//opt/oracle/oradata/ORCLCDB/control02.ctl": "Here lies control02.ctl, which was on disk since 2026-10-13 16:08. It waits, though the database has moved on from it.",
+      "lab-se2/ORCLPDB1/recyclebin/BIN$XtofteQWfKzgYwIAEaz9/g==$0": "Here lies GH_AUDIT_2019, which was dropped on 2026-10-27. It still holds seven point zero megabytes of memory.",
+      "lab-se2/ORCLPDB1/invalid/LAB.GH_RATES_TODAY": "Here lies GH_RATES_TODAY, which was noted since 2026-10-27 21:28. It remains invalid because something it relies on has vanished."
+     },
+     "by": {
+      "lab-26ai/FREEPDB1/session/217,5412": "gemma4:e4b",
+      "lab-se2/ORCLPDB1/indoubt/10.9.199680": "gemma4:e4b",
+      "lab-26ai/FREEPDB1/indoubt/4.4.159581": "gemma4:e4b",
+      "lab-se2/ORCLPDB1/orphan/GH_CONTRACTOR": "gemma4:e4b",
+      "lab-se2/CDB$ROOT/file//opt/oracle/oradata/ORCLCDB/control02.ctl": "gemma4:e4b",
+      "lab-se2/ORCLPDB1/recyclebin/BIN$XtofteQWfKzgYwIAEaz9/g==$0": "gemma4:e4b",
+      "lab-se2/ORCLPDB1/invalid/LAB.GH_RATES_TODAY": "gemma4:e4b",
+      "summary": "gemma4:e4b"
+     },
+     "calls": [
+      {
+       "input_tokens": 959,
+       "output_tokens": 478,
+       "seconds": 1.05
+      }
+     ]
+    }
+   }
+  ],
+  "gemma4:26b": [
+   {
+    "first": {
+     "json": true,
+     "lines": {
+      "G1": "Here lies session 217, which opened a transaction at 22:37 on 2026-10-27. It sits idle now, holding a lock that another session needs.",
+      "G2": "Here lies 10.9.199680, a prepared distributed transaction from 22:37 on 2026-10-27. It waits for a return that will never come.",
+      "G3": "Here lies 4.4.159581, a committed distributed transaction from 22:37 on 2026-10-27. It remains in the records even though its work is done.",
+      "G4": "Here lies GH_CONTRACTOR, who was locked on 2026-10-27. It still holds two objects and one enabled scheduler job in its cold hands.",
+      "G5": "Here lies control02.ctl, an 18 MB file left on the disk since 16:08 on 2026-10-13. The database has forgotten it.",
+      "G6": "Here lies GH_AUDIT_2019, a table dropped at 21:28 on 2026-10-27. It still occupies 7.0 MB of space where it used to live.",
+      "G7": "Here lies GH_RATES_TODAY, a view that became invalid at 21:28 on 2026-10-27. It reaches for dependencies that are no longer there.",
+      "summary": [
+       "lab-26ai holds session 217 and 4.4.159581, while lab-se2 keeps 10.9.199680, GH_CONTRACTOR, control02.ctl, GH_AUDIT_2019, and GH_RATES_TODAY.",
+       "session 217 sits idle with an open transaction, making one other session wait in the dark."
+      ]
+     },
+     "fails": {},
+     "seconds": 1.43,
+     "tokens": 1458
+    },
+    "final": {
+     "summary": [
+      "lab-26ai holds session 217 and 4.4.159581, while lab-se2 keeps 10.9.199680, GH_CONTRACTOR, control02.ctl, GH_AUDIT_2019, and GH_RATES_TODAY.",
+      "session 217 sits idle with an open transaction, making one other session wait in the dark."
+     ],
+     "epitaphs": {
+      "lab-26ai/FREEPDB1/session/217,5412": "Here lies session 217, who opened a transaction at 22:37 on 2026-10-27. It sits idle now, keeping one other session waiting.",
+      "lab-se2/ORCLPDB1/indoubt/10.9.199680": "Here lies 10.9.199680, a prepared distributed transaction from 2026-10-27 22:37. It stays prepared, though the other side has already committed.",
+      "lab-26ai/FREEPDB1/indoubt/4.4.159581": "Here lies 4.4.159581, a distributed transaction from 2026-10-27 22:37. It has committed, but it still occupies the space.",
+      "lab-se2/ORCLPDB1/orphan/GH_CONTRACTOR": "Here lies GH_CONTRACTOR, who was locked on 2026-10-27. It still holds two objects and one enabled scheduler job.",
+      "lab-se2/CDB$ROOT/file//opt/oracle/oradata/ORCLCDB/control02.ctl": "Here lies control02.ctl, an 18 MB file from 2026-10-13 16:08. It rests on the disk, though the database no longer uses it.",
+      "lab-se2/ORCLPDB1/recyclebin/BIN$XtofteQWfKzgYwIAEaz9/g==$0": "Here lies GH_AUDIT_2019, a table dropped on 2026-10-27 21:28. It still holds 7.0 MB of memory.",
+      "lab-se2/ORCLPDB1/invalid/LAB.GH_RATES_TODAY": "Here lies GH_RATES_TODAY, a view that broke on 2026-10-27 21:28. It remains invalid because its foundation is gone."
+     },
+     "by": {
+      "lab-26ai/FREEPDB1/session/217,5412": "gemma4:26b",
+      "lab-se2/ORCLPDB1/indoubt/10.9.199680": "gemma4:26b",
+      "lab-26ai/FREEPDB1/indoubt/4.4.159581": "gemma4:26b",
+      "lab-se2/ORCLPDB1/orphan/GH_CONTRACTOR": "gemma4:26b",
+      "lab-se2/CDB$ROOT/file//opt/oracle/oradata/ORCLCDB/control02.ctl": "gemma4:26b",
+      "lab-se2/ORCLPDB1/recyclebin/BIN$XtofteQWfKzgYwIAEaz9/g==$0": "gemma4:26b",
+      "lab-se2/ORCLPDB1/invalid/LAB.GH_RATES_TODAY": "gemma4:26b",
+      "summary": "gemma4:26b"
+     },
+     "calls": [
+      {
+       "input_tokens": 963,
+       "output_tokens": 481,
+       "seconds": 1.31
+      }
+     ]
+    }
+   },
+   {
+    "first": {
+     "json": true,
+     "lines": {
+      "G1": "Here lies session 217, which opened a transaction at 22:37 on 2026-10-27. It sits idle while another session waits for it.",
+      "G2": "Here lies 10.9.199680, a prepared distributed transaction from 22:37 on 2026-10-27. It waits for a master that will never return.",
+      "G3": "Here lies 4.4.159581, a distributed transaction committed at 22:37 on 2026-10-27. It stays in the records though the work is done.",
+      "G4": "Here lies GH_CONTRACTOR, who was locked on 2026-10-27. It still holds two objects and one enabled scheduler job.",
+      "G5": "Here lies control02.ctl, an 18 MB file from 2026-10-13. It sits on the disk after the database stopped using it.",
+      "G6": "Here lies GH_AUDIT_2019, a table dropped at 21:28 on 2026-10-27. It still holds 7.0 MB of space.",
+      "G7": "Here lies GH_RATES_TODAY, a view that became invalid at 21:28 on 2026-10-27. It waits for a dependency that is gone.",
+      "summary": [
+       "In lab-26ai, session 217 and 4.4.159581 remain. In lab-se2, 10.9.199680, GH_CONTRACTOR, control02.ctl, GH_AUDIT_2019, and GH_RATES_TODAY stay behind.",
+       "Session 217 sits idle with an open transaction, making another session wait."
+      ]
+     },
+     "fails": {},
+     "seconds": 1.35,
+     "tokens": 1439
+    },
+    "final": {
+     "summary": [
+      "lab-26ai holds session 217 and 4.4.159581, while lab-se2 keeps 10.9.199680, GH_CONTRACTOR, control02.ctl, GH_AUDIT_2019, and GH_RATES_TODAY.",
+      "session 217 sits idle with an open transaction, making another session wait."
+     ],
+     "epitaphs": {
+      "lab-26ai/FREEPDB1/session/217,5412": "Here lies session 217, which opened a transaction at 22:37 on 2026-10-27. It remains idle while another session waits for it.",
+      "lab-se2/ORCLPDB1/indoubt/10.9.199680": "Here lies 10.9.199680, a prepared distributed transaction from 22:37 on 2026-10-27. It stays prepared even though the other side committed.",
+      "lab-26ai/FREEPDB1/indoubt/4.4.159581": "Here lies 4.4.159581, a distributed transaction from 22:37 on 2026-10-27. It has committed, yet it remains in the records.",
+      "lab-se2/ORCLPDB1/orphan/GH_CONTRACTOR": "Here lies GH_CONTRACTOR, who has been locked since 2026-10-27. It still holds two objects and one enabled scheduler job.",
+      "lab-se2/CDB$ROOT/file//opt/oracle/oradata/ORCLCDB/control02.ctl": "Here lies control02.ctl, an 18 MB file from 2026-10-13 16:08. It sits on the disk after the database stopped using it.",
+      "lab-se2/ORCLPDB1/recyclebin/BIN$XtofteQWfKzgYwIAEaz9/g==$0": "Here lies GH_AUDIT_2019, a table dropped at 21:28 on 2026-10-27. It still holds 7.0 MB of space.",
+      "lab-se2/ORCLPDB1/invalid/LAB.GH_RATES_TODAY": "Here lies GH_RATES_TODAY, a view that became invalid at 21:28 on 2026-10-27. It waits for a dependency that is gone."
+     },
+     "by": {
+      "lab-26ai/FREEPDB1/session/217,5412": "gemma4:26b",
+      "lab-se2/ORCLPDB1/indoubt/10.9.199680": "gemma4:26b",
+      "lab-26ai/FREEPDB1/indoubt/4.4.159581": "gemma4:26b",
+      "lab-se2/ORCLPDB1/orphan/GH_CONTRACTOR": "gemma4:26b",
+      "lab-se2/CDB$ROOT/file//opt/oracle/oradata/ORCLCDB/control02.ctl": "gemma4:26b",
+      "lab-se2/ORCLPDB1/recyclebin/BIN$XtofteQWfKzgYwIAEaz9/g==$0": "gemma4:26b",
+      "lab-se2/ORCLPDB1/invalid/LAB.GH_RATES_TODAY": "gemma4:26b",
+      "summary": "gemma4:26b"
+     },
+     "calls": [
+      {
+       "input_tokens": 963,
+       "output_tokens": 478,
+       "seconds": 1.34
+      }
+     ]
+    }
+   },
+   {
+    "first": {
+     "json": true,
+     "lines": {
+      "G1": "Here lies session 217, which opened a transaction at 22:37 on 2026-10-27. It sits idle while another session waits on it.",
+      "G2": "Here lies 10.9.199680, a prepared distributed transaction from 22:37 on 2026-10-27. It stays prepared even though the other side committed.",
+      "G3": "Here lies 4.4.159581, a distributed transaction from 22:37 on 2026-10-27. It is already committed, yet it has not been purged.",
+      "G4": "Here lies GH_CONTRACTOR, who was locked on 2026-10-27. It still holds two objects and one enabled scheduler job.",
+      "G5": "Here lies control02.ctl, an 18 MB file from 2026-10-13. It sits on the disk though the database no longer uses it.",
+      "G6": "Here lies GH_AUDIT_2019, a table dropped at 21:28 on 2026-10-27. It still holds 7.0 MB of space.",
+      "G7": "Here lies GH_RATES_TODAY, a view that became invalid at 21:28 on 2026-10-27. It waits for a dependency that is gone.",
+      "summary": [
+       "In lab-26ai, session 217 and 4.4.159581 remain. In lab-se2, 10.9.199680, GH_CONTRACTOR, control02.ctl, GH_AUDIT_2019, and GH_RATES_TODAY stay behind.",
+       "Session 217 sits idle with an open transaction, forcing one other session to wait."
+      ]
+     },
+     "fails": {},
+     "seconds": 1.34,
+     "tokens": 1442
+    },
+    "final": {
+     "summary": [
+      "lab-26ai holds session 217 and 4.4.159581, while lab-se2 keeps 10.9.199680, GH_CONTRACTOR, control02.ctl, GH_AUDIT_2019, and GH_RATES_TODAY.",
+      "session 217 sits idle with an open transaction, making one other session wait in the dark."
+     ],
+     "epitaphs": {
+      "lab-26ai/FREEPDB1/session/217,5412": "Here lies session 217, which opened a transaction at 22:37 on 2026-10-27. It sits idle now, keeping one other session waiting.",
+      "lab-se2/ORCLPDB1/indoubt/10.9.199680": "Here lies 10.9.199680, a prepared distributed transaction from 22:37 on 2026-10-27. It stays prepared, though the other side has already committed.",
+      "lab-26ai/FREEPDB1/indoubt/4.4.159581": "Here lies 4.4.159581, a distributed transaction from 22:37 on 2026-10-27. It has committed, but it remains here for no one.",
+      "lab-se2/ORCLPDB1/orphan/GH_CONTRACTOR": "Here lies GH_CONTRACTOR, who was locked on 2026-10-27. It still holds two objects and one enabled scheduler job.",
+      "lab-se2/CDB$ROOT/file//opt/oracle/oradata/ORCLCDB/control02.ctl": "Here lies control02.ctl, an 18 MB file from 2026-10-13 16:08. It sits on the disk, though the database has moved on.",
+      "lab-se2/ORCLPDB1/recyclebin/BIN$XtofteQWfKzgYwIAEaz9/g==$0": "Here lies GH_AUDIT_2019, a table dropped at 21:28 on 2026-10-27. It still holds 7.0 MB of space.",
+      "lab-se2/ORCLPDB1/invalid/LAB.GH_RATES_TODAY": "Here lies GH_RATES_TODAY, a view that became invalid at 21:28 on 2026-10-27. It waits for a dependency that is gone."
+     },
+     "by": {
+      "lab-26ai/FREEPDB1/session/217,5412": "gemma4:26b",
+      "lab-se2/ORCLPDB1/indoubt/10.9.199680": "gemma4:26b",
+      "lab-26ai/FREEPDB1/indoubt/4.4.159581": "gemma4:26b",
+      "lab-se2/ORCLPDB1/orphan/GH_CONTRACTOR": "gemma4:26b",
+      "lab-se2/CDB$ROOT/file//opt/oracle/oradata/ORCLCDB/control02.ctl": "gemma4:26b",
+      "lab-se2/ORCLPDB1/recyclebin/BIN$XtofteQWfKzgYwIAEaz9/g==$0": "gemma4:26b",
+      "lab-se2/ORCLPDB1/invalid/LAB.GH_RATES_TODAY": "gemma4:26b",
+      "summary": "gemma4:26b"
+     },
+     "calls": [
+      {
+       "input_tokens": 963,
+       "output_tokens": 486,
+       "seconds": 1.33
+      }
+     ]
+    }
+   },
+   {
+    "first": {
+     "json": true,
+     "lines": {
+      "G1": "Here lies session 217, which opened a transaction at 22:37 on 2026-10-27. It stays idle while another session waits for it.",
+      "G2": "Here lies 10.9.199680, a prepared distributed transaction from 22:37. It waits for a master that will never return.",
+      "G3": "Here lies 4.4.159581, a committed distributed transaction from 22:37. It remains in the records even though its work is done.",
+      "G4": "Here lies GH_CONTRACTOR, who was locked on 2026-10-27. It still holds two objects and one enabled scheduler job.",
+      "G5": "Here lies control02.ctl, an 18 MB file from 2026-10-13. It sits on the disk after the database stopped using it.",
+      "G6": "Here lies GH_AUDIT_2019, a table dropped at 21:28 on 2026-10-27. It still occupies 7.0 MB of space.",
+      "G7": "Here lies GH_RATES_TODAY, a view that went invalid at 21:28 on 2026-10-27. It searches for something that is gone.",
+      "summary": [
+       "lab-26ai holds session 217 and 4.4.159581, while lab-se2 keeps 10.9.199680, GH_CONTRACTOR, control02.ctl, GH_AUDIT_2019, and GH_RATES_TODAY.",
+       "session 217 sits idle with an open transaction, making another session wait."
+      ]
+     },
+     "fails": {},
+     "seconds": 1.24,
+     "tokens": 1411
+    },
+    "final": {
+     "summary": [
+      "lab-26ai holds session 217 and 4.4.159581, while lab-se2 keeps 10.9.199680, GH_CONTRACTOR, control02.ctl, GH_AUDIT_2019, and GH_RATES_TODAY.",
+      "session 217 sits idle with an open transaction, making one other session wait in the dark."
+     ],
+     "epitaphs": {
+      "lab-26ai/FREEPDB1/session/217,5412": "Here lies session 217, which opened a transaction at 22:37 on 2026-10-27. It remains idle while another session waits for it.",
+      "lab-se2/ORCLPDB1/indoubt/10.9.199680": "Here lies 10.9.199680, a prepared distributed transaction from 22:37 on 2026-10-27. It stays prepared even though the other side has committed.",
+      "lab-26ai/FREEPDB1/indoubt/4.4.159581": "Here lies 4.4.159581, a distributed transaction from 22:37 on 2026-10-27. It has committed, yet it refuses to leave the records.",
+      "lab-se2/ORCLPDB1/orphan/GH_CONTRACTOR": "Here lies GH_CONTRACTOR, who was locked on 2026-10-27. It still holds two objects and one enabled scheduler job.",
+      "lab-se2/CDB$ROOT/file//opt/oracle/oradata/ORCLCDB/control02.ctl": "Here lies control02.ctl, an 18 MB file from 2026-10-13 16:08. It sits on the disk after the database stopped using it.",
+      "lab-se2/ORCLPDB1/recyclebin/BIN$XtofteQWfKzgYwIAEaz9/g==$0": "Here lies GH_AUDIT_2019, a table dropped on 2026-10-27 21:28. It still holds 7.0 MB of space.",
+      "lab-se2/ORCLPDB1/invalid/LAB.GH_RATES_TODAY": "Here lies GH_RATES_TODAY, a view that broke at 21:28 on 2026-10-27. It is invalid because its foundation has changed."
+     },
+     "by": {
+      "lab-26ai/FREEPDB1/session/217,5412": "gemma4:26b",
+      "lab-se2/ORCLPDB1/indoubt/10.9.199680": "gemma4:26b",
+      "lab-26ai/FREEPDB1/indoubt/4.4.159581": "gemma4:26b",
+      "lab-se2/ORCLPDB1/orphan/GH_CONTRACTOR": "gemma4:26b",
+      "lab-se2/CDB$ROOT/file//opt/oracle/oradata/ORCLCDB/control02.ctl": "gemma4:26b",
+      "lab-se2/ORCLPDB1/recyclebin/BIN$XtofteQWfKzgYwIAEaz9/g==$0": "gemma4:26b",
+      "lab-se2/ORCLPDB1/invalid/LAB.GH_RATES_TODAY": "gemma4:26b",
+      "summary": "gemma4:26b"
+     },
+     "calls": [
+      {
+       "input_tokens": 963,
+       "output_tokens": 481,
+       "seconds": 1.36
+      }
+     ]
+    }
+   },
+   {
+    "first": {
+     "json": true,
+     "lines": {
+      "G1": "Here lies session 217, which opened a transaction at 22:37 on 2026-10-27. It stays idle while another session waits for it.",
+      "G2": "Here lies 10.9.199680, a prepared distributed transaction from 22:37 on 2026-10-27. It waits for a master that will never return.",
+      "G3": "Here lies 4.4.159581, a committed distributed transaction from 22:37 on 2026-10-27. It remains even though the work is finished.",
+      "G4": "Here lies GH_CONTRACTOR, a locked user since 2026-10-27. It still holds two objects and one enabled scheduler job.",
+      "G5": "Here lies control02.ctl, an 18 MB file since 2026-10-13 16:08. It sits on the disk, though the database has moved on.",
+      "G6": "Here lies GH_AUDIT_2019, a table dropped at 21:28 on 2026-10-27. It still holds 7.0 MB of space.",
+      "G7": "Here lies GH_RATES_TODAY, a view that became invalid at 21:28 on 2026-10-27. It waits for a dependency that is gone.",
+      "summary": [
+       "lab-26ai holds session 217 and 4.4.159581, while lab-se2 keeps 10.9.199680, GH_CONTRACTOR, control02.ctl, GH_AUDIT_2019, and GH_RATES_TODAY.",
+       "session 217 sits idle with an open transaction, making another session wait in the dark."
+      ]
+     },
+     "fails": {},
+     "seconds": 1.32,
+     "tokens": 1443
+    },
+    "final": {
+     "summary": [
+      "The lab-26ai and lab-se2 databases hold session 217, 10.9.199680, 4.4.159581, GH_CONTRACTOR, control02.ctl, GH_AUDIT_2019, and GH_RATES_TODAY.",
+      "Session 217 sits idle with an open transaction, making another session wait in the dark."
+     ],
+     "epitaphs": {
+      "lab-26ai/FREEPDB1/session/217,5412": "Here lies session 217, which opened a transaction at 22:37 on 2026-10-27. It remains idle while one other session waits for it.",
+      "lab-se2/ORCLPDB1/indoubt/10.9.199680": "Here lies 10.9.199680, a prepared distributed transaction from 2026-10-27 22:37. It stays prepared even though the other side has already committed.",
+      "lab-26ai/FREEPDB1/indoubt/4.4.159581": "Here lies 4.4.159581, a distributed transaction from 2026-10-27 22:37. It has committed, yet it still occupies space in the lab-26ai database.",
+      "lab-se2/ORCLPDB1/orphan/GH_CONTRACTOR": "Here lies GH_CONTRACTOR, who has been locked since 2026-10-27. It still holds two objects and one enabled scheduler job.",
+      "lab-se2/CDB$ROOT/file//opt/oracle/oradata/ORCLCDB/control02.ctl": "Here lies control02.ctl, an 18 MB file from 2026-10-13 16:08. It sits on the disk after the database stopped using it.",
+      "lab-se2/ORCLPDB1/recyclebin/BIN$XtofteQWfKzgYwIAEaz9/g==$0": "Here lies GH_AUDIT_2019, a table dropped on 2026-10-27 21:28. It still holds 7.0 MB of space in the silence.",
+      "lab-se2/ORCLPDB1/invalid/LAB.GH_RATES_TODAY": "Here lies GH_RATES_TODAY, a view that became invalid at 21:28 on 2026-10-27. It waits for a dependency that is gone."
+     },
+     "by": {
+      "lab-26ai/FREEPDB1/session/217,5412": "gemma4:26b",
+      "lab-se2/ORCLPDB1/indoubt/10.9.199680": "gemma4:26b",
+      "lab-26ai/FREEPDB1/indoubt/4.4.159581": "gemma4:26b",
+      "lab-se2/ORCLPDB1/orphan/GH_CONTRACTOR": "gemma4:26b",
+      "lab-se2/CDB$ROOT/file//opt/oracle/oradata/ORCLCDB/control02.ctl": "gemma4:26b",
+      "lab-se2/ORCLPDB1/recyclebin/BIN$XtofteQWfKzgYwIAEaz9/g==$0": "gemma4:26b",
+      "lab-se2/ORCLPDB1/invalid/LAB.GH_RATES_TODAY": "gemma4:26b",
+      "summary": "gemma4:26b"
+     },
+     "calls": [
+      {
+       "input_tokens": 963,
+       "output_tokens": 492,
+       "seconds": 1.37
+      }
+     ]
+    }
+   },
+   {
+    "first": {
+     "json": true,
+     "lines": {
+      "G1": "Here lies session 217, which opened a transaction at 22:37 on 2026-10-27. It stays idle while another session waits for it.",
+      "G2": "Here lies 10.9.199680, a prepared distributed transaction from 22:37 on 2026-10-27. It waits for a master who will never return.",
+      "G3": "Here lies 4.4.159581, a distributed transaction committed at 22:37 on 2026-10-27. It stays in the records even though the work is done.",
+      "G4": "Here lies GH_CONTRACTOR, who was locked on 2026-10-27. It still holds two objects and one enabled scheduler job.",
+      "G5": "Here lies control02.ctl, an 18 MB file left on the disk since 16:08 on 2026-10-13. The database has moved on without it.",
+      "G6": "Here lies GH_AUDIT_2019, a table dropped at 21:28 on 2026-10-27. It still holds 7.0 MB of space.",
+      "G7": "Here lies GH_RATES_TODAY, a view that became invalid at 21:28 on 2026-10-27. It waits for a dependency that is gone.",
+      "summary": [
+       "In lab-26ai, session 217 and 4.4.159581 remain. In lab-se2, 10.9.199680, GH_CONTRACTOR, control02.ctl, GH_AUDIT_2019, and GH_RATES_TODAY stay behind.",
+       "Session 217 sits idle with an open transaction, making another session wait."
+      ]
+     },
+     "fails": {},
+     "seconds": 1.36,
+     "tokens": 1447
+    },
+    "final": {
+     "summary": [
+      "lab-26ai holds session 217 and 4.4.159581, while lab-se2 keeps 10.9.199680, GH_CONTRACTOR, control02.ctl, GH_AUDIT_2019, and GH_RATES_TODAY.",
+      "session 217 sits idle with an open transaction, making one other session wait in the dark."
+     ],
+     "epitaphs": {
+      "lab-26ai/FREEPDB1/session/217,5412": "Here lies session 217, which opened a transaction at 2026-10-27 22:37. It remains idle, holding a lock that one other session seeks.",
+      "lab-se2/ORCLPDB1/indoubt/10.9.199680": "Here lies 10.9.199680, a prepared distributed transaction from 2026-10-27 22:37. It waits for a master that will never return.",
+      "lab-26ai/FREEPDB1/indoubt/4.4.159581": "Here lies 4.4.159581, a committed distributed transaction from 2026-10-27 22:37. It stays in the records even though its work is finished.",
+      "lab-se2/ORCLPDB1/orphan/GH_CONTRACTOR": "Here lies GH_CONTRACTOR, who was locked on 2026-10-27. It still holds two objects and one enabled scheduler job.",
+      "lab-se2/CDB$ROOT/file//opt/oracle/oradata/ORCLCDB/control02.ctl": "Here lies control02.ctl, an 18 MB file left on the disk since 2026-10-13 16:08. The database no longer calls for it.",
+      "lab-se2/ORCLPDB1/recyclebin/BIN$XtofteQWfKzgYwIAEaz9/g==$0": "Here lies GH_AUDIT_2019, a table dropped on 2026-10-27 21:28. It still occupies 7.0 MB of space.",
+      "lab-se2/ORCLPDB1/invalid/LAB.GH_RATES_TODAY": "Here lies GH_RATES_TODAY, a view that became invalid on 2026-10-27 21:28. It searches for something that is no longer there."
+     },
+     "by": {
+      "lab-26ai/FREEPDB1/session/217,5412": "gemma4:26b",
+      "lab-se2/ORCLPDB1/indoubt/10.9.199680": "gemma4:26b",
+      "lab-26ai/FREEPDB1/indoubt/4.4.159581": "gemma4:26b",
+      "lab-se2/ORCLPDB1/orphan/GH_CONTRACTOR": "gemma4:26b",
+      "lab-se2/CDB$ROOT/file//opt/oracle/oradata/ORCLCDB/control02.ctl": "gemma4:26b",
+      "lab-se2/ORCLPDB1/recyclebin/BIN$XtofteQWfKzgYwIAEaz9/g==$0": "gemma4:26b",
+      "lab-se2/ORCLPDB1/invalid/LAB.GH_RATES_TODAY": "gemma4:26b",
+      "summary": "gemma4:26b"
+     },
+     "calls": [
+      {
+       "input_tokens": 963,
+       "output_tokens": 482,
+       "seconds": 1.33
+      }
+     ]
+    }
+   },
+   {
+    "first": {
+     "json": true,
+     "lines": {
+      "G1": "Here lies session 217, which opened a transaction at 22:37 on 2026-10-27. It remains idle while another session waits for it.",
+      "G2": "Here lies 10.9.199680, a prepared distributed transaction from 22:37 on 2026-10-27. It waits for a return that will never come.",
+      "G3": "Here lies 4.4.159581, a committed distributed transaction from 22:37 on 2026-10-27. It stays in the records though its work is done.",
+      "G4": "Here lies GH_CONTRACTOR, who was locked on 2026-10-27. It still holds two objects and one enabled scheduler job.",
+      "G5": "Here lies control02.ctl, an 18 MB file from 2026-10-13 16:08. It sits on the disk though the database has moved on.",
+      "G6": "Here lies GH_AUDIT_2019, a table dropped at 21:28 on 2026-10-27. It still holds 7.0 MB of space.",
+      "G7": "Here lies GH_RATES_TODAY, a view that became invalid at 21:28 on 2026-10-27. It searches for something that is gone.",
+      "summary": [
+       "lab-26ai holds session 217 and 4.4.159581, while lab-se2 keeps 10.9.199680, GH_CONTRACTOR, control02.ctl, GH_AUDIT_2019, and GH_RATES_TODAY.",
+       "session 217 sits idle with an open transaction, making one other session wait in the dark."
+      ]
+     },
+     "fails": {},
+     "seconds": 1.3,
+     "tokens": 1444
+    },
+    "final": {
+     "summary": [
+      "In lab-26ai, session 217 and 4.4.159581 remain. In lab-se2, 10.9.199680, GH_CONTRACTOR, control02.ctl, GH_AUDIT_2019, and GH_RATES_TODAY stay behind.",
+      "Session 217 sits idle with an open transaction, making one other session wait."
+     ],
+     "epitaphs": {
+      "lab-26ai/FREEPDB1/session/217,5412": "Here lies session 217, which opened a transaction at 22:37 on 2026-10-27. It sits idle while another session waits for it.",
+      "lab-se2/ORCLPDB1/indoubt/10.9.199680": "Here lies 10.9.199680, a prepared distributed transaction from 22:37 on 2026-10-27. It stays prepared though the other side has already committed.",
+      "lab-26ai/FREEPDB1/indoubt/4.4.159581": "Here lies 4.4.159581, a distributed transaction from 22:37 on 2026-10-27. It is committed, but no one has come to purge it.",
+      "lab-se2/ORCLPDB1/orphan/GH_CONTRACTOR": "Here lies GH_CONTRACTOR, who has been locked since 2026-10-27. It still holds two objects and one enabled scheduler job.",
+      "lab-se2/CDB$ROOT/file//opt/oracle/oradata/ORCLCDB/control02.ctl": "Here lies control02.ctl, an 18 MB file from 2026-10-13 16:08. It rests on the disk, though the database no longer uses it.",
+      "lab-se2/ORCLPDB1/recyclebin/BIN$XtofteQWfKzgYwIAEaz9/g==$0": "Here lies GH_AUDIT_2019, a table dropped at 21:28 on 2026-10-27. It still holds 7.0 MB of space.",
+      "lab-se2/ORCLPDB1/invalid/LAB.GH_RATES_TODAY": "Here lies GH_RATES_TODAY, a view that became invalid at 21:28 on 2026-10-27. It waits for a dependency that is gone."
+     },
+     "by": {
+      "lab-26ai/FREEPDB1/session/217,5412": "gemma4:26b",
+      "lab-se2/ORCLPDB1/indoubt/10.9.199680": "gemma4:26b",
+      "lab-26ai/FREEPDB1/indoubt/4.4.159581": "gemma4:26b",
+      "lab-se2/ORCLPDB1/orphan/GH_CONTRACTOR": "gemma4:26b",
+      "lab-se2/CDB$ROOT/file//opt/oracle/oradata/ORCLCDB/control02.ctl": "gemma4:26b",
+      "lab-se2/ORCLPDB1/recyclebin/BIN$XtofteQWfKzgYwIAEaz9/g==$0": "gemma4:26b",
+      "lab-se2/ORCLPDB1/invalid/LAB.GH_RATES_TODAY": "gemma4:26b",
+      "summary": "gemma4:26b"
+     },
+     "calls": [
+      {
+       "input_tokens": 963,
+       "output_tokens": 488,
+       "seconds": 1.37
+      }
+     ]
+    }
+   },
+   {
+    "first": {
+     "json": true,
+     "lines": {
+      "G1": "Here lies session 217, which opened a transaction at 22:37 on 2026-10-27. It sits idle now, making another session wait.",
+      "G2": "Here lies 10.9.199680, a prepared distributed transaction from 22:37. It waits for a master that will never return.",
+      "G3": "Here lies 4.4.159581, a committed distributed transaction from 22:37. It remains in the records though its work is finished.",
+      "G4": "Here lies GH_CONTRACTOR, who was locked on 2026-10-27. It still holds two objects and one enabled scheduler job.",
+      "G5": "Here lies control02.ctl, an 18 MB file left on the disk since 16:08 on 2026-10-13. The database no longer needs it.",
+      "G6": "Here lies GH_AUDIT_2019, a table dropped at 21:28 on 2026-10-27. It still occupies 7.0 MB of space.",
+      "G7": "Here lies GH_RATES_TODAY, a view that became invalid at 21:28 on 2026-10-27. It searches for something that is gone.",
+      "summary": [
+       "lab-26ai holds session 217 and 4.4.159581, while lab-se2 keeps 10.9.199680, GH_CONTRACTOR, control02.ctl, GH_AUDIT_2019, and GH_RATES_TODAY.",
+       "session 217 sits idle with an open transaction, making another session wait."
+      ]
+     },
+     "fails": {},
+     "seconds": 1.26,
+     "tokens": 1416
+    },
+    "final": {
+     "summary": [
+      "lab-26ai holds session 217 and 4.4.159581, while lab-se2 carries 10.9.199680, GH_CONTRACTOR, control02.ctl, GH_AUDIT_2019, and GH_RATES_TODAY.",
+      "session 217 sits idle with an open transaction, making one other session wait."
+     ],
+     "epitaphs": {
+      "lab-26ai/FREEPDB1/session/217,5412": "Here lies session 217, which opened a transaction at 22:37 on 2026-10-27. It stays idle while another session waits for it.",
+      "lab-se2/ORCLPDB1/indoubt/10.9.199680": "Here lies 10.9.199680, a prepared distributed transaction from 22:37. It remains after the other side committed.",
+      "lab-26ai/FREEPDB1/indoubt/4.4.159581": "Here lies 4.4.159581, a committed distributed transaction from 22:37. It stays in the records even though it is finished.",
+      "lab-se2/ORCLPDB1/orphan/GH_CONTRACTOR": "Here lies GH_CONTRACTOR, who was locked on 2026-10-27. It still holds two objects and one enabled scheduler job.",
+      "lab-se2/CDB$ROOT/file//opt/oracle/oradata/ORCLCDB/control02.ctl": "Here lies control02.ctl, an 18 MB file from 2026-10-13. It sits on the disk though the database has moved on.",
+      "lab-se2/ORCLPDB1/recyclebin/BIN$XtofteQWfKzgYwIAEaz9/g==$0": "Here lies GH_AUDIT_2019, a table dropped at 21:28 on 2026-10-27. It still holds 7.0 MB of space.",
+      "lab-se2/ORCLPDB1/invalid/LAB.GH_RATES_TODAY": "Here lies GH_RATES_TODAY, a view that became invalid at 21:28 on 2026-10-27. It waits for something that is no longer there."
+     },
+     "by": {
+      "lab-26ai/FREEPDB1/session/217,5412": "gemma4:26b",
+      "lab-se2/ORCLPDB1/indoubt/10.9.199680": "gemma4:26b",
+      "lab-26ai/FREEPDB1/indoubt/4.4.159581": "gemma4:26b",
+      "lab-se2/ORCLPDB1/orphan/GH_CONTRACTOR": "gemma4:26b",
+      "lab-se2/CDB$ROOT/file//opt/oracle/oradata/ORCLCDB/control02.ctl": "gemma4:26b",
+      "lab-se2/ORCLPDB1/recyclebin/BIN$XtofteQWfKzgYwIAEaz9/g==$0": "gemma4:26b",
+      "lab-se2/ORCLPDB1/invalid/LAB.GH_RATES_TODAY": "gemma4:26b",
+      "summary": "gemma4:26b"
+     },
+     "calls": [
+      {
+       "input_tokens": 963,
+       "output_tokens": 448,
+       "seconds": 1.24
+      }
+     ]
+    }
+   },
+   {
+    "first": {
+     "json": true,
+     "lines": {
+      "G1": "Here lies session 217, which opened a transaction at 22:37 on 2026-10-27. It stays idle while another session waits for it.",
+      "G2": "Here lies 10.9.199680, a prepared distributed transaction from 2026-10-27 22:37. It waits for a master that will never return.",
+      "G3": "Here lies 4.4.159581, a committed distributed transaction from 2026-10-27 22:37. It remains in the records even though its work is done.",
+      "G4": "Here lies GH_CONTRACTOR, who was locked on 2026-10-27. It still holds two objects and one enabled scheduler job.",
+      "G5": "Here lies control02.ctl, an 18 MB file from 2026-10-13 16:08. It sits on the disk after the database stopped using it.",
+      "G6": "Here lies GH_AUDIT_2019, a table dropped on 2026-10-27 21:28. It still holds 7.0 MB of space.",
+      "G7": "Here lies GH_RATES_TODAY, a view that became invalid at 21:28 on 2026-10-27. It searches for something that is no longer there.",
+      "summary": [
+       "lab-26ai holds session 217 and 4.4.159581, while lab-se2 contains 10.9.199680, GH_CONTRACTOR, control02.ctl, GH_AUDIT_2019, and GH_RATES_TODAY.",
+       "session 217 sits idle with an open transaction, making another session wait."
+      ]
+     },
+     "fails": {},
+     "seconds": 1.26,
+     "tokens": 1440
+    },
+    "final": {
+     "summary": [
+      "In lab-26ai, session 217 and 4.4.159581 remain. In lab-se2, 10.9.199680, GH_CONTRACTOR, control02.ctl, GH_AUDIT_2019, and GH_RATES_TODAY stay behind.",
+      "Session 217 sits idle with an open transaction, making another session wait in the dark."
+     ],
+     "epitaphs": {
+      "lab-26ai/FREEPDB1/session/217,5412": "Here lies session 217, which opened a transaction at 22:37 on 2026-10-27. It sits idle while another session waits for it.",
+      "lab-se2/ORCLPDB1/indoubt/10.9.199680": "Here lies 10.9.199680, a prepared distributed transaction from 22:37. It stays prepared even though the other side has already committed.",
+      "lab-26ai/FREEPDB1/indoubt/4.4.159581": "Here lies 4.4.159581, a distributed transaction from 22:37. It has already committed, but it has not been purged from the records.",
+      "lab-se2/ORCLPDB1/orphan/GH_CONTRACTOR": "Here lies GH_CONTRACTOR, who was locked on 2026-10-27. It still holds two objects and one enabled scheduler job.",
+      "lab-se2/CDB$ROOT/file//opt/oracle/oradata/ORCLCDB/control02.ctl": "Here lies control02.ctl, an 18 MB file from 2026-10-13. It rests on the disk, though the database no longer uses it.",
+      "lab-se2/ORCLPDB1/recyclebin/BIN$XtofteQWfKzgYwIAEaz9/g==$0": "Here lies GH_AUDIT_2019, a table dropped at 21:28 on 2026-10-27. It still holds 7.0 MB of space.",
+      "lab-se2/ORCLPDB1/invalid/LAB.GH_RATES_TODAY": "Here lies GH_RATES_TODAY, a view that became invalid at 21:28 on 2026-10-27. It waits for a dependency that is gone."
+     },
+     "by": {
+      "lab-26ai/FREEPDB1/session/217,5412": "gemma4:26b",
+      "lab-se2/ORCLPDB1/indoubt/10.9.199680": "gemma4:26b",
+      "lab-26ai/FREEPDB1/indoubt/4.4.159581": "gemma4:26b",
+      "lab-se2/ORCLPDB1/orphan/GH_CONTRACTOR": "gemma4:26b",
+      "lab-se2/CDB$ROOT/file//opt/oracle/oradata/ORCLCDB/control02.ctl": "gemma4:26b",
+      "lab-se2/ORCLPDB1/recyclebin/BIN$XtofteQWfKzgYwIAEaz9/g==$0": "gemma4:26b",
+      "lab-se2/ORCLPDB1/invalid/LAB.GH_RATES_TODAY": "gemma4:26b",
+      "summary": "gemma4:26b"
+     },
+     "calls": [
+      {
+       "input_tokens": 963,
+       "output_tokens": 462,
+       "seconds": 1.29
+      }
+     ]
+    }
+   },
+   {
+    "first": {
+     "json": true,
+     "lines": {
+      "G1": "Here lies session 217, which opened a transaction at 22:37 on 2026-10-27. It stays idle while another session waits for it.",
+      "G2": "Here lies 10.9.199680, a prepared distributed transaction from 22:37 on 2026-10-27. It waits for a master that has already committed.",
+      "G3": "Here lies 4.4.159581, a distributed transaction from 22:37 on 2026-10-27. It has committed, but it has not left the room.",
+      "G4": "Here lies GH_CONTRACTOR, who has been locked since 2026-10-27. It still holds two objects and one scheduler job.",
+      "G5": "Here lies control02.ctl, an 18 MB file left on the disk since 16:08 on 2026-10-13. The database no longer seeks it.",
+      "G6": "Here lies GH_AUDIT_2019, a table dropped at 21:28 on 2026-10-27. It still holds 7.0 MB of memory.",
+      "G7": "Here lies GH_RATES_TODAY, a view that became invalid at 21:28 on 2026-10-27. It searches for something that is gone.",
+      "summary": [
+       "In lab-26ai, session 217 and 4.4.159581 remain. In lab-se2, 10.9.199680, GH_CONTRACTOR, control02.ctl, GH_AUDIT_2019, and GH_RATES_TODAY still walk the halls.",
+       "Session 217 sits idle with an open transaction, making another session wait in the dark."
+      ]
+     },
+     "fails": {},
+     "seconds": 1.34,
+     "tokens": 1449
+    },
+    "final": {
+     "summary": [
+      "In lab-26ai, session 217 and 4.4.159581 remain. In lab-se2, 10.9.199680, GH_CONTRACTOR, control02.ctl, GH_AUDIT_2019, and GH_RATES_TODAY stay behind.",
+      "Session 217 sits idle with an open transaction, making another session wait."
+     ],
+     "epitaphs": {
+      "lab-26ai/FREEPDB1/session/217,5412": "Here lies session 217, which opened a transaction at 22:37 on 2026-10-27. It sits idle while another session waits for it.",
+      "lab-se2/ORCLPDB1/indoubt/10.9.199680": "Here lies 10.9.199680, a prepared distributed transaction from 22:37 on 2026-10-27. It waits for a return that will never come.",
+      "lab-26ai/FREEPDB1/indoubt/4.4.159581": "Here lies 4.4.159581, a distributed transaction committed at 22:37 on 2026-10-27. It stays in the records though the work is done.",
+      "lab-se2/ORCLPDB1/orphan/GH_CONTRACTOR": "Here lies GH_CONTRACTOR, who was locked on 2026-10-27. It still holds two objects and one enabled scheduler job.",
+      "lab-se2/CDB$ROOT/file//opt/oracle/oradata/ORCLCDB/control02.ctl": "Here lies control02.ctl, an 18 MB file from 2026-10-13. It rests on the disk though the database no longer uses it.",
+      "lab-se2/ORCLPDB1/recyclebin/BIN$XtofteQWfKzgYwIAEaz9/g==$0": "Here lies GH_AUDIT_2019, a table dropped at 21:28 on 2026-10-27. It still holds 7.0 MB of space.",
+      "lab-se2/ORCLPDB1/invalid/LAB.GH_RATES_TODAY": "Here lies GH_RATES_TODAY, a view that broke at 21:28 on 2026-10-27. It remains invalid because its foundation has changed."
+     },
+     "by": {
+      "lab-26ai/FREEPDB1/session/217,5412": "gemma4:26b",
+      "lab-se2/ORCLPDB1/indoubt/10.9.199680": "gemma4:26b",
+      "lab-26ai/FREEPDB1/indoubt/4.4.159581": "gemma4:26b",
+      "lab-se2/ORCLPDB1/orphan/GH_CONTRACTOR": "gemma4:26b",
+      "lab-se2/CDB$ROOT/file//opt/oracle/oradata/ORCLCDB/control02.ctl": "gemma4:26b",
+      "lab-se2/ORCLPDB1/recyclebin/BIN$XtofteQWfKzgYwIAEaz9/g==$0": "gemma4:26b",
+      "lab-se2/ORCLPDB1/invalid/LAB.GH_RATES_TODAY": "gemma4:26b",
+      "summary": "gemma4:26b"
+     },
+     "calls": [
+      {
+       "input_tokens": 963,
+       "output_tokens": 476,
+       "seconds": 1.31
+      }
+     ]
+    }
+   },
+   {
+    "first": {
+     "json": true,
+     "lines": {
+      "G1": "Here lies session 217, which opened a transaction at 22:37 on 2026-10-27. It sits idle now, keeping one other session waiting.",
+      "G2": "Here lies 10.9.199680, a prepared distributed transaction from 2026-10-27 22:37. It waits for a master that will never return.",
+      "G3": "Here lies 4.4.159581, a committed distributed transaction from 2026-10-27 22:37. It occupies space even though the work is done.",
+      "G4": "Here lies GH_CONTRACTOR, who was locked on 2026-10-27. It still holds two objects and one enabled scheduler job.",
+      "G5": "Here lies control02.ctl, an 18 MB file from 2026-10-13 16:08. It rests on the disk, though the database no longer needs it.",
+      "G6": "Here lies GH_AUDIT_2019, a table dropped on 2026-10-27 21:28. It still holds 7.0 MB of data in the dark.",
+      "G7": "Here lies GH_RATES_TODAY, a view that broke on 2026-10-27 21:28. It remains invalid because its foundation has vanished.",
+      "summary": [
+       "In lab-26ai, session 217 and 4.4.159581 remain. In lab-se2, 10.9.199680, GH_CONTRACTOR, control02.ctl, GH_AUDIT_2019, and GH_RATES_TODAY stay behind.",
+       "Session 217 sits idle with an open transaction, making one other session wait."
+      ]
+     },
+     "fails": {},
+     "seconds": 1.31,
+     "tokens": 1446
+    },
+    "final": {
+     "summary": [
+      "lab-26ai holds session 217 and 4.4.159581, while lab-se2 is haunted by 10.9.199680, GH_CONTRACTOR, control02.ctl, GH_AUDIT_2019, and GH_RATES_TODAY.",
+      "session 217 sits idle with an open transaction, keeping another session waiting in the dark."
+     ],
+     "epitaphs": {
+      "lab-26ai/FREEPDB1/session/217,5412": "Here lies session 217, which opened a transaction at 22:37 on 2026-10-27. It sits idle now, making another session wait.",
+      "lab-se2/ORCLPDB1/indoubt/10.9.199680": "Here lies 10.9.199680, a prepared distributed transaction from 22:37. It waits for a return that will never come.",
+      "lab-26ai/FREEPDB1/indoubt/4.4.159581": "Here lies 4.4.159581, a committed distributed transaction from 22:37. It remains in the records though its work is done.",
+      "lab-se2/ORCLPDB1/orphan/GH_CONTRACTOR": "Here lies GH_CONTRACTOR, who was locked on 2026-10-27. It still holds two objects and one enabled scheduler job.",
+      "lab-se2/CDB$ROOT/file//opt/oracle/oradata/ORCLCDB/control02.ctl": "Here lies control02.ctl, an 18 MB file left on the disk since 16:08 on 2026-10-13. The database no longer seeks it.",
+      "lab-se2/ORCLPDB1/recyclebin/BIN$XtofteQWfKzgYwIAEaz9/g==$0": "Here lies GH_AUDIT_2019, a table dropped at 21:28 on 2026-10-27. It still holds 7.0 MB of space.",
+      "lab-se2/ORCLPDB1/invalid/LAB.GH_RATES_TODAY": "Here lies GH_RATES_TODAY, a view that became invalid at 21:28 on 2026-10-27. It reaches for things that are no longer there."
+     },
+     "by": {
+      "lab-26ai/FREEPDB1/session/217,5412": "gemma4:26b",
+      "lab-se2/ORCLPDB1/indoubt/10.9.199680": "gemma4:26b",
+      "lab-26ai/FREEPDB1/indoubt/4.4.159581": "gemma4:26b",
+      "lab-se2/ORCLPDB1/orphan/GH_CONTRACTOR": "gemma4:26b",
+      "lab-se2/CDB$ROOT/file//opt/oracle/oradata/ORCLCDB/control02.ctl": "gemma4:26b",
+      "lab-se2/ORCLPDB1/recyclebin/BIN$XtofteQWfKzgYwIAEaz9/g==$0": "gemma4:26b",
+      "lab-se2/ORCLPDB1/invalid/LAB.GH_RATES_TODAY": "gemma4:26b",
+      "summary": "gemma4:26b"
+     },
+     "calls": [
+      {
+       "input_tokens": 963,
+       "output_tokens": 460,
+       "seconds": 1.27
+      }
+     ]
+    }
+   },
+   {
+    "first": {
+     "json": true,
+     "lines": {
+      "G1": "Here lies session 217, which opened a transaction at 22:37 on 2026-10-27. It sits idle while another session waits for it.",
+      "G2": "Here lies 10.9.199680, a prepared distributed transaction from 22:37 on 2026-10-27. It waits for a master that will never return.",
+      "G3": "Here lies 4.4.159581, a distributed transaction from 22:37 on 2026-10-27. It has already committed, yet it remains in the records.",
+      "G4": "Here lies GH_CONTRACTOR, who has been locked since 2026-10-27. It still holds two objects and one enabled scheduler job.",
+      "G5": "Here lies control02.ctl, an 18 MB file from 2026-10-13. It sits on the disk, though the database has moved on.",
+      "G6": "Here lies GH_AUDIT_2019, a table dropped at 21:28 on 2026-10-27. It still occupies 7.0 MB of space.",
+      "G7": "Here lies GH_RATES_TODAY, a view that became invalid at 21:28 on 2026-10-27. It searches for something that is no longer there.",
+      "summary": [
+       "lab-26ai holds session 217 and 4.4.159581, while lab-se2 keeps 10.9.199680, GH_CONTRACTOR, control02.ctl, GH_AUDIT_2019, and GH_RATES_TODAY.",
+       "session 217 sits idle with an open transaction, making another session wait."
+      ]
+     },
+     "fails": {},
+     "seconds": 1.31,
+     "tokens": 1438
+    },
+    "final": {
+     "summary": [
+      "lab-26ai holds session 217 and 4.4.159581, while lab-se2 keeps 10.9.199680, GH_CONTRACTOR, control02.ctl, GH_AUDIT_2019, and GH_RATES_TODAY.",
+      "session 217 sits idle with an open transaction, making one other session wait."
+     ],
+     "epitaphs": {
+      "lab-26ai/FREEPDB1/session/217,5412": "Here lies session 217, which opened a transaction on 2026-10-27 22:37. It still holds its place, making another session wait.",
+      "lab-se2/ORCLPDB1/indoubt/10.9.199680": "Here lies 10.9.199680, a prepared distributed transaction from 2026-10-27 22:37. It stays prepared, though the other side has already committed.",
+      "lab-26ai/FREEPDB1/indoubt/4.4.159581": "Here lies 4.4.159581, a distributed transaction from 2026-10-27 22:37. It has committed, but it has not been purged from the records.",
+      "lab-se2/ORCLPDB1/orphan/GH_CONTRACTOR": "Here lies GH_CONTRACTOR, who was locked on 2026-10-27. It still holds two objects and one enabled scheduler job.",
+      "lab-se2/CDB$ROOT/file//opt/oracle/oradata/ORCLCDB/control02.ctl": "Here lies control02.ctl, an 18 MB file from 2026-10-13 16:08. It sits on the disk, though the database no longer uses it.",
+      "lab-se2/ORCLPDB1/recyclebin/BIN$XtofteQWfKzgYwIAEaz9/g==$0": "Here lies GH_AUDIT_2019, a table dropped on 2026-10-27 21:28. It still occupies 7.0 MB of space.",
+      "lab-se2/ORCLPDB1/invalid/LAB.GH_RATES_TODAY": "Here lies GH_RATES_TODAY, a view that broke on 2026-10-27 21:28. It is invalid now that its dependencies are gone."
+     },
+     "by": {
+      "lab-26ai/FREEPDB1/session/217,5412": "gemma4:26b",
+      "lab-se2/ORCLPDB1/indoubt/10.9.199680": "gemma4:26b",
+      "lab-26ai/FREEPDB1/indoubt/4.4.159581": "gemma4:26b",
+      "lab-se2/ORCLPDB1/orphan/GH_CONTRACTOR": "gemma4:26b",
+      "lab-se2/CDB$ROOT/file//opt/oracle/oradata/ORCLCDB/control02.ctl": "gemma4:26b",
+      "lab-se2/ORCLPDB1/recyclebin/BIN$XtofteQWfKzgYwIAEaz9/g==$0": "gemma4:26b",
+      "lab-se2/ORCLPDB1/invalid/LAB.GH_RATES_TODAY": "gemma4:26b",
+      "summary": "gemma4:26b"
+     },
+     "calls": [
+      {
+       "input_tokens": 963,
+       "output_tokens": 481,
+       "seconds": 1.32
+      }
+     ]
+    }
+   },
+   {
+    "first": {
+     "json": true,
+     "lines": {
+      "G1": "Here lies session 217, which opened a transaction at 22:37 on 2026-10-27. It sits idle while another session waits for it.",
+      "G2": "Here lies 10.9.199680, a prepared distributed transaction from 22:37 on 2026-10-27. It stays prepared even though the other side committed.",
+      "G3": "Here lies 4.4.159581, a distributed transaction from 22:37 on 2026-10-27. It has committed, but it still remains in the records.",
+      "G4": "Here lies GH_CONTRACTOR, who has been locked since 2026-10-27. It still holds two objects and one enabled scheduler job.",
+      "G5": "Here lies control02.ctl, an 18 MB file from 2026-10-13 16:08. It sits on the disk after the database stopped using it.",
+      "G6": "Here lies GH_AUDIT_2019, a table dropped at 21:28 on 2026-10-27. It still holds 7.0 MB of space.",
+      "G7": "Here lies GH_RATES_TODAY, a view that became invalid at 21:28 on 2026-10-27. It waits for a dependency that is gone.",
+      "summary": [
+       "lab-26ai holds session 217 and 4.4.159581, while lab-se2 is haunted by 10.9.199680, GH_CONTRACTOR, control02.ctl, GH_AUDIT_2019, and GH_RATES_TODAY.",
+       "session 217 sits idle with an open transaction, making one other session wait."
+      ]
+     },
+     "fails": {},
+     "seconds": 1.33,
+     "tokens": 1445
+    },
+    "final": {
+     "summary": [
+      "lab-26ai holds session 217 and 4.4.159581, while lab-se2 keeps 10.9.199680, GH_CONTRACTOR, control02.ctl, GH_AUDIT_2019, and GH_RATES_TODAY.",
+      "session 217 sits idle with an open transaction, making one other session wait in the dark."
+     ],
+     "epitaphs": {
+      "lab-26ai/FREEPDB1/session/217,5412": "Here lies session 217, which opened a transaction at 22:37 on 2026-10-27. It sits idle now, holding a lock that someone else needs.",
+      "lab-se2/ORCLPDB1/indoubt/10.9.199680": "Here lies 10.9.199680, a prepared distributed transaction from 22:37 on 2026-10-27. It waits for a master that will never return.",
+      "lab-26ai/FREEPDB1/indoubt/4.4.159581": "Here lies 4.4.159581, a committed distributed transaction from 22:37 on 2026-10-27. It remains in the records even though its work is done.",
+      "lab-se2/ORCLPDB1/orphan/GH_CONTRACTOR": "Here lies GH_CONTRACTOR, who has been locked since 2026-10-27. It still holds two objects and one enabled scheduler job.",
+      "lab-se2/CDB$ROOT/file//opt/oracle/oradata/ORCLCDB/control02.ctl": "Here lies control02.ctl, an 18 MB file left on the disk since 16:08 on 2026-10-13. The database has forgotten it.",
+      "lab-se2/ORCLPDB1/recyclebin/BIN$XtofteQWfKzgYwIAEaz9/g==$0": "Here lies GH_AUDIT_2019, a table dropped at 21:28 on 2026-10-27. It still occupies 7.0 MB of space.",
+      "lab-se2/ORCLPDB1/invalid/LAB.GH_RATES_TODAY": "Here lies GH_RATES_TODAY, a view that became invalid at 21:28 on 2026-10-27. It searches for something that is no longer there."
+     },
+     "by": {
+      "lab-26ai/FREEPDB1/session/217,5412": "gemma4:26b",
+      "lab-se2/ORCLPDB1/indoubt/10.9.199680": "gemma4:26b",
+      "lab-26ai/FREEPDB1/indoubt/4.4.159581": "gemma4:26b",
+      "lab-se2/ORCLPDB1/orphan/GH_CONTRACTOR": "gemma4:26b",
+      "lab-se2/CDB$ROOT/file//opt/oracle/oradata/ORCLCDB/control02.ctl": "gemma4:26b",
+      "lab-se2/ORCLPDB1/recyclebin/BIN$XtofteQWfKzgYwIAEaz9/g==$0": "gemma4:26b",
+      "lab-se2/ORCLPDB1/invalid/LAB.GH_RATES_TODAY": "gemma4:26b",
+      "summary": "gemma4:26b"
+     },
+     "calls": [
+      {
+       "input_tokens": 963,
+       "output_tokens": 487,
+       "seconds": 1.32
+      }
+     ]
+    }
+   },
+   {
+    "first": {
+     "json": true,
+     "lines": {
+      "G1": "Here lies session 217, which opened a transaction at 22:37 on 2026-10-27. It sits idle while another session waits for it.",
+      "G2": "Here lies 10.9.199680, a prepared distributed transaction from 22:37 on 2026-10-27. It stays prepared though the other side has already committed.",
+      "G3": "Here lies 4.4.159581, a distributed transaction from 22:37 on 2026-10-27. It has already committed, yet it remains in the records.",
+      "G4": "Here lies GH_CONTRACTOR, who has been locked since 2026-10-27. It still holds two objects and one enabled scheduler job.",
+      "G5": "Here lies control02.ctl, an 18 MB file from 2026-10-13. It rests on the disk though the database has stopped using it.",
+      "G6": "Here lies GH_AUDIT_2019, a table dropped at 21:28 on 2026-10-27. It still holds 7.0 MB of space.",
+      "G7": "Here lies GH_RATES_TODAY, a view that became invalid at 21:28 on 2026-10-27. It waits for a dependency that is gone.",
+      "summary": [
+       "The lab-26ai and lab-se2 databases hold session 217, 10.9.199680, 4.4.159581, GH_CONTRACTOR, control02.ctl, GH_AUDIT_2019, and GH_RATES_TODAY.",
+       "Session 217 keeps a transaction open and makes another session wait."
+      ]
+     },
+     "fails": {},
+     "seconds": 1.29,
+     "tokens": 1437
+    },
+    "final": {
+     "summary": [
+      "In lab-26ai, session 217 and 4.4.159581 remain. In lab-se2, 10.9.199680, GH_CONTRACTOR, control02.ctl, GH_AUDIT_2019, and GH_RATES_TODAY still walk the halls.",
+      "Session 217 sits idle with an open transaction, making one other session wait in the dark."
+     ],
+     "epitaphs": {
+      "lab-26ai/FREEPDB1/session/217,5412": "Here lies session 217, which opened a transaction at 22:37 on 2026-10-27. It sits idle while another session waits for it.",
+      "lab-se2/ORCLPDB1/indoubt/10.9.199680": "Here lies 10.9.199680, a prepared distributed transaction from 22:37 on 2026-10-27. It stays prepared even though the other side committed.",
+      "lab-26ai/FREEPDB1/indoubt/4.4.159581": "Here lies 4.4.159581, a distributed transaction from 22:37 on 2026-10-27. It has committed, yet it refuses to leave the records.",
+      "lab-se2/ORCLPDB1/orphan/GH_CONTRACTOR": "Here lies GH_CONTRACTOR, who has been locked since 2026-10-27. It still holds two objects and one enabled scheduler job.",
+      "lab-se2/CDB$ROOT/file//opt/oracle/oradata/ORCLCDB/control02.ctl": "Here lies control02.ctl, an 18 MB file from 2026-10-13 16:08. It rests on the disk after the database stopped using it.",
+      "lab-se2/ORCLPDB1/recyclebin/BIN$XtofteQWfKzgYwIAEaz9/g==$0": "Here lies GH_AUDIT_2019, a table dropped at 21:28 on 2026-10-27. It still holds 7.0 MB of space.",
+      "lab-se2/ORCLPDB1/invalid/LAB.GH_RATES_TODAY": "Here lies GH_RATES_TODAY, a view that became invalid at 21:28 on 2026-10-27. It waits for a dependency that is gone."
+     },
+     "by": {
+      "lab-26ai/FREEPDB1/session/217,5412": "gemma4:26b",
+      "lab-se2/ORCLPDB1/indoubt/10.9.199680": "gemma4:26b",
+      "lab-26ai/FREEPDB1/indoubt/4.4.159581": "gemma4:26b",
+      "lab-se2/ORCLPDB1/orphan/GH_CONTRACTOR": "gemma4:26b",
+      "lab-se2/CDB$ROOT/file//opt/oracle/oradata/ORCLCDB/control02.ctl": "gemma4:26b",
+      "lab-se2/ORCLPDB1/recyclebin/BIN$XtofteQWfKzgYwIAEaz9/g==$0": "gemma4:26b",
+      "lab-se2/ORCLPDB1/invalid/LAB.GH_RATES_TODAY": "gemma4:26b",
+      "summary": "gemma4:26b"
+     },
+     "calls": [
+      {
+       "input_tokens": 963,
+       "output_tokens": 489,
+       "seconds": 1.39
+      }
+     ]
+    }
+   },
+   {
+    "first": {
+     "json": true,
+     "lines": {
+      "G1": "Here lies session 217, which opened a transaction at 22:37 on 2026-10-27. It stays idle while another session waits for it.",
+      "G2": "Here lies 10.9.199680, a prepared distributed transaction from 22:37. It waits for a master that will never return.",
+      "G3": "Here lies 4.4.159581, a committed distributed transaction from 22:37. It remains in the records though its work is finished.",
+      "G4": "Here lies GH_CONTRACTOR, who was locked on 2026-10-27. It still holds two objects and one enabled scheduler job.",
+      "G5": "Here lies control02.ctl, an 18 MB file left on the disk since 16:08 on 2026-10-13. The database no longer calls for it.",
+      "G6": "Here lies GH_AUDIT_2019, a table dropped at 21:28 on 2026-10-27. It still occupies 7.0 MB of space.",
+      "G7": "Here lies GH_RATES_TODAY, a view that became invalid at 21:28 on 2026-10-27. It reaches for things that are no longer there.",
+      "summary": [
+       "lab-26ai holds session 217 and 4.4.159581, while lab-se2 keeps 10.9.199680, GH_CONTRACTOR, control02.ctl, GH_AUDIT_2019, and GH_RATES_TODAY.",
+       "session 217 sits idle with an open transaction, making another session wait in the dark."
+      ]
+     },
+     "fails": {},
+     "seconds": 1.29,
+     "tokens": 1422
+    },
+    "final": {
+     "summary": [
+      "lab-26ai holds session 217 and 4.4.159581, while lab-se2 keeps 10.9.199680, GH_CONTRACTOR, control02.ctl, GH_AUDIT_2019, and GH_RATES_TODAY.",
+      "session 217 sits idle with an open transaction, making another session wait for it."
+     ],
+     "epitaphs": {
+      "lab-26ai/FREEPDB1/session/217,5412": "Here lies session 217, which opened a transaction at 22:37 on 2026-10-27. It remains idle while another session waits.",
+      "lab-se2/ORCLPDB1/indoubt/10.9.199680": "Here lies 10.9.199680, a prepared distributed transaction from 2026-10-27 22:37. It stays prepared even though the other side committed.",
+      "lab-26ai/FREEPDB1/indoubt/4.4.159581": "Here lies 4.4.159581, a distributed transaction from 2026-10-27 22:37. It has committed, yet it has not been purged.",
+      "lab-se2/ORCLPDB1/orphan/GH_CONTRACTOR": "Here lies GH_CONTRACTOR, who was locked on 2026-10-27. It still holds two objects and one enabled scheduler job.",
+      "lab-se2/CDB$ROOT/file//opt/oracle/oradata/ORCLCDB/control02.ctl": "Here lies control02.ctl, an 18 MB file from 2026-10-13 16:08. It sits on the disk, though the database no longer uses it.",
+      "lab-se2/ORCLPDB1/recyclebin/BIN$XtofteQWfKzgYwIAEaz9/g==$0": "Here lies GH_AUDIT_2019, a table dropped on 2026-10-27 21:28. It still holds 7.0 MB of space.",
+      "lab-se2/ORCLPDB1/invalid/LAB.GH_RATES_TODAY": "Here lies GH_RATES_TODAY, a view that became invalid on 2026-10-27 21:28. It waits for a dependency that is gone."
+     },
+     "by": {
+      "lab-26ai/FREEPDB1/session/217,5412": "gemma4:26b",
+      "lab-se2/ORCLPDB1/indoubt/10.9.199680": "gemma4:26b",
+      "lab-26ai/FREEPDB1/indoubt/4.4.159581": "gemma4:26b",
+      "lab-se2/ORCLPDB1/orphan/GH_CONTRACTOR": "gemma4:26b",
+      "lab-se2/CDB$ROOT/file//opt/oracle/oradata/ORCLCDB/control02.ctl": "gemma4:26b",
+      "lab-se2/ORCLPDB1/recyclebin/BIN$XtofteQWfKzgYwIAEaz9/g==$0": "gemma4:26b",
+      "lab-se2/ORCLPDB1/invalid/LAB.GH_RATES_TODAY": "gemma4:26b",
+      "summary": "gemma4:26b"
+     },
+     "calls": [
+      {
+       "input_tokens": 963,
+       "output_tokens": 475,
+       "seconds": 1.29
+      }
+     ]
+    }
+   },
+   {
+    "first": {
+     "json": true,
+     "lines": {
+      "G1": "Here lies session 217, which opened a transaction at 22:37 on 2026-10-27. It stays idle while another session waits for it.",
+      "G2": "Here lies 10.9.199680, a prepared distributed transaction from 22:37 on 2026-10-27. It waits for a return that will never come.",
+      "G3": "Here lies 4.4.159581, a committed distributed transaction from 22:37 on 2026-10-27. It sits in the records though its work is done.",
+      "G4": "Here lies GH_CONTRACTOR, who was locked on 2026-10-27. It still holds two objects and one enabled scheduler job.",
+      "G5": "Here lies control02.ctl, an 18 MB file from 2026-10-13. It rests on the disk though the database has moved on.",
+      "G6": "Here lies GH_AUDIT_2019, a table dropped at 21:28 on 2026-10-27. It still holds 7.0 MB of space.",
+      "G7": "Here lies GH_RATES_TODAY, a view that became invalid at 21:28 on 2026-10-27. It waits for a dependency that is gone.",
+      "summary": [
+       "In lab-26ai, session 217 and 4.4.159581 remain. In lab-se2, 10.9.199680, GH_CONTRACTOR, control02.ctl, GH_AUDIT_2019, and GH_RATES_TODAY stay behind.",
+       "Session 217 holds an open transaction that makes another session wait."
+      ]
+     },
+     "fails": {},
+     "seconds": 1.29,
+     "tokens": 1437
+    },
+    "final": {
+     "summary": [
+      "In lab-26ai, session 217 and 4.4.159581 remain. In lab-se2, 10.9.199680, GH_CONTRACTOR, control02.ctl, GH_AUDIT_2019, and GH_RATES_TODAY stay behind.",
+      "Session 217 sits idle with an open transaction, making another session wait."
+     ],
+     "epitaphs": {
+      "lab-26ai/FREEPDB1/session/217,5412": "Here lies session 217, which opened a transaction at 22:37 on 2026-10-27. It sits idle while one other session waits.",
+      "lab-se2/ORCLPDB1/indoubt/10.9.199680": "Here lies 10.9.199680, a prepared distributed transaction from 22:37 on 2026-10-27. It waits for a return that will never come.",
+      "lab-26ai/FREEPDB1/indoubt/4.4.159581": "Here lies 4.4.159581, a distributed transaction committed at 22:37 on 2026-10-27. It stays in the records though the work is done.",
+      "lab-se2/ORCLPDB1/orphan/GH_CONTRACTOR": "Here lies GH_CONTRACTOR, who was locked on 2026-10-27. It still holds two objects and one enabled scheduler job.",
+      "lab-se2/CDB$ROOT/file//opt/oracle/oradata/ORCLCDB/control02.ctl": "Here lies control02.ctl, an 18 MB file from 2026-10-13. It rests on the disk though the database has moved on.",
+      "lab-se2/ORCLPDB1/recyclebin/BIN$XtofteQWfKzgYwIAEaz9/g==$0": "Here lies GH_AUDIT_2019, a table dropped at 21:28 on 2026-10-27. It still holds 7.0 MB of space.",
+      "lab-se2/ORCLPDB1/invalid/LAB.GH_RATES_TODAY": "Here lies GH_RATES_TODAY, a view that became invalid at 21:28 on 2026-10-27. It waits for a dependency that is gone."
+     },
+     "by": {
+      "lab-26ai/FREEPDB1/session/217,5412": "gemma4:26b",
+      "lab-se2/ORCLPDB1/indoubt/10.9.199680": "gemma4:26b",
+      "lab-26ai/FREEPDB1/indoubt/4.4.159581": "gemma4:26b",
+      "lab-se2/ORCLPDB1/orphan/GH_CONTRACTOR": "gemma4:26b",
+      "lab-se2/CDB$ROOT/file//opt/oracle/oradata/ORCLCDB/control02.ctl": "gemma4:26b",
+      "lab-se2/ORCLPDB1/recyclebin/BIN$XtofteQWfKzgYwIAEaz9/g==$0": "gemma4:26b",
+      "lab-se2/ORCLPDB1/invalid/LAB.GH_RATES_TODAY": "gemma4:26b",
+      "summary": "gemma4:26b"
+     },
+     "calls": [
+      {
+       "input_tokens": 963,
+       "output_tokens": 475,
+       "seconds": 1.34
+      }
+     ]
+    }
+   },
+   {
+    "first": {
+     "json": true,
+     "lines": {
+      "G1": "Here lies session 217, which opened a transaction at 22:37 on 2026-10-27. It sits idle while another session waits for it.",
+      "G2": "Here lies 10.9.199680, a prepared distributed transaction from 22:37 on 2026-10-27. It waits for a return that will never come.",
+      "G3": "Here lies 4.4.159581, a distributed transaction committed at 22:37 on 2026-10-27. It stays in the records though the work is done.",
+      "G4": "Here lies GH_CONTRACTOR, who was locked on 2026-10-27. It still holds two objects and one enabled scheduler job.",
+      "G5": "Here lies control02.ctl, an 18 MB file from 2026-10-13 16:08. It rests on the disk after the database stopped using it.",
+      "G6": "Here lies GH_AUDIT_2019, a table dropped on 2026-10-27 21:28. It still holds 7.0 MB of space.",
+      "G7": "Here lies GH_RATES_TODAY, a view that became invalid at 21:28 on 2026-10-27. It waits for something that is gone.",
+      "summary": [
+       "In lab-26ai, session 217 and 4.4.159581 remain. In lab-se2, 10.9.199680, GH_CONTRACTOR, control02.ctl, GH_AUDIT_2019, and GH_RATES_TODAY stay behind.",
+       "Session 217 sits idle with an open transaction, making another session wait."
+      ]
+     },
+     "fails": {},
+     "seconds": 1.36,
+     "tokens": 1443
+    },
+    "final": {
+     "summary": [
+      "lab-26ai holds session 217 and 4.4.159581, while lab-se2 keeps 10.9.199680, GH_CONTRACTOR, control02.ctl, GH_AUDIT_2019, and GH_RATES_TODAY.",
+      "session 217 sits idle with an open transaction, making another session wait in the dark."
+     ],
+     "epitaphs": {
+      "lab-26ai/FREEPDB1/session/217,5412": "Here lies session 217, which opened a transaction at 22:37 on 2026-10-27. It remains idle while another session waits for it.",
+      "lab-se2/ORCLPDB1/indoubt/10.9.199680": "Here lies 10.9.199680, a prepared distributed transaction from 22:37 on 2026-10-27. It stays prepared even though the other side has committed.",
+      "lab-26ai/FREEPDB1/indoubt/4.4.159581": "Here lies 4.4.159581, a distributed transaction that committed at 22:37 on 2026-10-27. It remains even though the work is done.",
+      "lab-se2/ORCLPDB1/orphan/GH_CONTRACTOR": "Here lies GH_CONTRACTOR, who has been locked since 2026-10-27. It still holds two objects and one enabled scheduler job.",
+      "lab-se2/CDB$ROOT/file//opt/oracle/oradata/ORCLCDB/control02.ctl": "Here lies control02.ctl, an 18 MB file left on the disk since 16:08 on 2026-10-13. The database no longer uses it.",
+      "lab-se2/ORCLPDB1/recyclebin/BIN$XtofteQWfKzgYwIAEaz9/g==$0": "Here lies GH_AUDIT_2019, a table dropped at 21:28 on 2026-10-27. It still holds 7.0 MB of space.",
+      "lab-se2/ORCLPDB1/invalid/LAB.GH_RATES_TODAY": "Here lies GH_RATES_TODAY, a view that became invalid at 21:28 on 2026-10-27. It waits for a dependency that is gone."
+     },
+     "by": {
+      "lab-26ai/FREEPDB1/session/217,5412": "gemma4:26b",
+      "lab-se2/ORCLPDB1/indoubt/10.9.199680": "gemma4:26b",
+      "lab-26ai/FREEPDB1/indoubt/4.4.159581": "gemma4:26b",
+      "lab-se2/ORCLPDB1/orphan/GH_CONTRACTOR": "gemma4:26b",
+      "lab-se2/CDB$ROOT/file//opt/oracle/oradata/ORCLCDB/control02.ctl": "gemma4:26b",
+      "lab-se2/ORCLPDB1/recyclebin/BIN$XtofteQWfKzgYwIAEaz9/g==$0": "gemma4:26b",
+      "lab-se2/ORCLPDB1/invalid/LAB.GH_RATES_TODAY": "gemma4:26b",
+      "summary": "gemma4:26b"
+     },
+     "calls": [
+      {
+       "input_tokens": 963,
+       "output_tokens": 482,
+       "seconds": 1.3
+      }
+     ]
+    }
+   },
+   {
+    "first": {
+     "json": true,
+     "lines": {
+      "G1": "Here lies session 217, which opened a transaction at 22:37 on 2026-10-27. It stays idle while another session waits for it.",
+      "G2": "Here lies 10.9.199680, a prepared distributed transaction from 22:37 on 2026-10-27. It waits for a master that will never return.",
+      "G3": "Here lies 4.4.159581, a committed distributed transaction from 22:37 on 2026-10-27. It remains even though the work is finished.",
+      "G4": "Here lies GH_CONTRACTOR, who was locked on 2026-10-27. It still holds two objects and one enabled scheduler job.",
+      "G5": "Here lies control02.ctl, an 18 MB file from 2026-10-13 16:08. It sits on the disk though the database has moved on.",
+      "G6": "Here lies GH_AUDIT_2019, a table dropped at 21:28 on 2026-10-27. It still holds 7.0 MB of space.",
+      "G7": "Here lies GH_RATES_TODAY, a view that broke at 21:28 on 2026-10-27. It stays invalid because its foundation is gone.",
+      "summary": [
+       "lab-26ai holds session 217 and 4.4.159581, while lab-se2 is haunted by 10.9.199680, GH_CONTRACTOR, control02.ctl, GH_AUDIT_2019, and GH_RATES_TODAY.",
+       "session 217 sits idle with an open transaction, making one other session wait in the dark."
+      ]
+     },
+     "fails": {},
+     "seconds": 1.31,
+     "tokens": 1444
+    },
+    "final": {
+     "summary": [
+      "lab-26ai holds session 217 and 4.4.159581, while lab-se2 contains 10.9.199680, GH_CONTRACTOR, control02.ctl, GH_AUDIT_2019, and GH_RATES_TODAY.",
+      "session 217 sits idle with an open transaction, making another session wait."
+     ],
+     "epitaphs": {
+      "lab-26ai/FREEPDB1/session/217,5412": "Here lies session 217, which opened a transaction at 22:37 on 2026-10-27. It stays idle while another session waits for it.",
+      "lab-se2/ORCLPDB1/indoubt/10.9.199680": "Here lies 10.9.199680, a prepared distributed transaction from 22:37 on 2026-10-27. It waits for a master that will never return.",
+      "lab-26ai/FREEPDB1/indoubt/4.4.159581": "Here lies 4.4.159581, a distributed transaction that committed at 22:37 on 2026-10-27. It remains even though the work is done.",
+      "lab-se2/ORCLPDB1/orphan/GH_CONTRACTOR": "Here lies GH_CONTRACTOR, who was locked on 2026-10-27. It still holds two objects and one enabled scheduler job.",
+      "lab-se2/CDB$ROOT/file//opt/oracle/oradata/ORCLCDB/control02.ctl": "Here lies control02.ctl, an 18 MB file left on the disk since 16:08 on 2026-10-13. The database no longer needs it.",
+      "lab-se2/ORCLPDB1/recyclebin/BIN$XtofteQWfKzgYwIAEaz9/g==$0": "Here lies GH_AUDIT_2019, a table dropped at 21:28 on 2026-10-27. It still holds 7.0 MB of space.",
+      "lab-se2/ORCLPDB1/invalid/LAB.GH_RATES_TODAY": "Here lies GH_RATES_TODAY, a view that became invalid at 21:28 on 2026-10-27. It waits for a dependency that is gone."
+     },
+     "by": {
+      "lab-26ai/FREEPDB1/session/217,5412": "gemma4:26b",
+      "lab-se2/ORCLPDB1/indoubt/10.9.199680": "gemma4:26b",
+      "lab-26ai/FREEPDB1/indoubt/4.4.159581": "gemma4:26b",
+      "lab-se2/ORCLPDB1/orphan/GH_CONTRACTOR": "gemma4:26b",
+      "lab-se2/CDB$ROOT/file//opt/oracle/oradata/ORCLCDB/control02.ctl": "gemma4:26b",
+      "lab-se2/ORCLPDB1/recyclebin/BIN$XtofteQWfKzgYwIAEaz9/g==$0": "gemma4:26b",
+      "lab-se2/ORCLPDB1/invalid/LAB.GH_RATES_TODAY": "gemma4:26b",
+      "summary": "gemma4:26b"
+     },
+     "calls": [
+      {
+       "input_tokens": 963,
+       "output_tokens": 477,
+       "seconds": 1.27
+      }
+     ]
+    }
+   },
+   {
+    "first": {
+     "json": true,
+     "lines": {
+      "G1": "Here lies session 217, which opened a transaction at 22:37 on 2026-10-27. It stays idle while another session waits.",
+      "G2": "Here lies 10.9.199680, a prepared distributed transaction from 22:37 on 2026-10-27. It waits for a master who will never return.",
+      "G3": "Here lies 4.4.159581, a committed distributed transaction from 22:37 on 2026-10-27. It stays in the records though its work is done.",
+      "G4": "Here lies GH_CONTRACTOR, who was locked on 2026-10-27. It still holds two objects and one enabled scheduler job.",
+      "G5": "Here lies control02.ctl, an 18 MB file from 2026-10-13. It rests on the disk even though the database has moved on.",
+      "G6": "Here lies GH_AUDIT_2019, a table dropped at 21:28 on 2026-10-27. It still holds 7.0 MB of space.",
+      "G7": "Here lies GH_RATES_TODAY, a view that became invalid at 21:28 on 2026-10-27. It waits for a dependency that is gone.",
+      "summary": [
+       "In lab-26ai, session 217 and 4.4.159581 remain. In lab-se2, 10.9.199680, GH_CONTRACTOR, control02.ctl, GH_AUDIT_2019, and GH_RATES_TODAY stay behind.",
+       "Session 217 sits idle with an open transaction, making another session wait for it."
+      ]
+     },
+     "fails": {},
+     "seconds": 1.3,
+     "tokens": 1440
+    },
+    "final": {
+     "summary": [
+      "lab-26ai holds session 217 and 4.4.159581, while lab-se2 carries 10.9.199680, GH_CONTRACTOR, control02.ctl, GH_AUDIT_2019, and GH_RATES_TODAY.",
+      "session 217 sits idle with an open transaction, making one other session wait."
+     ],
+     "epitaphs": {
+      "lab-26ai/FREEPDB1/session/217,5412": "Here lies session 217, which opened a transaction at 22:37 on 2026-10-27. It remains idle while another session waits for it.",
+      "lab-se2/ORCLPDB1/indoubt/10.9.199680": "Here lies 10.9.199680, a prepared distributed transaction from 22:37 on 2026-10-27. It stays prepared even though the other side committed.",
+      "lab-26ai/FREEPDB1/indoubt/4.4.159581": "Here lies 4.4.159581, a distributed transaction from 22:37 on 2026-10-27. It has committed, but it has not been purged.",
+      "lab-se2/ORCLPDB1/orphan/GH_CONTRACTOR": "Here lies GH_CONTRACTOR, who was locked on 2026-10-27. It still holds two objects and one enabled scheduler job.",
+      "lab-se2/CDB$ROOT/file//opt/oracle/oradata/ORCLCDB/control02.ctl": "Here lies control02.ctl, an 18 MB file from 2026-10-13 16:08. It sits on the disk though the database no longer uses it.",
+      "lab-se2/ORCLPDB1/recyclebin/BIN$XtofteQWfKzgYwIAEaz9/g==$0": "Here lies GH_AUDIT_2019, a table dropped on 2026-10-27 21:28. It still holds 7.0 MB of space.",
+      "lab-se2/ORCLPDB1/invalid/LAB.GH_RATES_TODAY": "Here lies GH_RATES_TODAY, a view that became invalid at 21:28 on 2026-10-27. It waits for a dependency that is gone."
+     },
+     "by": {
+      "lab-26ai/FREEPDB1/session/217,5412": "gemma4:26b",
+      "lab-se2/ORCLPDB1/indoubt/10.9.199680": "gemma4:26b",
+      "lab-26ai/FREEPDB1/indoubt/4.4.159581": "gemma4:26b",
+      "lab-se2/ORCLPDB1/orphan/GH_CONTRACTOR": "gemma4:26b",
+      "lab-se2/CDB$ROOT/file//opt/oracle/oradata/ORCLCDB/control02.ctl": "gemma4:26b",
+      "lab-se2/ORCLPDB1/recyclebin/BIN$XtofteQWfKzgYwIAEaz9/g==$0": "gemma4:26b",
+      "lab-se2/ORCLPDB1/invalid/LAB.GH_RATES_TODAY": "gemma4:26b",
+      "summary": "gemma4:26b"
+     },
+     "calls": [
+      {
+       "input_tokens": 963,
+       "output_tokens": 478,
+       "seconds": 1.27
+      }
+     ]
+    }
+   },
+   {
+    "first": {
+     "json": true,
+     "lines": {
+      "G1": "Here lies session 217, which opened a transaction at 22:37 on 2026-10-27. It stays idle while another session waits for it.",
+      "G2": "Here lies 10.9.199680, a prepared distributed transaction from 22:37 on 2026-10-27. It waits for a master who will never return.",
+      "G3": "Here lies 4.4.159581, a committed distributed transaction from 22:37 on 2026-10-27. It remains in the records though the work is done.",
+      "G4": "Here lies GH_CONTRACTOR, who was locked on 2026-10-27. It still holds two objects and one enabled scheduler job.",
+      "G5": "Here lies control02.ctl, an 18 MB file from 2026-10-13. It sits on the disk though the database has moved on.",
+      "G6": "Here lies GH_AUDIT_2019, a table dropped at 21:28 on 2026-10-27. It still occupies 7.0 MB of space.",
+      "G7": "Here lies GH_RATES_TODAY, a view that became invalid at 21:28 on 2026-10-27. It waits for a dependency that is gone.",
+      "summary": [
+       "lab-26ai holds session 217 and 4.4.159581, while lab-se2 contains 10.9.199680, GH_CONTRACTOR, control02.ctl, GH_AUDIT_2019, and GH_RATES_TODAY.",
+       "session 217 sits idle with an open transaction, making another session wait."
+      ]
+     },
+     "fails": {},
+     "seconds": 1.32,
+     "tokens": 1435
+    },
+    "final": {
+     "summary": [
+      "lab-26ai holds session 217 and 4.4.159581, while lab-se2 keeps 10.9.199680, GH_CONTRACTOR, control02.ctl, GH_AUDIT_2019, and GH_RATES_TODAY.",
+      "session 217 sits idle with an open transaction, making another session wait in the dark."
+     ],
+     "epitaphs": {
+      "lab-26ai/FREEPDB1/session/217,5412": "Here lies session 217, which opened a transaction at 22:37 on 2026-10-27. It sits idle now, keeping one other session waiting.",
+      "lab-se2/ORCLPDB1/indoubt/10.9.199680": "Here lies 10.9.199680, a prepared distributed transaction from 22:37 on 2026-10-27. It waits for a return that will never come.",
+      "lab-26ai/FREEPDB1/indoubt/4.4.159581": "Here lies 4.4.159581, a distributed transaction committed at 22:37 on 2026-10-27. It remains even though the work is finished.",
+      "lab-se2/ORCLPDB1/orphan/GH_CONTRACTOR": "Here lies GH_CONTRACTOR, who was locked on 2026-10-27. It still holds two objects and one enabled scheduler job.",
+      "lab-se2/CDB$ROOT/file//opt/oracle/oradata/ORCLCDB/control02.ctl": "Here lies control02.ctl, an 18 MB file left on the disk since 16:08 on 2026-10-13. The database no longer needs it.",
+      "lab-se2/ORCLPDB1/recyclebin/BIN$XtofteQWfKzgYwIAEaz9/g==$0": "Here lies GH_AUDIT_2019, a table dropped at 21:28 on 2026-10-27. It still occupies 7.0 MB of space.",
+      "lab-se2/ORCLPDB1/invalid/LAB.GH_RATES_TODAY": "Here lies GH_RATES_TODAY, a view that went invalid at 21:28 on 2026-10-27. It searches for something that is no longer there."
+     },
+     "by": {
+      "lab-26ai/FREEPDB1/session/217,5412": "gemma4:26b",
+      "lab-se2/ORCLPDB1/indoubt/10.9.199680": "gemma4:26b",
+      "lab-26ai/FREEPDB1/indoubt/4.4.159581": "gemma4:26b",
+      "lab-se2/ORCLPDB1/orphan/GH_CONTRACTOR": "gemma4:26b",
+      "lab-se2/CDB$ROOT/file//opt/oracle/oradata/ORCLCDB/control02.ctl": "gemma4:26b",
+      "lab-se2/ORCLPDB1/recyclebin/BIN$XtofteQWfKzgYwIAEaz9/g==$0": "gemma4:26b",
+      "lab-se2/ORCLPDB1/invalid/LAB.GH_RATES_TODAY": "gemma4:26b",
+      "summary": "gemma4:26b"
+     },
+     "calls": [
+      {
+       "input_tokens": 963,
+       "output_tokens": 481,
+       "seconds": 1.3
+      }
+     ]
+    }
+   }
+  ]
+ }
+}
