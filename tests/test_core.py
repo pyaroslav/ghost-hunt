@@ -55,11 +55,12 @@ def test_summary_names_every_database_and_no_labels():
 
 def test_sentry_gets_metadata_only():
     ev = {"contexts": {"trace": {"data": {"gen_ai.request.model": "gemma4:26b", "sql": "commit force '1.2.3'"}}},
-          "spans": [{"data": {"gen_ai.usage.input_tokens": 900, "gen_ai.input.messages": "Here lies GH_AUDIT_2019"}}],
+          "spans": [{"op": "gen_ai.chat", "data": {"gen_ai.usage.input_tokens": 900, "gen_ai.input.messages": "Here lies GH_AUDIT_2019"}},
+                    {"op": "subprocess", "description": "docker exec w2-se2 find /opt/oracle/oradata", "data": {}}],
           "server_name": "my-laptop", "request": {"url": "x"}}
     out = scrub(ev)
     assert out["contexts"]["trace"]["data"] == {"gen_ai.request.model": "gemma4:26b"}
-    assert out["spans"][0]["data"] == {"gen_ai.usage.input_tokens": 900}
+    assert out["spans"] == [{"op": "gen_ai.chat", "data": {"gen_ai.usage.input_tokens": 900}}]
     assert "server_name" not in out and "request" not in out
     err = scrub_error({"exception": {"values": [{"value": 'ORA-00942: table or view "LAB"."GH_SECRET" does not exist'}]}})
     assert err["exception"]["values"][0]["value"] == "ORA-00942"

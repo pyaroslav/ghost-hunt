@@ -25,7 +25,9 @@ SAFE = {"gen_ai.operation.name", "gen_ai.agent.name", "gen_ai.request.model", "g
 
 
 def scrub(event, hint=None):
-    """Keep only whitelisted span data. Applied to every transaction before it is sent."""
+    """Keep only our own gen_ai spans and whitelisted span data. Applied to every transaction before it is sent.
+    (Auto-instrumented spans, such as a subprocess call, would carry the command line.)"""
+    event["spans"] = [s for s in event.get("spans", []) if str(s.get("op", "")).startswith("gen_ai.")]
     for span in [event.get("contexts", {}).get("trace", {}), *event.get("spans", [])]:
         data = span.get("data") or {}
         for k in list(data):
@@ -57,7 +59,8 @@ def init():
     if not dsn or _on:
         return
     import sentry_sdk
-    sentry_sdk.init(dsn=dsn, traces_sample_rate=1.0, send_default_pii=False, server_name="ghost-hunt",
+    from sentry_sdk.integrations.stdlib import StdlibIntegration
+    sentry_sdk.init(dsn=dsn, disabled_integrations=[StdlibIntegration()], traces_sample_rate=1.0, send_default_pii=False, server_name="ghost-hunt",
                     include_local_variables=False, before_send_transaction=scrub, before_send=scrub_error, max_breadcrumbs=0,
                     environment="lab")
     _on = True
