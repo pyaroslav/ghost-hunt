@@ -220,7 +220,8 @@ class GhostHunt:
                 outcomes[g["id"]] = {"status": "done" if r["done"] else "changed", "log": r["log"]}
             except ActivityError as e:
                 outcomes[g["id"]] = {"status": "failed", "log": [f"failed: {str(e.cause or e)[:160]}"]}
-        touched = {g["db"] for g in self.ghosts if outcomes.get(g["id"], {}).get("status") == "done"}
+        # a list in ghost order, not a set: replay after a worker restart must schedule the same activities in order
+        touched = list(dict.fromkeys(g["db"] for g in self.ghosts if outcomes.get(g["id"], {}).get("status") == "done"))
         after, again = await self._hunt([by_name[db] for db in touched]) if touched else ([], [])
         unchecked = {p["db"] for p in again if "error" in p}
         md2 = rested(self.ghosts, picks, outcomes, {g["id"]: g["kind"] for g in after}, unchecked, wid)

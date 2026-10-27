@@ -19,7 +19,7 @@ need be, for a person to approve each exorcism, and then hunts again to prove th
 
 _Here lies 10.9.199680, a prepared distributed transaction from 22:37 on 2026-10-27. It waits for a master that will never return._
 
-The other side: lab-26ai committed. Decision: commit force: the other side committed.
+The other side: lab-26ai/FREEPDB1 committed. Decision: commit force: the other side committed.
 
 Exorcism, if you approve it:
     commit force '10.9.199680';
@@ -70,7 +70,8 @@ anything changed, nothing is run and the report says so.
    come from the model.
 4. **Wait** (Temporal). The report is written and a desktop notification goes out. Then the workflow waits for
    an `approve` signal, 12 hours by default. If nobody answers, nothing is touched. The worker can die and come
-   back while it waits, and the signal can arrive while it's down.
+   back while it waits, and an approval by number can arrive while it's down (`all` needs a worker to list the
+   ghosts).
 5. **Exorcise and check** ([`ghosthunt/exorcise.py`](ghosthunt/exorcise.py)). Only the approved ghosts, each
    checked again first, as `c##exorcist`: `CREATE SESSION`, `SELECT ANY DICTIONARY` (for the checks),
    `ALTER SYSTEM` (to kill a session), `FORCE ANY TRANSACTION`, `EXECUTE` on `DBMS_TRANSACTION`, and `DELETE` on
