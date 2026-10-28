@@ -81,7 +81,9 @@ anything changed, nothing is run and the report says so.
 6. **Trace** ([`ghosthunt/trace.py`](ghosthunt/trace.py)). With `SENTRY_DSN` set, each activity is a Sentry
    `gen_ai.invoke_agent` transaction in one trace per hunt, with `execute_tool` and `chat` spans. **Only metadata
    leaves the machine:** model name, token counts, timings, how many ghosts of each kind. No SQL, no object or
-   user names, no prompts, no answers. Error messages are cut down to their ORA- code. Stack frames lose
+   user names, no prompts, no answers. Error messages are cut down to their ORA- code. Like any web request,
+   each event also carries the sender's IP address, from which Sentry derives a city; turn on the project's
+   "Prevent Storing of IP Addresses" setting if you don't want that. Stack frames lose
    their file paths. Sentry's standard-library instrumentation is off, because a `subprocess` span carries its
    command line. I found that the first time I
    looked at a trace. [`tests/test_core.py`](tests/test_core.py) checks the scrubbing.
@@ -100,10 +102,10 @@ model and read every line ([`results/claims.md`](results/claims.md), raw lines i
 
 | 7 ghosts, 20 runs | gemma4:e4b | gemma4:26b |
 |---|---|---|
-| Lines passing the automatic checks | 160 / 160 | 160 / 160 |
+| Epitaphs and summaries passing the automatic checks | 160 / 160 | 160 / 160 |
 | Epitaphs with a false claim (read by hand) | **24 / 140** | **1 / 140** |
-| Summary lines with a false claim | 5 / 20 | 0 / 20 |
-| Median seconds per answer (model loaded) | 1.05 | 1.32 |
+| Summaries (two lines each) with a false claim | 5 / 20 | 0 / 20 |
+| Median seconds per report, one call (model loaded) | 1.05 | 1.32 |
 
 e4b's mistakes all sounded right: a dropped table holding "7.0 MB of memory", the blocking session "still
 waiting for another session", a committed transaction "already purged" before anyone had approved anything. So

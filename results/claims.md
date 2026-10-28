@@ -15,8 +15,8 @@ A line counts as false only if it states something wrong about the ghost. Odd wo
 | | gemma4:e4b | gemma4:26b |
 |---|---|---|
 | Epitaphs with a false claim | **24 / 140** | **1 / 140** |
-| Summary line 2 with a false claim | **5 / 20** | **0 / 20** |
-| Median seconds per answer (after the model is loaded) | 1.05 | 1.32 |
+| Summaries (two lines each) with a false claim | **5 / 20** | **0 / 20** |
+| Median seconds per report, one call (after the model is loaded) | 1.05 | 1.32 |
 
 ## What e4b got wrong
 
