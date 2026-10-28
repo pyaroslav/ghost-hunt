@@ -122,6 +122,7 @@ def test_sentry_gets_metadata_only():
     assert out["contexts"]["trace"]["data"] == {"gen_ai.request.model": "gemma4:26b"}
     assert out["spans"] == [{"op": "gen_ai.chat", "data": {"gen_ai.usage.input_tokens": 900}}]
     assert "server_name" not in out and "request" not in out
+    assert out["user"] == {"ip_address": "0.0.0.0"}  # nothing for Sentry to locate
     err = scrub_error({"exception": {"values": [{"value": 'ORA-00942: table or view "LAB"."GH_SECRET" does not exist',
                                                  "stacktrace": {"frames": [{"abs_path": "/home/someone/ghost-hunt/ghosthunt/hunt.py",
                                                                             "filename": "/home/someone/ghost-hunt/ghosthunt/hunt.py",

@@ -34,7 +34,7 @@ def scrub(event, hint=None):
             if k not in SAFE and not k.startswith(("sentry.", "thread.")):
                 del data[k]
     event.pop("request", None)
-    event.pop("user", None)
+    event["user"] = {"ip_address": "0.0.0.0"}  # an explicit non-address, so Sentry doesn't look up where the sender is
     event.pop("server_name", None)
     return event
 

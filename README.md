@@ -81,9 +81,9 @@ anything changed, nothing is run and the report says so.
 6. **Trace** ([`ghosthunt/trace.py`](ghosthunt/trace.py)). With `SENTRY_DSN` set, each activity is a Sentry
    `gen_ai.invoke_agent` transaction in one trace per hunt, with `execute_tool` and `chat` spans. **Only metadata
    leaves the machine:** model name, token counts, timings, how many ghosts of each kind. No SQL, no object or
-   user names, no prompts, no answers. Error messages are cut down to their ORA- code. Like any web request,
-   each event also carries the sender's IP address, from which Sentry derives a city; turn on the project's
-   "Prevent Storing of IP Addresses" setting if you don't want that. Stack frames lose
+   user names, no prompts, no answers. Error messages are cut down to their ORA- code. Sentry's servers see the
+   IP address an event comes from and would turn it into a city, so Ghost Hunt sends `0.0.0.0` as the user's
+   address; also turn on the project's "Prevent Storing of IP Addresses" setting. Stack frames lose
    their file paths. Sentry's standard-library instrumentation is off, because a `subprocess` span carries its
    command line. I found that the first time I
    looked at a trace. [`tests/test_core.py`](tests/test_core.py) checks the scrubbing.
