@@ -35,7 +35,7 @@ def env():
 
 async def client():
     from temporalio.client import Client
-    return await Client.connect(ADDRESS)
+    return await Client.connect(ADDRESS, identity=f"ghost-hunt-cli-{os.getpid()}")  # the default is pid@hostname
 
 
 def server(a):

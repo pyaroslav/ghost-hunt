@@ -90,6 +90,8 @@ anything changed, nothing is run and the report says so.
 
 ![Temporal timeline of one hunt: two hunts, Gemma, the approval timer (up to 12 hours), the approve signal, three exorcisms, two hunts to check](docs/temporal.png)
 
+The demo run's full event history is in [`results/demo-history.json`](results/demo-history.json) (`temporal workflow show --output json`). The hunt ran on worker `3143315`; the exorcisms and the second hunt ran on `3144782`, started after the first was killed with `kill -9`.
+
 ![The same hunt in Sentry: one trace across the worker restart, with the Gemma call's model and token counts and no input recorded](docs/sentry-trace.png)
 
 ![Sentry span detail for the Gemma call: gemma4:26b, 967 in + 425 out tokens, "No input for this span"](docs/sentry-span.png)
